@@ -1,6 +1,6 @@
-import { useState } from 'react'
 
 import './App.css'
+import Footer from './components/Footer/Footer'
 
 function App() {
   
@@ -9,12 +9,13 @@ function App() {
     <>
      
 
-    <p>Hallo Bro</p>
+    
 
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
 
+
+
+
+    <Footer/>
     </>
   )
 }
