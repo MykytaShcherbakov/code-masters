@@ -1,0 +1,103 @@
+.banner {
+  background: no-repeat center center;
+  background-size: cover;
+  width: 1440px;
+  height: 600px;
+  position: relative;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bannerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.textOverlay {
+  position: absolute;
+  top: 100px;
+  left: 40px;
+  width: 1360px;
+  height: 310px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px;
+  text-align: left;
+  color: white;
+}
+
+.textOverlay h1 {
+  font-family: Montserrat; 
+  font-weight: 700; 
+  font-size: 96px; 
+  line-height: 110%; 
+  letter-spacing: 0%; 
+  margin: 0;
+}
+
+.checkOutButton {
+  width: 218px; 
+  height: 58px; 
+  gap: 10px; 
+  border-radius: 5px; 
+  padding-top: 16px; 
+  padding-right: 56px; 
+  padding-bottom: 16px; 
+  padding-left: 56px; 
+  background-color: #92A134; 
+  color: white;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.checkOutButton:hover {
+  background-color: #7D8F2D; 
+}
+
+.night_mode .checkOutButton {
+  background-color: #ff7043;
+}
+
+.night_mode .checkOutButton:hover {
+  background-color: #ff8f60;
+}
+
+@media (max-width: 767px) {
+  .banner {
+    width: 100%;
+    height: 400px;
+    margin-top: 0;
+  }
+
+  .textOverlay {
+    top: 100px;
+    left: 20px;
+    width: 90%;
+    height: auto;
+    gap: 20px;
+  }
+
+  .textOverlay h1 {
+    font-size: 32px; 
+  }
+
+  .checkOutButton {
+    width: 150px; 
+    height: 40px; 
+    padding: 8px 20px; 
+    font-size: 14px; 
+  }
+}
