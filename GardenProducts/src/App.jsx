@@ -1,6 +1,7 @@
 
 import './App.css'
-import Footer from './components/Footer/Footer'
+import Footer from './Layout/Footer/Footer'
+import ProductCard from './components/ProductCard/ProductCard'
 
 function App() {
   
@@ -9,13 +10,8 @@ function App() {
     <>
      
 
-    
-
-
-
-
-
-   
+  <ProductCard></ProductCard>
+   <Footer></Footer>
     </>
   )
 }

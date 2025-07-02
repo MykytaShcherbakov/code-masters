@@ -90,6 +90,23 @@ footer h2 {
   display: block;
 }
 
+/* --- Адаптив под 1440px --- */
+@media (max-width: 1440px) {
+  .footer-content {
+    max-width: 95vw;
+    padding: 0 16px;
+  }
+  .footer-grid {
+    gap: 18px;
+  }
+  .footer-map iframe {
+    height: 220px;
+  }
+  footer h2 {
+    font-size: 36px;
+  }
+}
+
 @media (max-width: 900px) {
   .footer-content,
   .footer-grid,
