@@ -1,22 +1,12 @@
-import { useState } from 'react'
-
-import './App.css'
+import './App.css';
+import Sales from './components/Sales/Sales';
 
 function App() {
-  
-
   return (
     <>
-     
-
-    <p>Hallo Bro</p>
-
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-
+      <Sales />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
