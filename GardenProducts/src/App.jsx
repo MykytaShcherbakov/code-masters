@@ -1,4 +1,6 @@
-export default App;
+
+import './App.css';
+i
 
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -31,4 +33,5 @@ const App = () => {
 };
 
 export default App;
+
 
