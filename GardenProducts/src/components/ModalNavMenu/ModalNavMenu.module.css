@@ -1,0 +1,126 @@
+
+.modal {
+  display: none;
+}
+
+.modal.active {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modalContent {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 100%;
+  background: #F0F8E0;
+  padding: 20px;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.active .modalContent {
+  transform: translateX(0);
+}
+
+.discountButton {
+  background-color: #90EE90;
+  color: #333;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.discountButton:hover {
+  background-color: #8da17f;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  padding: 0;
+  line-height: 1;
+}
+
+.closeButton:hover {
+  color: #8BC34A;
+}
+
+.night_mode .modalContent {
+  background: #333;
+}
+
+.night_mode .navLink {
+  color: #bbb;
+}
+
+.night_mode .navLink:hover {
+  color: #ff7043;
+}
+
+.night_mode .discountButton {
+  background-color: #ff7043;
+}
+
+.night_mode .discountButton:hover {
+  background-color: #ff8f60;
+}
+
+.night_mode .closeButton {
+  color: #bbb;
+}
+
+.night_mode .closeButton:hover {
+  color: #ff7043;
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+}
+
+.navItem {
+  margin-bottom: 20px;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+}
+
+.navLink:hover {
+  color: #8BC34A;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    display: none !important;
+  }
+}
