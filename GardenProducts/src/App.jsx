@@ -1,3 +1,5 @@
+export default App;
+
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Header from './components/Header/Header.jsx';
@@ -29,3 +31,4 @@ const App = () => {
 };
 
 export default App;
+
