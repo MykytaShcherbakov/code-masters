@@ -7,9 +7,10 @@ function ProductCard() {
   const [count, setCount] = useState(1)
   const [product, setProduct] = useState(null)
   const [showFullDesc, setShowFullDesc] = useState(false)
+  const [cartState, setCartState] = useState('default') // 'default' | 'hover' | 'added'
 
   useEffect(() => {
-    fetch('http://localhost:3333/products/35')
+    fetch('http://localhost:3333/products/1')
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) setProduct(data[0])
@@ -79,7 +80,15 @@ function ProductCard() {
           <button className="quantity-btn" onClick={handleDecrement}>-</button>
           <span className="quantity-value">{count}</span>
           <button className="quantity-btn" onClick={handleIncrement}>+</button>
-          <button className="add-to-cart-btn">Add to cart</button>
+          <button
+            className={`add-to-cart-btn ${cartState}`}
+            onMouseEnter={() => cartState === 'default' && setCartState('hover')}
+            onMouseLeave={() => cartState === 'hover' && setCartState('default')}
+            onClick={() => setCartState('added')}
+            disabled={cartState === 'added'}
+          >
+            {cartState === 'added' ? 'Added' : 'Add to cart'}
+          </button>
         </div>
         <h4 className="product-description-title">Description</h4>
         <p className="product-description">
