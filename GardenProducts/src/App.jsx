@@ -1,22 +1,15 @@
-import { useState } from 'react'
+import { Route, Routes } from "react-router";
+import Categories from "./pages/Categories/Categories";
+import Home from "./pages/Home/Home";
+import "./App.css";
 
-import './App.css'
-
-function App() {
-  
-
+const App = () => {
   return (
-    <>
-     
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route path="/categories" element={<Categories />}/>       
+      </Routes>
+  );
+};
 
-    <p>Hallo Bro</p>
-
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-
-    </>
-  )
-}
-
-export default App
+export default App;
