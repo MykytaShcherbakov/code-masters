@@ -1,44 +1,18 @@
-
-import './App.css';
-
-
-
-import React from 'react';
-
-
-import Banner from './components/Banner/Banner.jsx';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { toggleTheme } from './slices/themeSlice';
-import './App.css';
-import Sales from './components/Sales/Sales.jsx';
-import Footer from "./Layout/Footer/Footer.jsx"
+import { Route, Routes } from "react-router-dom";
+import Categories from "./pages/Categories/Categories.jsx";
+import Home from "./pages/Home/Home.jsx";
+import CategoriePage from "./pages/CategoriePage/CategoriePage.jsx";
+import "./App.css";
 
 const App = () => {
-  // // Добавляем защиту от undefined
-  // const nightMode = useSelector((state) => state.theme?.nightMode ?? false);
-  // const dispatch = useDispatch();
 
-  // // Для отладки выведем текущее состояние
-  // React.useEffect(() => {
-  //   console.log('Current theme state:', { nightMode });
-  // }, [nightMode]);
-
-  // const handleToggleTheme = () => {
-  //   dispatch(toggleTheme());
-  // };
-
-  return (
-    <>
-      {/* <Header onToggleTheme={handleToggleTheme} nightMode={nightMode} /> */}
-      <Banner />
-    
-      <Sales/>
-      <Footer/>
-      
-    </>
+  return ( 
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/categories" element={<Categories />} />
+      <Route path="/categories/:id" element={<CategoriePage />} />
+    </Routes>
   );
 };
 
 export default App;
-
-
