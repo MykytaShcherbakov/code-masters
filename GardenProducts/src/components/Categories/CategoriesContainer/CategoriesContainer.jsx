@@ -11,6 +11,9 @@ const CategoriesContainer = ({ children, showButton = true }) => {
       <div className="category-list">
         { children }
       </div>
+      <div className="mobileButton">
+        {showButton && <AllCategoriesButton />}
+      </div>
     </div>
   );
 };

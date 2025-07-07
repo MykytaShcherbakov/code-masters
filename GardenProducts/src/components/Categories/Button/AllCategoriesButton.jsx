@@ -1,11 +1,11 @@
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import "./AllCategoriesButton.css";
 
 const AllCategoriesButton = () => {
   const navigate = useNavigate();
 
   const allCategoriesButton = () => {
-    navigate("/categories");
+      navigate("/categories");
   };
   
   return (
