@@ -1,0 +1,148 @@
+.categories-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 80px 40px;
+  max-width: 1440px;
+}
+
+.categories-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 40px 0;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.categories-name {
+  font-weight: 700;
+  font-size: 4rem;
+  color: #424436;
+}
+
+.category-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  align-items: stretch;
+  gap: 30px;
+}
+
+.mobileButton {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  /* Categories */
+  .categories-name {
+    font-size: 3.5rem;
+  }
+
+  .all-categories-btn button {
+    font-size: 13px;
+  }
+
+  .category-list {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+  }
+
+  .category-list p {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .categories-container {
+    padding: 24px 20px;
+  }
+
+  .categories-name {
+    font-size: 3rem;
+  }
+
+  .category-list {
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+  }
+
+  .all-categories-btn button {
+    font-size: 13px;
+  }
+
+  .category-list p {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .categories-name {
+    font-size: 2.5rem;
+    white-space: normal;
+  }
+
+  .category-list {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+  }
+
+  .all-categories-btn {
+    display: flex;
+    padding: 0;
+  }
+
+  .all-categories-btn button {
+    font-size: 8px;
+    padding: 4px 8px;
+  }
+
+  .category-item img {
+    height: 200px;
+  }
+
+  .category-list {
+    gap: 16px;
+  }
+
+  .category-list p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .categories-container {
+    margin: 0px 16px;
+  }
+
+  .categories-name {
+    font-size: 2.5rem;
+  }
+
+  .category-list p {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+  }
+
+  .categories-title button {
+    display: none;
+  }
+
+  .line {
+    display: none;
+  }
+
+  .categories-title {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 0;
+    gap: 0;
+  }
+
+  .mobileButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0 0;
+  }
+}

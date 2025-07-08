@@ -1,0 +1,176 @@
+.discount-form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 40px;
+  max-width: 1440px;
+  background: transparent;
+}
+
+.discount-inner {
+  background: linear-gradient(to right, #87933d, #55610b);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.discount-title {
+  padding: 32px 32px 24px 32px;
+  display: flex;
+  justify-content: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.discount-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px 32px;
+  gap: 32px;
+}
+
+.discount-content img {
+  display: block;
+  object-fit: cover;
+}
+
+.discount-fields {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 0px;
+  gap: 32px;
+  width: 100%;
+}
+
+.discount-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.discount-inputs input {
+  padding: 16px 32px;
+  border-radius: 6px;
+  border: 1px solid #fffff1;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: transparent;
+}
+
+.discount-inputs input::placeholder {
+  color: #ffffff;
+  opacity: 1;
+}
+
+.discount-btn button {
+  padding: 16px 32px;
+  border: 1px solid white;
+  color: #424436;
+  font-weight: 600;
+  border-radius: 6px;
+  font-size: 20px;
+  cursor: pointer;
+  width: 100%;
+}
+
+@media (max-width: 1000px) {
+  .discount-content {
+    flex-direction: row;
+    gap: 24px;
+    padding: 0 32px 0 0;
+  }
+
+  .discount-content img {
+    display: block;
+    object-fit: cover;
+    object-position:right;
+    width: 50%;
+  }
+
+  .discount-fields {
+    display: flex;
+    padding: 0 0 32px 0;
+  }
+
+  .discount-title {
+    font-size: 32px;
+    padding: 24px;
+  }
+
+  .discount-inputs input,
+  .discount-btn button {
+    font-size: 18px;
+    padding: 14px 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .discount-title {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .discount-inputs input,
+  .discount-btn button {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+
+  .discount-form {
+    padding: 24px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+.discount-content {
+  display: flex;
+  flex-direction: column-reverse ;
+  align-items: center;
+  gap: 12px;
+  padding: 0px 12px;
+}
+
+  .discount-title {
+    font-size: 1.7rem;
+  }
+
+  .discount-content img {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+  }
+
+  .discount-inputs {
+    gap: 12px;
+    padding: 24px 0;
+  }
+
+  .discount-inputs input,
+  .discount-btn button {
+    font-size: 15px;
+    padding: 10px 16px;
+  }
+
+  .discount-form {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 360px) {
+  .discount-title {
+    font-size: 1.5rem;
+  }
+
+  .discount-inputs input,
+  .discount-btn button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .discount-form {
+    padding: 50px 16px 16px;
+  }
+}

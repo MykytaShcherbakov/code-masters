@@ -1,0 +1,25 @@
+.all-categories-btn {
+  display: flex;
+  align-items: center;
+  padding-top: 12px;
+  flex-grow: 1;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: #dddddd;
+}
+
+.all-categories-btn button {
+  cursor: pointer;
+  padding: 8px 16px;
+  white-space: nowrap;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  background-color: white;
+  font-weight: 500;
+  font-size: 16px;
+  color: #8b8b8b; 
+}
+
