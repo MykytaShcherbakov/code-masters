@@ -2,7 +2,7 @@ body {
   font-family: 'Inter', sans-serif;
   background-color: #FFFFF1;
   margin: 0;
-  padding: 20px;
+  /* padding: 20px; */
   box-sizing: border-box;
 }
 
@@ -12,7 +12,7 @@ body {
 
 .sales-section .container,
 .container {
-  max-width: 1200px;
+  max-width: 1360px;
   margin: 0 auto;
   padding: 0 15px;
 }
@@ -65,7 +65,7 @@ body {
   margin-bottom: 24px; 
 }
 
-.product-card {
+.product-grid .product-card {
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
@@ -79,11 +79,11 @@ body {
   cursor: pointer;
 }
 
-.product-card:hover {
+.product-grid .product-card:hover {
   border-color: #8A2BE2;
 }
 
-.product-card img {
+.product-grid .product-card img {
   width: 100%;
   height: 250px;
   object-fit: cover;

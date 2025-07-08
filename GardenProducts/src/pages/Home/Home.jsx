@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Banner from "../../components/Banner/Banner";
+import Banner from "../../Layout/Banner/Banner";
 import CategoriesContainer from "../../components/Categories/CategoriesContainer/CategoriesContainer";
 import CategoriesCard from "../../components/Categories/CategoriesCard/CategoriesCard";
 import DiscountForm from "../../components/DiscountForm/DiscountForm";
 import Footer from "../../Layout/Footer/Footer";
+import Sales from "../../components/Sales/Sales";
 
 
 const Home = () => {
@@ -54,7 +55,8 @@ const Home = () => {
         ))}
       </CategoriesContainer>
       <DiscountForm />
-      <Footer />
+      <Sales/>
+      
     </>
   );
 };
