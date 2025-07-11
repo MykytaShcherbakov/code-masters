@@ -90,7 +90,6 @@ footer h2 {
   display: block;
 }
 
-/* --- Адаптив под 1440px --- */
 @media (max-width: 1440px) {
   .footer-content {
     max-width: 95vw;
@@ -106,7 +105,6 @@ footer h2 {
     font-size: 36px;
   }
 }
-
 @media (max-width: 900px) {
   .footer-content,
   .footer-grid,
@@ -114,7 +112,6 @@ footer h2 {
     max-width: 100%;
   }
 }
-
 @media (max-width: 768px) {
   .footer-content {
     padding: 0 8px;

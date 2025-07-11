@@ -11,6 +11,7 @@ function ProductCard() {
   const [product, setProduct] = useState(null);
   const [showFullDesc, setShowFullDesc] = useState(false);
   const [cartState, setCartState] = useState('default');
+   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { id } = useParams();
 
@@ -78,8 +79,12 @@ function ProductCard() {
     </button>
   );
 
+
+
+  const handleImageClick = () => setIsModalOpen(true);
+const handleModalClose = () => setIsModalOpen(false);
   const ProductImage = (
-    <img src={imageUrl} alt={product.title} className="product-image" />
+    <img src={imageUrl} alt={product.title} className="product-image" onClick={handleImageClick} style={{cursor:  'pointer'}} />
   );
 
   const PriceBlock = (
@@ -134,6 +139,18 @@ function ProductCard() {
   // ----- RETURN -----
 
   return (
+<>
+      {isModalOpen && (
+      <div className="modal-overlay" onClick={handleModalClose}>
+        <div className="modal-content" onClick={e => e.stopPropagation()}>
+          <img src={imageUrl} alt={product.title} className="modal-img" />
+          <button className="modal-close-btn" onClick={handleModalClose}>
+            &times;
+          </button>
+        </div>
+      </div>
+    )}
+
     <section className="product-card-section mobile-only">
       <div className="product-card">
 
@@ -167,6 +184,7 @@ function ProductCard() {
         {DescriptionBlock("desc-mobile")}
       </div>
     </section>
+    </>
   );
 }
 
