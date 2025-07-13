@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Sales.css';
+import { Link } from 'react-router-dom';
 
 const Sales = () => {
   const [sales, setSales] = useState([]);
@@ -64,8 +65,10 @@ const Sales = () => {
         <div className="header">
           <h1 className="sale">Sale</h1>
           <div className="header-line-between"></div>
-       
-          <button className="header-all-sales-button">All sales</button>
+
+          <Link to={'/discounted-items'}>
+            <button className="header-all-sales-button">All sales</button>
+          </Link>
         </div>
 
         <div className="product-grid">
@@ -118,7 +121,6 @@ const Sales = () => {
           ))}
         </div>
 
-    
         <div className="all-sales-button-container">
           <button className="all-sales-button">All sales</button>
         </div>

@@ -1,24 +1,40 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Categories from "./pages/Categories/Categories.jsx";
-import Home from "./pages/Home/Home.jsx";
-import CategoriePage from "./pages/CategoriePage/CategoriePage.jsx";
-import Layout from "./Layout/Layout.jsx";
-// import ProductCard from "./components/ProductCard/ProductCard.jsx";
-// import "./App.css";
+import { createBrowserRouter,RouterProvider } from "react-router-dom";
+import Layout from "./Layout/Layout"
+import ErrorPage from "./Pages/ErrorPage/ErrorPage"
+import Home from "./Pages/Home/Home";
+import { fetchCategories} from "./Loader/fetchCategories";
+import { fetchProducts } from "./Loader/fetchProducts";
+import DiscountedItems from "./components/DiscountedItems/DiscountedItems";
+import Categories from "./components/Categories/Categories";
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+        loader: fetchCategories,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: '/discounted-items',
+        element: <DiscountedItems />,
+        loader: fetchProducts,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: 'categories',
+        element: <Categories />,
+        loader: fetchCategories,
+      },
+    ],
+  },
+]);
 
 const App = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout><Home /></Layout>} />
-        <Route path="/categories" element={<Layout><Categories /></Layout>} />
-        <Route path="/categories/:id" element={<Layout><CategoriePage /></Layout>} />
-        {/* <Route path="/product/:id" element={<Layout><ProductCard /></Layout>} /> */}
-      </Routes>
-    </BrowserRouter>
-
-    // <ProductCard/>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;

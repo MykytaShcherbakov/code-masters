@@ -1,15 +1,35 @@
-import React from 'react'
-import Header from './Header/Header'
-import Footer from './Footer/Footer'
+import React from 'react';
+import { Outlet, useNavigation } from 'react-router-dom';
+import './Layout.css';
+import DiscountedItems from '../components/DiscountedItems/DiscountedItems';
+import DiscountForm from '../components/DiscountForm/DiscountForm';
+import Footer from './Footer/Footer';
+import Banner from '../components/Banner/Banner';
+import Categories from '../components/Categories/Categories';
+import Header from './Header/Header';
+import ProductCard from '../components/ProductCard/ProductCard';
 
-function Layout({ children }) {
+function Layout() {
+  const navigation = useNavigation();
+
+  if (navigation.state !== 'idle') {
+    return (
+      <div className="loading-overlay">
+        <h1>LOADING...</h1>
+      </div>
+    );
+  }
+
   return (
-    <>
+    <div className="layout-container">
+      {/* <ProductCard/> */}
       <Header />
-      <main>{children}</main>
+      <main>
+        <Outlet />
+      </main>
       <Footer />
-    </>
-  )
+    </div>
+  );
 }
 
-export default Layout
+export default Layout;

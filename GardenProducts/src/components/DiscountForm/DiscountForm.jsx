@@ -1,4 +1,4 @@
-import "./DiscountForm.css";
+import './DiscountForm.css';
 
 const DiscountForm = () => {
   return (
