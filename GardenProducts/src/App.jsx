@@ -1,11 +1,13 @@
-import { createBrowserRouter,RouterProvider } from "react-router-dom";
-import Layout from "./Layout/Layout"
-import ErrorPage from "./Pages/ErrorPage/ErrorPage"
-import Home from "./Pages/Home/Home";
-import { fetchCategories} from "./Loader/fetchCategories";
-import { fetchProducts } from "./Loader/fetchProducts";
-import DiscountedItems from "./components/DiscountedItems/DiscountedItems";
-import Categories from "./components/Categories/Categories";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Layout from './Layout/Layout';
+import ErrorPage from './Pages/ErrorPage/ErrorPage';
+import Home from './Pages/Home/Home';
+import { fetchCategories } from './Loader/fetchCategories';
+import { fetchProducts } from './Loader/fetchProducts';
+import { fetchProduct } from './Loader/fetchProduct';
+import DiscountedItems from './components/DiscountedItems/DiscountedItems';
+import Categories from './components/Categories/Categories';
+import ProductDetails from './components/ProductDetails/ProductDetails';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,11 @@ const router = createBrowserRouter([
         path: 'categories',
         element: <Categories />,
         loader: fetchCategories,
+      },
+      {
+        path: 'product/:id',
+        element: <ProductDetails />,
+        loader: fetchProduct,
       },
     ],
   },

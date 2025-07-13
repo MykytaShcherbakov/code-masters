@@ -7,7 +7,7 @@ import Footer from './Footer/Footer';
 import Banner from '../components/Banner/Banner';
 import Categories from '../components/Categories/Categories';
 import Header from './Header/Header';
-import ProductCard from '../components/ProductCard/ProductCard';
+import ProductDetails from "../components/ProductDetails/ProductDetails.jsx"
 
 function Layout() {
   const navigation = useNavigation();
@@ -22,7 +22,8 @@ function Layout() {
 
   return (
     <div className="layout-container">
-      {/* <ProductCard/> */}
+     <ProductDetails/>
+
       <Header />
       <main>
         <Outlet />
