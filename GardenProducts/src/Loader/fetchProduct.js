@@ -3,5 +3,6 @@ export async function fetchProduct({ params }) {
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
-  return response.json();
+  const data = await response.json();
+  return Array.isArray(data) ? data[0] : data;
 }

@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useLoaderData } from 'react-router-dom';
+import { useParams, useLoaderData } from 'react-router-dom';
 import './ProductDetails.scss';
-import productImg from './5422e5af264f78b8a10da5d1979747d487daef24.png';
-import heartIcon from './basket=like.svg';
-import heartFilledIcon from './basket=liked.svg';
+import productImg from '../../media/5422e5af264f78b8a10da5d1979747d487daef24.png';
+import heartIcon from '../../media/basket=like.svg';
+import heartFilledIcon from '../../media/basket=liked.svg';
 
 function ProductDetails() {
   const [isFavorite, setIsFavorite] = useState(false);
   const [count, setCount] = useState(1);
-  const [product, setProduct] = useState(null);
+  // const [product, setProduct] = useState(null);
   const [showFullDesc, setShowFullDesc] = useState(false);
   const [cartState, setCartState] = useState('default');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,27 +31,7 @@ function ProductDetails() {
     setIsFavorite(!isFavorite);
   };
 
-
-  const fetchProduct = useLoaderData()
-  console.log(fetchProduct);
-  
-
-
-  // useEffect(() => {
-  //   const fetchProduct = async () => {
-  //     try {
-  //       const res = await fetch(`http://localhost:3333/products/${id}`);
-  //       const data = await res.json();
-  //       setProduct(Array.isArray(data) ? data[0] : data);
-  //     } catch (error) {
-  //       console.error('Error fetching product:', error);
-  //       setProduct(null);
-  //     }
-  //   };
-  //   fetchProduct();
-  // }, [id]);
-
-
+ const product = useLoaderData();
 
   const handleDecrement = () => setCount((c) => (c > 1 ? c - 1 : 1));
   const handleIncrement = () => setCount((c) => c + 1);
