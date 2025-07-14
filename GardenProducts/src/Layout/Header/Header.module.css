@@ -1,0 +1,250 @@
+/* Определение глобальных CSS-переменных для цветов */
+:root {
+  --grey-divider: #DDDDDD; 
+  --grey: #333; 
+  --green: #92A134; 
+  --white: #FFFFFF; 
+  --day-icon-color: #333; 
+  --night-icon-color:#DDDDDD;
+}
+
+/* Стили для заголовка */
+.header {
+  max-width: 1440px; 
+  width: 100%; 
+  height: 128px; 
+  background: #FFFFF1; 
+  border-bottom: 1px solid var(--grey-divider); 
+  margin: 0 auto; 
+  position: relative; 
+}
+
+/* Стили для контейнера */
+.container {
+  max-width: 1440px; 
+  margin: 0 auto; 
+  height: 100%; 
+  padding: 0 40px; 
+}
+
+/* Стили для сетки заголовка */
+.headerGrid {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; /* Центрирование по вертикали */
+  height: 100%; 
+}
+
+/* Стили для левого блока: логотип и переключатель темы */
+.logoBlock {
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+}
+
+/* для логотипа */
+.logo {
+  width: 70px; 
+  height: 70px; 
+}
+
+/* Стили для переключателя темы */
+.themeToggle {
+  width: 60px;
+  height: 32px; 
+  background: none; 
+  border: none; 
+  cursor: pointer; 
+  opacity: 0.5; 
+}
+
+/* Стили для иконки переключения темы */
+.themeIcon {
+  width: 60px; 
+  height: 32px; 
+}
+
+/* Стили для центрального блока: скидка и навигация */
+.centerBlock {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 20px; 
+  flex: 1; /* Гибкость */
+  text-align: center; 
+}
+
+/* Стили для кнопки скидки */
+.discountButton {
+  width: 151px; 
+  height: 32px; 
+  padding: 6px 16px; 
+  background-color: var(--green); 
+  color: var(--white); /* Текст */
+  border: none; 
+  border-radius: 4px; /* Скругление */
+  cursor: pointer; 
+  font-size: 16px; 
+}
+
+/* Стили при наведении на кнопку скидки */
+.discountButton:hover {
+  background-color: #7D8F2D; 
+}
+
+/* Стили для меню навигации */
+.navMenu {
+  display: flex; 
+  gap: 32px; 
+  align-items: center; 
+  justify-content: center; 
+  flex-wrap: wrap; /* Разрешение переноса */
+}
+
+/* Стили для ссылок в меню */
+.navLink {
+  color: var(--grey); 
+  text-decoration: none; 
+  font-size: 16px; 
+  transition: color 0.3s ease; 
+}
+
+/* Стили при наведении на ссылки */
+.navLink:hover {
+  color: var(--green); 
+}
+
+/* Стили для правого блока: избранное, корзина и бургер */
+.rightBlock {
+  display: flex; 
+  align-items: center; 
+  gap: 20px; 
+}
+
+/* Стили для блока с иконками корзины */
+.cartIcons {
+  display: flex; 
+  align-items: center; 
+  gap: 15px; 
+}
+
+/* Стили для ссылок с иконками */
+.iconLink {
+  position: relative; 
+  display: flex; 
+  align-items: center; 
+}
+
+/* Стили для счетчика уведомлений */
+.badgeCount {
+  position: absolute; 
+  top: -5px; /* Смещение вверх */
+  right: -5px; /* Смещение вправо */
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  width: 17px; 
+  height: 17px; 
+  border-radius: 50%; /* Круглая форма */
+  background: var(--green); 
+  font-weight: 600; /* Толщина шрифта */
+  font-size: 12px; /* Шрифт */
+  color: var(--white); /* Текст */
+}
+
+/* для иконок */
+.icon {
+  width: 44px; 
+  height: 44px; 
+}
+
+/* Стили для бургер-меню */
+.burger {
+  display: none; /* Скрыто по умолчанию */
+  background: none; 
+  border: none; /* Нет границ */
+  cursor: pointer; 
+}
+
+/* Стили для иконки бургер-меню */
+.burgerIcon {
+  width: 44px; 
+  height: 44px; 
+  fill: var(--day-icon-color); /* Цвет иконки в дневном режиме */
+}
+
+/* Стили для ночного режима */
+.night_mode .header {
+  background: var(--grey); 
+  border-bottom: 1px solid var(--grey); /* Граница */
+}
+
+.night_mode .navLink {
+  color: var(--white); /* Текст */
+}
+
+.night_mode .discountButton {
+  background-color:#92A134; 
+}
+
+.night_mode .burgerIcon {
+  fill: var(--night-icon-color); /* Цвет иконки в ночном режиме */
+}
+
+/* Адаптивность для 1440px */
+@media (max-width: 1440px) {
+  .container { padding: 0 40px; } 
+  .logo { width: 60px; height: 60px; } 
+  .themeToggle { width: 50px; height: 26px; } /* Уменьшение переключателя */
+  .themeIcon, .icon, .burgerIcon { width: 28px; height: 28px; } /* Уменьшение иконок */
+  .discountButton { width: 130px; height: 28px; padding: 5px 12px; font-size: 14px; } /* Уменьшение кнопки */
+  .navLink { font-size: 14px; } /* Уменьшение шрифта ссылок */
+  .badgeCount { width: 15px; height: 15px; font-size: 10px; } /* Уменьшение счетчика */
+}
+
+/* Адаптивность для 1000px */
+@media (max-width: 1000px) {
+  .logo { width: 50px; height: 50px; } 
+  .themeToggle { width: 40px; height: 20px; } /* Уменьшение переключателя */
+  .themeIcon, .icon, .burgerIcon { width: 24px; height: 24px; } /* Уменьшение иконок */
+  .discountButton { width: 120px; height: 24px; padding: 4px 10px; font-size: 12px; } /* Уменьшение кнопки */
+  .navLink { font-size: 12px; } /* Уменьшение шрифта ссылок */
+  .badgeCount { width: 13px; height: 13px; font-size: 9px; } /* Уменьшение счетчика */
+}
+
+/* Адаптивность для 768px */
+@media (max-width: 768px) {
+  .header { height: auto; } /* Автоматическая высота */
+  .container { padding: 0 10px; } 
+  .logo { width: 40px; height: 40px; } /* Уменьшение логотипа */
+  .themeToggle { width: 30px; height: 16px; } /* Уменьшение переключателя */
+  .themeIcon, .icon, .burgerIcon { width: 20px; height: 20px; } /* Уменьшение иконок */
+  .discountButton { width: 100px; height: 20px; padding: 3px 8px; font-size: 10px; margin-top: 20px;} /* Уменьшение кнопки */
+  .navLink { font-size: 10px; } /* Уменьшение шрифта ссылок */
+  .badgeCount { width: 12px; height: 12px; font-size: 8px; } /* Уменьшение счетчика */
+  .navMenu { flex-wrap: wrap; justify-content: center; } /* Перенос ссылок */
+  .headerGrid { flex-wrap: wrap; justify-content: space-between; } /* Распределение элементов */
+}
+
+/* Адаптивность для 480px */
+@media (max-width: 480px) {
+  .headerGrid { padding: 5px; } /* Добавление внутренних отступов */
+  .logo { width: 30px; height: 30px; } /* Уменьшение логотипа */
+  .themeToggle { width: 18px; height: 14px; } /* Уменьшение переключателя */
+  .themeIcon, .icon, .burgerIcon { width: 18px; height: 18px; } /* Уменьшение иконок */
+  .badgeCount { width: 10px; height: 10px; font-size: 7px; } /* Уменьшение счетчика */
+  .centerBlock { display: none; } /* Скрытие центрального блока (скидка и навигация) */
+  .burger { display: block; } /* Показ бургер-меню */
+  .rightBlock { justify-content: flex-end; } /* Выравнивание вправо */
+}
+
+/* Адаптивность для 360px */
+@media (max-width: 360px) {
+  .headerGrid { padding: 3px; } /* Уменьшение внутренних отступов */
+  .logo { width: 25px; height: 25px; } /* Уменьшение логотипа */
+  .themeToggle { width: 16px; height: 12px; } /* Уменьшение переключателя */
+  .themeIcon, .icon, .burgerIcon { width: 16px; height: 16px; } /* Уменьшение иконок */
+  .badgeCount { width: 9px; height: 9px; font-size: 6px; } /* Уменьшение счетчика */
+  .centerBlock { display: none; } /* Скрытие центрального блока */
+  .rightBlock { justify-content: flex-end; } /* Выравнивание вправо */
+}

@@ -1,22 +1,45 @@
-import { useState } from 'react'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Layout from './Layout/Layout';
+import ErrorPage from './Pages/ErrorPage/ErrorPage';
+import Home from './Pages/Home/Home';
+import { fetchCategories } from './Loader/fetchCategories';
+import { fetchProducts } from './Loader/fetchProducts';
+import { fetchProduct } from './Loader/fetchProduct';
+import DiscountedItems from './components/DiscountedItems/DiscountedItems';
+import Categories from './components/Categories/Categories';
+import ProductDetails from './components/ProductDetails/ProductDetails';
 
-import './App.css'
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+        loader: fetchCategories,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: '/discounted-items',
+        element: <DiscountedItems />,
+        loader: fetchProducts,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: 'categories',
+        element: <Categories />,
+        loader: fetchCategories,
+      },
+      {
+        path: 'product/:id',
+        element: <ProductDetails />,
+        loader: fetchProduct,
+      },
+    ],
+  },
+]);
 
-function App() {
-  
-
-  return (
-    <>
-     
-
-    <p>Hallo Bro</p>
-
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-
-    </>
-  )
-}
-
-export default App
+const App = () => {
+  return <RouterProvider router={router} />;
+};
