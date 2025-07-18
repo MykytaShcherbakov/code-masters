@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import './DiscountedItems.css';
+import './ProductsFromCategory.css';
 import { useLoaderData } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { GiShoppingBag } from 'react-icons/gi';
 import { IoMdHeart } from 'react-icons/io';
 
-export default function DiscountedItems() {
-  const products = useLoaderData();
+export default function ProductsFromCategory() {
+  const products = useLoaderData() || [];
 
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
@@ -36,7 +37,6 @@ export default function DiscountedItems() {
   //   return <h1 className='no-products-on-sale'>No Products on sale</h1>;
   // }
 
-
   return (
     <div>
       <div className="container">
@@ -44,11 +44,16 @@ export default function DiscountedItems() {
           <Link to="/" className="breadcrumb-text">
             Main page
           </Link>
-          <span className="breadcrumb-linie"></span>
-          <span className="breadcrumb-text-2">All sales</span>
+          <div className="breadcrumb-linie"></div>
+
+          <Link to="/categories" className="breadcrumb-text">
+            Categories
+          </Link>
+          <div className="breadcrumb-linie"></div>
+          <span className="breadcrumb-text-2">Tools and equipment</span>
         </div>
 
-        <h1 className="page-title">Discounted items</h1>
+        <h1 className="page-title">Tools and equipment</h1>
 
         <div className="filters-panel">
           <div className="filter-group">
