@@ -30,6 +30,13 @@
   flex-direction: column;
 }
 
+.category-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+
 .category-item img {
   display: block;
   border-radius: 12px;
