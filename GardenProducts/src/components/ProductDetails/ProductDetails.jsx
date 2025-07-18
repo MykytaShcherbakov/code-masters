@@ -8,7 +8,6 @@ import heartFilledIcon from '../../media/basket=liked.svg';
 function ProductDetails() {
   const [isFavorite, setIsFavorite] = useState(false);
   const [count, setCount] = useState(1);
-  // const [product, setProduct] = useState(null);
   const [showFullDesc, setShowFullDesc] = useState(false);
   const [cartState, setCartState] = useState('default');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,6 +36,19 @@ function ProductDetails() {
   const handleIncrement = () => setCount((c) => c + 1);
 
   if (!product) return <div>Loading...</div>;
+
+    const handleAddToCart = () => {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existing = cart.find(item => item.id === product.id);
+
+    if (existing) {
+      existing.count += count;
+    } else {
+      cart.push({ id: product.id, count });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    setCartState('added');
+  };
 
   const hasDiscount = product.discont_price && product.discont_price < product.price;
   const discount = hasDiscount
@@ -105,15 +117,15 @@ function ProductDetails() {
     </div>
   );
 
-  const AddToCartBtn = (
-    <button
-      className={`add-to-cart-btn ${cartState}`}
-      onClick={() => setCartState('added')}
-      disabled={cartState === 'added'}
-    >
-      {cartState === 'added' ? 'Added' : 'Add to cart'}
-    </button>
-  );
+const AddToCartBtn = (
+  <button
+    className={`add-to-cart-btn ${cartState}`}
+    onClick={handleAddToCart}
+    disabled={cartState === 'added'}
+  >
+    {cartState === 'added' ? 'Added' : 'Add to cart'}
+  </button>
+);
 
   const DescriptionBlock = (blockClass) => (
     <div className={`product-description-block ${blockClass}`}>
@@ -167,7 +179,7 @@ function ProductDetails() {
             <div className="product-header after480">
               <h3 className="product-title">{product.title}</h3>
               {FavoriteButton}
-            </div>
+            </div> 
             {PriceBlock}
             <div className="product-quantity-cart">
               {QuantityControls}
