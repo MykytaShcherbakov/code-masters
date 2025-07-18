@@ -3,6 +3,14 @@ import { Outlet, useNavigation } from 'react-router-dom';
 import './Layout.css';
 import Footer from './Footer/Footer';
 
+import Banner from '../components/Banner/Banner';
+import Categories from '../components/Categories/Categories';
+import Header from './Header/Header';
+// import ProductDetails from "../components/ProductDetails/ProductDetails.jsx"
+import ProductsFromCategory from "../components/ProductsFromCategory/ProductsFromCategory"
+import LikedProducts from '../components/LikedProducts/LikedProducts';
+
+
 import Header from './Header/Header';
 function Layout() {
   const navigation = useNavigation();
@@ -17,6 +25,11 @@ function Layout() {
 
   return (
     <div className="layout-container">
+
+
+  {/* <LikedProducts/> */}
+     {/* <ProductsFromCategory/> */}
+
       <Header />
       <main>
         <Outlet />

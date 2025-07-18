@@ -1,32 +1,31 @@
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import './Categories.css';
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Categories = ({ showButton = true }) => {
-//   const categories = useLoaderData(); // получаем данные из загрузчика
+  //   const categories = useLoaderData(); // получаем данные из загрузчика
   const navigate = useNavigate();
-    // const [categories, setCategories] = useState([]);
-    // console.log(categories);
-    
-   
+  const [categories, setCategories] = useState([]);
+  console.log(categories);
 
-    // useEffect(() => {
-    //   const getSales = async () => {
-       
-    //       const res = await fetch('http://localhost:3333/categories/all');
-    //       if (!res.ok) {
-    //         throw new Error(`HTTP error! status: ${res.status}`);
-    //       }
-    //       const data = await res.json();
-    //       setCategories(data);
-    //       console.log();
-        
-    //   };
+  useEffect(() => {
+    const getSales = async () => {
 
-    //   getSales();
-    // }, []);
+        const res = await fetch('http://localhost:3333/categories/all');
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const data = await res.json();
+        setCategories(data);
+        console.log();
 
-    const categories = useLoaderData();
+    };
+
+    getSales();
+  }, []);
+
+  // const categories = useLoaderData() || []
+  // console.log(categories);
   
 
   const handleAllCategoriesClick = () => {
@@ -37,7 +36,7 @@ const Categories = ({ showButton = true }) => {
     navigate(`/categories/${id}`);
   };
 
-  if (!categories ) {
+  if (!categories) {
     return <div>Loading or no categories found...</div>;
   }
 
@@ -55,14 +54,20 @@ const Categories = ({ showButton = true }) => {
 
       <div className="category-list">
         {categories.map((category) => (
-          <div className="category-item" key={category.id}>
-            <img
-              src={`http://localhost:3333${category.image}`}
-              alt={category.title}
-              onClick={() => handleCardClick(category.id)}
-            />
-            <p>{category.title}</p>
-          </div>
+          <Link
+            to={`categories/${category.id}`}
+            className="category-link"
+            key={category.id}
+          >
+            <div className="category-item" key={category.id}>
+              <img
+                src={`http://localhost:3333${category.image}`}
+                alt={category.title}
+                onClick={() => handleCardClick(category.id)}
+              />
+              <p>{category.title}</p>
+            </div>
+          </Link>
         ))}
       </div>
 

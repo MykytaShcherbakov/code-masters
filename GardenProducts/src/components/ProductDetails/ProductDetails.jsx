@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useLoaderData } from 'react-router-dom';
 import './ProductDetails.scss';
@@ -22,7 +23,7 @@ function ProductDetails() {
   const handleFavorite = () => {
     let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
     if (isFavorite) {
-      favorites = favorites.filter(favId => favId !== String(id));
+      favorites = favorites.filter((favId) => favId !== String(id));
     } else {
       favorites.push(String(id));
     }
@@ -30,12 +31,13 @@ function ProductDetails() {
     setIsFavorite(!isFavorite);
   };
 
- const product = useLoaderData();
+  const product = useLoaderData();
 
   const handleDecrement = () => setCount((c) => (c > 1 ? c - 1 : 1));
   const handleIncrement = () => setCount((c) => c + 1);
 
   if (!product) return <div>Loading...</div>;
+
 
     const handleAddToCart = () => {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -51,8 +53,11 @@ function ProductDetails() {
   };
 
   const hasDiscount = product.discont_price && product.discont_price < product.price;
+
   const discount = hasDiscount
-    ? Math.round(((product.price - product.discont_price) / product.price) * 100)
+    ? Math.round(
+        ((product.price - product.discont_price) / product.price) * 100
+      )
     : 0;
 
   const imageUrl = product.image?.startsWith('/')
@@ -61,10 +66,10 @@ function ProductDetails() {
 
   const descLimit = 220;
   const isLongDesc = product.description?.length > descLimit;
-  const descToShow = showFullDesc || !isLongDesc
-    ? product.description
-    : product.description?.slice(0, descLimit) + '...';
-
+  const descToShow =
+    showFullDesc || !isLongDesc
+      ? product.description
+      : product.description?.slice(0, descLimit) + '...';
 
   const DiscountBadgeInImage = hasDiscount && (
     <span className="product-discount">{`-${discount}%`}</span>
@@ -92,7 +97,13 @@ function ProductDetails() {
   const handleImageClick = () => setIsModalOpen(true);
   const handleModalClose = () => setIsModalOpen(false);
   const ProductImage = (
-    <img src={imageUrl} alt={product.title} className="product-image" onClick={handleImageClick} style={{cursor:  'pointer'}} />
+    <img
+      src={imageUrl}
+      alt={product.title}
+      className="product-image"
+      onClick={handleImageClick}
+      style={{ cursor: 'pointer' }}
+    />
   );
 
   const PriceBlock = (
@@ -111,9 +122,19 @@ function ProductDetails() {
 
   const QuantityControls = (
     <div className="quantity-controls">
-      <button className="quantity-btn quantity-btn-minus" onClick={handleDecrement}>-</button>
+      <button
+        className="quantity-btn quantity-btn-minus"
+        onClick={handleDecrement}
+      >
+        -
+      </button>
       <span className="quantity-value">{count}</span>
-      <button className="quantity-btn quantity-btn-plus" onClick={handleIncrement}>+</button>
+      <button
+        className="quantity-btn quantity-btn-plus"
+        onClick={handleIncrement}
+      >
+        +
+      </button>
     </div>
   );
 
@@ -144,36 +165,29 @@ const AddToCartBtn = (
     </div>
   );
 
-
   // ----- RETURN -----
 
   return (
-<>
+    <>
       {isModalOpen && (
-      <div className="modal-overlay" onClick={handleModalClose}>
-        <div className="modal-content" onClick={e => e.stopPropagation()}>
-          <img src={imageUrl} alt={product.title} className="modal-img" />
-          <button className="modal-close-btn" onClick={handleModalClose}>
-            &times;
-          </button>
-        </div>
-      </div>
-    )}
-
-    <section className="product-card-section mobile-only">
-      <div className="product-card">
-
-        {/* Заголовок для мобильных */}
-        <div className="product-header before768">
-          <h3 className="product-title">{product.title}</h3>
-          {FavoriteButton}
-        </div>
-
-        <div className="product-main-block">
-          <div className="product-img-block">
-            {ProductImage}
-            {DiscountBadgeInImage}
+        <div className="modal-overlay" onClick={handleModalClose}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <img src={imageUrl} alt={product.title} className="modal-img" />
+            <button className="modal-close-btn" onClick={handleModalClose}>
+              &times;
+            </button>
           </div>
+        </div>
+      )}
+
+      <section className="product-card-section mobile-only">
+        <div className="product-card">
+          {/* Заголовок для мобильных */}
+          <div className="product-header before768">
+            <h3 className="product-title">{product.title}</h3>
+            {FavoriteButton}
+          </div>
+
           <div className="product-purchase-block">
             {/* Заголовок для адаптива 481–768 */}
             <div className="product-header after480">
@@ -185,14 +199,11 @@ const AddToCartBtn = (
               {QuantityControls}
               <div className="after768">{AddToCartBtn}</div>
             </div>
-            <div className="before768">{AddToCartBtn}</div>
-            {DescriptionBlock("desc-tablet")}
           </div>
-        </div>
 
-        {DescriptionBlock("desc-mobile")}
-      </div>
-    </section>
+          {DescriptionBlock('desc-mobile')}
+        </div>
+      </section>
     </>
   );
 }
