@@ -9,7 +9,6 @@ import heartFilledIcon from '../../media/basket=liked.svg';
 function ProductDetails() {
   const [isFavorite, setIsFavorite] = useState(false);
   const [count, setCount] = useState(1);
-  // const [product, setProduct] = useState(null);
   const [showFullDesc, setShowFullDesc] = useState(false);
   const [cartState, setCartState] = useState('default');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,8 +38,22 @@ function ProductDetails() {
 
   if (!product) return <div>Loading...</div>;
 
-  const hasDiscount =
-    product.discont_price && product.discont_price < product.price;
+
+    const handleAddToCart = () => {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existing = cart.find(item => item.id === product.id);
+
+    if (existing) {
+      existing.count += count;
+    } else {
+      cart.push({ id: product.id, count });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    setCartState('added');
+  };
+
+  const hasDiscount = product.discont_price && product.discont_price < product.price;
+
   const discount = hasDiscount
     ? Math.round(
         ((product.price - product.discont_price) / product.price) * 100
@@ -125,15 +138,15 @@ function ProductDetails() {
     </div>
   );
 
-  const AddToCartBtn = (
-    <button
-      className={`add-to-cart-btn ${cartState}`}
-      onClick={() => setCartState('added')}
-      disabled={cartState === 'added'}
-    >
-      {cartState === 'added' ? 'Added' : 'Add to cart'}
-    </button>
-  );
+const AddToCartBtn = (
+  <button
+    className={`add-to-cart-btn ${cartState}`}
+    onClick={handleAddToCart}
+    disabled={cartState === 'added'}
+  >
+    {cartState === 'added' ? 'Added' : 'Add to cart'}
+  </button>
+);
 
   const DescriptionBlock = (blockClass) => (
     <div className={`product-description-block ${blockClass}`}>
@@ -175,24 +188,16 @@ function ProductDetails() {
             {FavoriteButton}
           </div>
 
-          <div className="product-main-block">
-            <div className="product-img-block">
-              {ProductImage}
-              {DiscountBadgeInImage}
-            </div>
-            <div className="product-purchase-block">
-              {/* Заголовок для адаптива 481–768 */}
-              <div className="product-header after480">
-                <h3 className="product-title">{product.title}</h3>
-                {FavoriteButton}
-              </div>
-              {PriceBlock}
-              <div className="product-quantity-cart">
-                {QuantityControls}
-                <div className="after768">{AddToCartBtn}</div>
-              </div>
-              <div className="before768">{AddToCartBtn}</div>
-              {DescriptionBlock('desc-tablet')}
+          <div className="product-purchase-block">
+            {/* Заголовок для адаптива 481–768 */}
+            <div className="product-header after480">
+              <h3 className="product-title">{product.title}</h3>
+              {FavoriteButton}
+            </div> 
+            {PriceBlock}
+            <div className="product-quantity-cart">
+              {QuantityControls}
+              <div className="after768">{AddToCartBtn}</div>
             </div>
           </div>
 
