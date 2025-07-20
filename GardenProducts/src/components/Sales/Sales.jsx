@@ -3,6 +3,7 @@ import './Sales.scss';
 import { Link } from 'react-router-dom';
 import { GiShoppingBag } from 'react-icons/gi';
 import { IoMdHeart } from 'react-icons/io';
+import ProductCard from '../ProductCard/ProductCard';
 
 const Sales = () => {
   const [sales, setSales] = useState([]);
@@ -63,8 +64,7 @@ const Sales = () => {
 
   return (
     <section className="sales-section">
-      <d
-      iv className="container">
+      <div className="container">
         <div className="header">
           <h1 className="sale">Sale</h1>
           <div className="header-line-between"></div>
@@ -76,39 +76,14 @@ const Sales = () => {
 
         <div className="product-grid">
           {randomSales.map((product) => (
-            <div className="product-card" key={product.id}>
-              <img
-                src={`http://localhost:3333${product.image}`}
-                alt={product.title}
-              />
-
-              <div className="discount-badge">
-                -
-                {Math.round(
-                  ((product.price - product.discont_price) / product.price) *
-                    100
-                )}
-                %
-              </div>
-
-              <div className="card-icons">
-                <IoMdHeart className="heart-icon-sales" />
-                <GiShoppingBag className="shopping-bag-icon-sales" />
-              </div>
-
-              <p className="product-name">{product.title}</p>
-              <div className="prices">
-                <span className="current-price">${product.discont_price}</span>
-                <span className="original-price">${product.price}</span>
-              </div>
-            </div>
+            <ProductCard product={product} key={product.id} />
           ))}
         </div>
 
         <div className="all-sales-button-container">
           <button className="all-sales-button">All sales</button>
         </div>
-      </d>
+      </div>
     </section>
   );
 };

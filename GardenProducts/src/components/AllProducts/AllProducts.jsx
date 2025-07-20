@@ -14,18 +14,16 @@ export default function AllProducts() {
   const min = parseFloat(minPrice) || 0;
   const max = parseFloat(maxPrice) || Infinity;
 
-  // 1. Фильтрация по цене
+ 
   const priceFilteredProducts = products.filter((product) => {
     const realPrice = product.discont_price ?? product.price;
     return realPrice >= min && realPrice <= max;
   });
 
-  // 2. Фильтрация по скидке
   const discountedFilteredProducts = showDiscountedOnly
     ? priceFilteredProducts.filter((product) => product.discont_price !== null)
     : priceFilteredProducts;
 
-  // 3. Сортировка
   let sortedProducts = [...discountedFilteredProducts];
   if (sortOrder === 'price-asc') {
     sortedProducts.sort((a, b) => {
