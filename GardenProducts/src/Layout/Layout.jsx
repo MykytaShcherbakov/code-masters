@@ -10,8 +10,6 @@ import Header from './Header/Header';
 import ProductsFromCategory from "../components/ProductsFromCategory/ProductsFromCategory"
 import LikedProducts from '../components/LikedProducts/LikedProducts';
 
-
-import Header from './Header/Header';
 function Layout() {
   const navigation = useNavigation();
 
