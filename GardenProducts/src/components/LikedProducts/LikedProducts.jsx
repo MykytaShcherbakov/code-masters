@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
-import './DiscountedItems.css';
+import React, { useState} from 'react';
+// import './DiscountedItems.css';
 import { useLoaderData } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { GiShoppingBag } from 'react-icons/gi';
 import { IoMdHeart } from 'react-icons/io';
 
-export default function DiscountedItems() {
-  const products = useLoaderData();
+
+export default function LikedProducts() {
+  const products = useLoaderData() || []
+  console.log(products);
+  
 
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
@@ -36,7 +39,6 @@ export default function DiscountedItems() {
   //   return <h1 className='no-products-on-sale'>No Products on sale</h1>;
   // }
 
-
   return (
     <div>
       <div className="container">
@@ -45,10 +47,10 @@ export default function DiscountedItems() {
             Main page
           </Link>
           <span className="breadcrumb-linie"></span>
-          <span className="breadcrumb-text-2">All sales</span>
+          <span className="breadcrumb-text-2">Liked products</span>
         </div>
 
-        <h1 className="page-title">Discounted items</h1>
+        <h1 className="page-title">Liked products</h1>
 
         <div className="filters-panel">
           <div className="filter-group">
@@ -91,7 +93,7 @@ export default function DiscountedItems() {
         </div>
 
         <div className="product-grid">
-          {sortedProducts.map((product) => (
+          {sortedProducts.slice(0, 5).map((product) => (
             <div className="product-card" key={product.id}>
               <img
                 src={`http://localhost:3333${product.image}`}
@@ -109,6 +111,7 @@ export default function DiscountedItems() {
                 <IoMdHeart className="heart-icon-sales" />
                 <GiShoppingBag className="shopping-bag-icon-sales" />
               </div>
+
               <p className="product-name">{product.title}</p>
               <div className="prices">
                 <span className="current-price">${product.discont_price}</span>
@@ -121,3 +124,8 @@ export default function DiscountedItems() {
     </div>
   );
 }
+
+
+
+
+

@@ -42,6 +42,18 @@ const router = createBrowserRouter([
         path: "product/:id",
         element: <ProductDetails />,
         loader: fetchProduct,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: 'product/likedproducts',
+        element: <LikedProducts/>,
+        loader: fetchProducts,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: '/cart',
+        element: <Cart />,
+        loader: fetchProducts,
       },
     ],
   },

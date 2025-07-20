@@ -6,3 +6,4 @@ export async function fetchProduct({ params }) {
   const data = await response.json();
   return Array.isArray(data) ? data[0] : data;
 }
+
