@@ -1,0 +1,130 @@
+.sale__form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 38%;
+  padding: 32px 32px 32px 0;
+
+  &-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 32px;
+
+    .input__container {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &-section {
+    background: linear-gradient(80.46deg, #87933d -0.68%, #55610b 66.66%);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 24px;
+    margin: 0 20px;
+    overflow: hidden;
+
+    h3 {
+      padding: 32px 0 0 0;
+      font-size: 64px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 auto;
+    }
+  }
+
+  &-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+    // justify-content: space-between;
+    max-width: 100%;
+    max-height: 100%;
+
+    .sale__form-image__container {
+      .sale__form-image {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .error-message {
+    font-size: 16px;
+    font-weight: 500;
+    color: #ff0000;
+    margin-top: 8px;
+    text-align: start;
+  }
+
+  .submit__message {
+    margin-top: 8px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: start;
+  }
+}
+@media (max-width: 1000px) {
+  .sale__form {
+    width: 70%;
+  }
+}
+
+@media (max-width: 768px) {
+  .sale__form {
+    padding: 0 20px 20px 0;
+    gap: 20px;
+
+    &-inputs {
+      padding-top: 0;
+    } 
+
+    &-section {
+    h3 {
+        font-size: 56px;
+        padding: 24px 20px 0 20px;
+      }
+   }
+  }
+
+   
+}
+
+@media (max-width: 767px) {
+  .sale__form {
+    padding: 24px 20px 0 20px;
+    width: 100%;
+    &-section {
+      padding: 24px 20px 0;
+
+      h3 {
+        font-size: 54px;
+        padding: 24px 20px 0 20px;
+      }
+    }
+
+    &-container {
+      flex-wrap: wrap-reverse;
+      justify-content: center;
+    }
+
+    &-inputs {
+      padding: 0;
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .sale__form-section {
+    h3 {
+      font-size: 32px;
+      padding: 24px 20px 0 20px;
+    }
+  }
+}
