@@ -1,26 +1,19 @@
-import { createBrowserRouter, RouterProvider, Routes } from 'react-router-dom';
-import Layout from './Layout/Layout';
-import ErrorPage from './Pages/ErrorPage/ErrorPage';
-import Home from './Pages/Home/Home';
-import { fetchCategories } from './Loader/fetchCategories';
-import { fetchProducts } from './Loader/fetchProducts';
-import { fetchProduct } from './Loader/fetchProduct';
-import DiscountedItems from './components/DiscountedItems/DiscountedItems';
-import Categories from './components/Categories/Categories';
-import ProductDetails from './components/ProductDetails/ProductDetails';
-
-import Cart from './pages/Cart/Cart';
-
-import AllProducts from './components/AllProducts/AllProducts';
-import LikedProducts from './components/LikedProducts/LikedProducts'
-
-
-
-
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Layout from "./Layout/Layout";
+import ErrorPage from "./Pages/ErrorPage/ErrorPage";
+import Home from "./Pages/Home/Home";
+import { fetchCategories } from "./Loader/fetchCategories";
+import { fetchProducts } from "./Loader/fetchProducts";
+import { fetchProduct } from "./Loader/fetchProduct";
+import DiscountedItems from "./components/DiscountedItems/DiscountedItems";
+import CategoriesPage from "./pages/CategoriesPage/CategoriesPage";
+import ProductDetails from "./components/ProductDetails/ProductDetails";
+import CategorieProducts from "./pages/CategorieProducts/CategorieProducts";
+import { fetchCategoryWithProducts } from "./Loader/fetchCategoryWithProducts";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Layout />,
     children: [
       {
@@ -30,25 +23,23 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       },
       {
-        path: '/products',
-        element: <AllProducts />,
-        loader: fetchProducts,
-        errorElement: <ErrorPage />,
-      },
-      {
-        path: '/discounted-items',
+        path: "/discounted-items",
         element: <DiscountedItems />,
         loader: fetchProducts,
         errorElement: <ErrorPage />,
       },
       {
-        path: 'categories/:id',
-        element: <Categories />,
+        path: "categories/all",
+        element: <CategoriesPage />,
         loader: fetchCategories,
-        errorElement: <ErrorPage />,
       },
       {
-        path: 'product/:id',
+        path: "categories/:categoryId",
+        element: <CategorieProducts />,
+        loader: fetchCategoryWithProducts,
+      },
+      {
+        path: "product/:id",
         element: <ProductDetails />,
         loader: fetchProduct,
         errorElement: <ErrorPage />,
@@ -69,9 +60,7 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-   return <RouterProvider router={router} />;
-  // return <Cart />;
-
+  return <RouterProvider router={router} />;
 };
 
 export default App;
