@@ -158,42 +158,6 @@
 }
 
 
-.product-name {
-  font-size: 20px;
-  font-weight: 500;
-  color: #333;
-  padding: 16px 16px 0 16px;
-  line-height: 1.4;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.prices {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  padding: 8px 16px 16px 16px;
-}
-
-.current-price {
-  font-size: 40px;
-  font-weight: 600;
-  color: #424436;
-}
-
-.original-price {
-  font-size: 20px;
-  color: #8b8b8b;
-  text-decoration: line-through;
-}
-
-.all-sales-button-container {
-  display: none;
-  justify-content: center;
-
-  margin-bottom: 56px;
-}
 
 .all-sales-button {
   font-size: 16px;

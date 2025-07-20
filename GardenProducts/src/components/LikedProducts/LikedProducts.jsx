@@ -1,21 +1,25 @@
-import React, { useState} from 'react';
-// import './DiscountedItems.css';
-import { useLoaderData } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { GiShoppingBag } from 'react-icons/gi';
-import { IoMdHeart } from 'react-icons/io';
-
+import React, { useState, useEffect } from 'react';
+import './LikedProducts.scss';
+import { useLoaderData, Link } from 'react-router-dom';
+import ProductCard from '../ProductCard/ProductCard';
 
 export default function LikedProducts() {
-  const products = useLoaderData() || []
-  console.log(products);
-  
+  const products = useLoaderData() || [];
 
+  const [likedProducts, setLikedProducts] = useState([]);
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [sortOrder, setSortOrder] = useState('default');
 
-  const discountedProducts = products.filter(
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const filtered = products.filter(
+      (product) => favorites.includes(String(product.id)) 
+    );
+    setLikedProducts(filtered);
+  }, [products]);
+
+  const discountedProducts = likedProducts.filter(
     (product) => product.discont_price !== null
   );
 
@@ -34,10 +38,6 @@ export default function LikedProducts() {
   } else if (sortOrder === 'price-desc') {
     sortedProducts.sort((a, b) => b.discont_price - a.discont_price);
   }
-
-  // if (priceFilteredProducts.length === 0) {
-  //   return <h1 className='no-products-on-sale'>No Products on sale</h1>;
-  // }
 
   return (
     <div>
@@ -92,40 +92,18 @@ export default function LikedProducts() {
           </div>
         </div>
 
-        <div className="product-grid">
-          {sortedProducts.slice(0, 5).map((product) => (
-            <div className="product-card" key={product.id}>
-              <img
-                src={`http://localhost:3333${product.image}`}
-                alt={product.title}
-              />
-              <div className="discount-badge">
-                -
-                {Math.round(
-                  ((product.price - product.discont_price) / product.price) *
-                    100
-                )}
-                %
-              </div>
-              <div className="card-icons">
-                <IoMdHeart className="heart-icon-sales" />
-                <GiShoppingBag className="shopping-bag-icon-sales" />
-              </div>
-
-              <p className="product-name">{product.title}</p>
-              <div className="prices">
-                <span className="current-price">${product.discont_price}</span>
-                <span className="original-price">${product.price}</span>
-              </div>
-            </div>
-          ))}
-        </div>
+        {sortedProducts.length === 0 ? (
+          <p className="empty-favorites">
+            No liked products found in selected filters.
+          </p>
+        ) : (
+          <div className="product-grid">
+            {sortedProducts.map((product) => (
+              <ProductCard product={product} key={product.id} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 }
-
-
-
-
-

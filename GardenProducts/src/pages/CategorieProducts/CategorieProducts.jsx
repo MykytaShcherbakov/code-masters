@@ -1,37 +1,45 @@
-import React, { useState } from 'react';
-import './AllProducts.scss';
-import { useLoaderData, Link } from 'react-router-dom';
-import ProductCard from '../ProductCard/ProductCard';
+import React, { useState } from "react";
+import { useLoaderData, useParams, Link } from "react-router-dom";
+import ProductCard from "../../components/ProductCard/ProductCard";
+import "./CategorieProducts.scss";
 
-export default function AllProducts() {
-  const products = useLoaderData() || [];
+export default function CategorieProducts() {
+  const { categoryId } = useParams();
+  const { products, category } = useLoaderData();
 
-  const [minPrice, setMinPrice] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
-  const [sortOrder, setSortOrder] = useState('default');
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [sortOrder, setSortOrder] = useState("default");
   const [showDiscountedOnly, setShowDiscountedOnly] = useState(false);
 
   const min = parseFloat(minPrice) || 0;
   const max = parseFloat(maxPrice) || Infinity;
 
- 
-  const priceFilteredProducts = products.filter((product) => {
+  // 1. Фильтрация по категории
+  const categoryFilteredProducts = products.filter(
+    (product) => product.categoryId === +categoryId
+  );
+
+  // 2. Фильтрация по цене
+  const priceFilteredProducts = categoryFilteredProducts.filter((product) => {
     const realPrice = product.discont_price ?? product.price;
     return realPrice >= min && realPrice <= max;
   });
 
+  // 3. Фильтрация по скидке
   const discountedFilteredProducts = showDiscountedOnly
     ? priceFilteredProducts.filter((product) => product.discont_price !== null)
     : priceFilteredProducts;
 
+  // 4. Сортировка
   let sortedProducts = [...discountedFilteredProducts];
-  if (sortOrder === 'price-asc') {
+  if (sortOrder === "price-asc") {
     sortedProducts.sort((a, b) => {
       const priceA = a.discont_price ?? a.price;
       const priceB = b.discont_price ?? b.price;
       return priceA - priceB;
     });
-  } else if (sortOrder === 'price-desc') {
+  } else if (sortOrder === "price-desc") {
     sortedProducts.sort((a, b) => {
       const priceA = a.discont_price ?? a.price;
       const priceB = b.discont_price ?? b.price;
@@ -52,12 +60,16 @@ export default function AllProducts() {
             <span className="breadcrumb-line" />
           </li>
           <li className="breadcrumb-item">
-            <span className="breadcrumb-text-2">All products</span>
+            <span className="breadcrumb-text-2">
+              {category ? category.title : "Category Products"}
+            </span>
           </li>
         </ol>
       </nav>
 
-      <h1 className="page-title">All Products</h1>
+      <h1 className="page-title">
+        {category ? category.title : "Category Products"}
+      </h1>
 
       <div className="filters-panel">
         <div className="filter-group">
@@ -118,7 +130,7 @@ export default function AllProducts() {
             <ProductCard key={product.id} product={product} />
           ))
         ) : (
-          <p className="no-products-on-sale">No products on sale</p>
+          <p className="no-products-on-sale">No products found</p>
         )}
       </div>
     </div>

@@ -30,7 +30,10 @@ function ProductDetails() {
     setIsFavorite(!isFavorite);
   };
 
+
  const product = useLoaderData();
+
+
 
   const handleDecrement = () => setCount((c) => (c > 1 ? c - 1 : 1));
   const handleIncrement = () => setCount((c) => c + 1);
