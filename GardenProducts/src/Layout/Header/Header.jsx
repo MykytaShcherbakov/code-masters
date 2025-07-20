@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-/*import { Link } from "react-router-dom";*/
+import { Link } from "react-router-dom";
 import styles from "../../Layout/Header/Header.module.css";
 import ModalNavMenu from "../../Layout/ModalNavMenu/ModalNavMenu";
 import NavMenu from "../../Layout/NavMenu/NavMenu";
+
 
 import LogoIcon from "../Images/Icons/logo.png";
 import IconHeart from "../Images/Icons/heartHeder.svg";
@@ -56,7 +57,9 @@ function Header() {
   return (
     <>
       <header
+
         className={`${styles.header} ${isDarkMode ? styles.night_mode : ""}`}
+
       >
         <div className={styles.container}>
           <div className={styles.headerGrid}>
@@ -66,8 +69,10 @@ function Header() {
                 className={styles.themeToggle}
                 aria-label={
                   isDarkMode
+
                     ? "Переключиться на светлый режим"
                     : "Переключиться на темный режим"
+
                 }
                 onClick={() => setIsDarkMode(!isDarkMode)}
               >
@@ -75,8 +80,10 @@ function Header() {
                   src={isDarkMode ? ModeDayIcon : ModeNightIcon}
                   alt={
                     isDarkMode
+
                       ? "Иконка светлого режима"
                       : "Иконка темного режима"
+
                   }
                   className={styles.themeIcon}
                 />
@@ -112,14 +119,21 @@ function Header() {
             <div className={styles.rightBlock}>
               <div className={styles.cartIcons}>
                 <div className={styles.iconLink}>
-                  <img
-                    src={IconHeart}
-                    alt="Избранное"
-                    className={styles.icon}
-                  />
+
+                  <Link to={'product/likedproducts'}>
+                    <img
+                      src={IconHeart}
+                      alt="Избранное"
+                      className={styles.icon}
+                    />
+                  </Link>
+
                   <span className={styles.badgeCount}>1</span>
                 </div>
-                <img src={BagIcon} alt="Корзина" className={styles.icon} />
+                <Link to={"/cart"}>
+                  <img src={BagIcon} alt="Корзина" className={styles.icon} />
+                </Link>
+                {/* <img src={BagIcon} alt="Корзина" className={styles.icon} /> */}
               </div>
               <button
                 className={styles.burger}
@@ -130,14 +144,18 @@ function Header() {
                   src={isDarkMode ? BurgerNightIcon : BurgerDayIcon}
                   alt={
                     isDarkMode
+
                       ? "Бургер-меню (ночной режим)"
                       : "Бургер-меню (дневной режим)"
+
                   }
                   className={styles.burgerIcon}
                   style={{
                     fill: isDarkMode
+
                       ? "var(--night-icon-color)"
                       : "var(--day-icon-color)",
+
                   }}
                 />
               </button>

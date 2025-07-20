@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import './DiscountedItems.css';
+import './DiscountedItems.scss';
 import { useLoaderData } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { GiShoppingBag } from 'react-icons/gi';
 import { IoMdHeart } from 'react-icons/io';
+import ProductCard from '../ProductCard/ProductCard';
 
 export default function DiscountedItems() {
   const products = useLoaderData();
@@ -35,7 +36,6 @@ export default function DiscountedItems() {
   // if (priceFilteredProducts.length === 0) {
   //   return <h1 className='no-products-on-sale'>No Products on sale</h1>;
   // }
-
 
   return (
     <div>
@@ -92,29 +92,7 @@ export default function DiscountedItems() {
 
         <div className="product-grid">
           {sortedProducts.map((product) => (
-            <div className="product-card" key={product.id}>
-              <img
-                src={`http://localhost:3333${product.image}`}
-                alt={product.title}
-              />
-              <div className="discount-badge">
-                -
-                {Math.round(
-                  ((product.price - product.discont_price) / product.price) *
-                    100
-                )}
-                %
-              </div>
-              <div className="card-icons">
-                <IoMdHeart className="heart-icon-sales" />
-                <GiShoppingBag className="shopping-bag-icon-sales" />
-              </div>
-              <p className="product-name">{product.title}</p>
-              <div className="prices">
-                <span className="current-price">${product.discont_price}</span>
-                <span className="original-price">${product.price}</span>
-              </div>
-            </div>
+            <ProductCard product={product} key={product.id} />
           ))}
         </div>
       </div>
