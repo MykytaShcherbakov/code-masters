@@ -13,9 +13,6 @@ const ProductCard = ({ product,categories }) => {
 
   console.log(categories);
   console.log(product);
-  
-  
-  
 
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -57,7 +54,6 @@ const ProductCard = ({ product,categories }) => {
       localStorage.setItem('cart', JSON.stringify(cart));
       setIsInCart(true);
     } else {
-     
       cart = cart.filter((item) => String(item.id) !== productIdStr);
       localStorage.setItem('cart', JSON.stringify(cart));
       setIsInCart(false);
@@ -100,7 +96,6 @@ const ProductCard = ({ product,categories }) => {
             onClick={handleAddToCart}
           />
         </div>
-     
         <p className="product-name">{product.title}</p>
         <div className="prices">
           <span className="current-price">${currentPrice.toFixed(2)}</span>

@@ -1,3 +1,5 @@
+import ProductSkeleton from "../../components/ProductSkeleton/ProductSkeleton";
+import useSkeletonLoader from "../../components/ProductSkeleton/useSkeletonLoader";
 import React, { useState } from 'react';
 import {
   useLoaderData,
@@ -12,14 +14,15 @@ import './CategorieProducts.scss';
 export default function CategorieProducts() {
   const { categoryId } = useParams();
   const { products, category } = useLoaderData();
+
+  const localLoading = useSkeletonLoader(100);
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [sortOrder, setSortOrder] = useState("default");
+  const [showDiscountedOnly, setShowDiscountedOnly] = useState(false);
   const location = useLocation();
   console.log(location);
   
-
-  const [minPrice, setMinPrice] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
-  const [sortOrder, setSortOrder] = useState('default');
-  const [showDiscountedOnly, setShowDiscountedOnly] = useState(false);
 
   // Проверяем, находимся ли мы на странице товара
   const isProductPage = location.pathname.includes('/product/');
@@ -46,6 +49,7 @@ export default function CategorieProducts() {
     : priceFilteredProducts;
 
   let sortedProducts = [...discountedFilteredProducts];
+
   if (sortOrder === 'price-asc') {
     sortedProducts.sort((a, b) => {
       const priceA = a.discont_price ?? a.price;
@@ -117,8 +121,11 @@ export default function CategorieProducts() {
           </select>
         </div>
       </div>
+
       <div className="product-grid">
-        {sortedProducts.length > 0 ? (
+        {localLoading ? (
+          <ProductSkeleton />
+        ) : sortedProducts.length > 0 ? (
           sortedProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))

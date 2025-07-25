@@ -8,8 +8,7 @@ const CategoriesMainPage = () => {
   const categories = useLoaderData() ?? [];
   const location = useLocation();
   const isOnCategoriesPage = location.pathname.startsWith("/categories");
-  
-   
+
   return (
     <section className="categories__section">
       <div className="categories__content">

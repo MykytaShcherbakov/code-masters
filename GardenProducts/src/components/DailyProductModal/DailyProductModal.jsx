@@ -1,28 +1,30 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { IoCloseOutline } from "react-icons/io5";
 import { IoMdHeart } from "react-icons/io";
 import Button from "../UI/Button/Button";
 import { fetchProducts } from "../../Loader/fetchProducts";
+import { addToCart } from "../../store/cartSlice";
 import "./DailyProductModal.scss";
 
 const DailyProductModal = ({ onClose, onDiscountUsed }) => {
   const [products, setProducts] = useState([]);
   const [favourite, setFavourite] = useState([]);
   const [productOfTheDay, setProductOfTheDay] = useState(null);
+  const dispatch = useDispatch();
 
- useEffect(() => {
-  const loadProducts = async () => {
-    try {
-      const data = await fetchProducts();
-      setProducts(data);
-    } catch (error) {
-      console.error("Ошибка при загрузке продуктов:", error);
-    }
-  };
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await fetchProducts();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error loading products!", error);
+      }
+    };
 
-  loadProducts();
-}, []);
-
+    loadProducts();
+  }, []);
 
   useEffect(() => {
     if (products.length > 0) {
@@ -32,22 +34,36 @@ const DailyProductModal = ({ onClose, onDiscountUsed }) => {
       selected.discont_price = selected.price * 0.5;
       setProductOfTheDay(selected);
     }
+    
   }, [products]);
 
-  const isFavourite = productOfTheDay && favourite.some(item => item.id === productOfTheDay.id);
+  const isFavourite =
+    productOfTheDay && favourite.some((item) => item.id === productOfTheDay.id);
 
   const toggleFavourite = () => {
     if (!productOfTheDay) return;
-    setFavourite(prev =>
+    setFavourite((prev) =>
       isFavourite
-        ? prev.filter(item => item.id !== productOfTheDay.id)
+        ? prev.filter((item) => item.id !== productOfTheDay.id)
+  }, [products]);
         : [...prev, productOfTheDay]
     );
   };
 
-  const handleAddToCart = () => {
-    onDiscountUsed();
-  };
+ const handleAddToCart = () => {
+  if (!productOfTheDay) return;
+  dispatch(
+    addToCart({
+      id: productOfTheDay.id,
+      title: productOfTheDay.title,
+      image: productOfTheDay.image,
+      price: productOfTheDay.price,
+      discont_price: productOfTheDay.discont_price,
+      count: 1,
+    })
+  );
+  onDiscountUsed?.();
+};
 
   if (!productOfTheDay) return null;
 

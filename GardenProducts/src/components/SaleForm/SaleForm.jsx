@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import "./SaleForm.scss";
+import { useDispatch } from "react-redux";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
-
+import { applySaleForm } from "../../store/saleFormSlice";
+import "./SaleForm.scss";
 const SaleForm = () => {
-  const [submitMessage, setSubmitMessage] = useState(""); // Для подтверждающего сообщения
+  const [submitMessage, setSubmitMessage] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const dispatch = useDispatch();
+
+
 
   const {
     register,
@@ -14,15 +19,25 @@ const SaleForm = () => {
     reset,
   } = useForm();
 
-  const onSubmit = () => {
-    setSubmitMessage("The discount has been successfully sent by email"); // Текст сообщения при удачной отправки формы
-    reset(); // Обнуление формы после подтверждения
+  const onSubmit = (data) => {
+    dispatch(
+      applySaleForm({
+        email: data.email,
+        name: data.name,
+        phone: data.phone,
+      })
+    );
+
+    setSubmitMessage("The discount has been successfully sent by email");
+
+    reset();
+    setIsSubmitted(true);
   };
 
   // Определяем, есть ли какие-либо ошибки
   const hasErrors = Object.keys(errors).length > 0;
 
-  return (
+  return isSubmitted ? null : (
     <section className="sale__form-section">
       <h3>5% off on the first order</h3>
       <div className="sale__form-container">
@@ -40,26 +55,26 @@ const SaleForm = () => {
                 typeName="text"
                 placeholderName="Name"
                 formClass="sale__form-control"
-                registerData={register("name", {
-                  // Регистрируем инпут с именем
+                registerData={register("name", {     
                   required: "Name is required",
                 })}
               />
+              {errors.name && <p className="error-message">{errors.name.message}</p>}
             </div>
             <div className="input__container">
               <Input
                 typeName="text"
                 placeholderName="Phone number"
                 formClass="sale__form-control"
-                registerData={register("phone", {
-                  // Регистрируем инпут с телефоном
+                registerData={register("phone", {       
                   required: "Phone number is required",
                   pattern: {
-                    value: /^\d+$/, // Проверяем телефон
+                    value: /^\d+$/,
                     message: "Wrong input. Try again",
                   },
                 })}
               />
+              {errors.phone && <p className="error-message">{errors.phone.message}</p>}
             </div>
             <div className="input__container">
               <Input
@@ -67,19 +82,14 @@ const SaleForm = () => {
                 placeholderName="Email"
                 formClass="sale__form-control"
                 registerData={register("email", {
-                  // Регистрируем инпут с почтой
                   required: "Email address is required",
                   pattern: {
-                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Проверяем почту
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                     message: "Wrong input. Try again",
                   },
                 })}
               />
-
-              {/* Если есть ошибки, выводим сообщение */}
-              {hasErrors && (
-                <p className="error-message">Wrong input. Try again</p>
-              )}
+              {errors.email && <p className="error-message">{errors.email.message}</p>}
               {/* Сообщение при успешном заполнении формы */}
               {!hasErrors && submitMessage && (
                 <p className="submit__message">{submitMessage}</p>
@@ -94,7 +104,7 @@ const SaleForm = () => {
           />
         </form>
       </div>
-    </section>
+    </section>  
   );
 };
 
