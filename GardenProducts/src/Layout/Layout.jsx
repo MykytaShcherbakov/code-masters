@@ -5,6 +5,7 @@ import Footer from './Footer/Footer';
 import Header from './Header/Header';
 import Breadcrumbs from './Breadcrumbs/Breadcrumbs';
 
+
 function Layout() {
   const navigation = useNavigation();
 
