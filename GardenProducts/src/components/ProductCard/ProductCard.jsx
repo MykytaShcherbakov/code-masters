@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { IoMdHeart } from 'react-icons/io';
 import { GiShoppingBag } from 'react-icons/gi';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import './ProductCard.scss';
 
 const ProductCard = ({ product,categories }) => {

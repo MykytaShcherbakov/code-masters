@@ -1,6 +1,7 @@
 @use '../../assets/styles/variables' as nav;
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap'); //импорт шрифта
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 * {
   padding: 0;
@@ -42,6 +43,9 @@ body {
     }
 
     section {
+      background-color: nav.$bg-color-darkTheme;
+    }
+    .header .header-all-sales-button {
       background-color: nav.$bg-color-darkTheme;
     }
     .breadcrumb-link.active {
