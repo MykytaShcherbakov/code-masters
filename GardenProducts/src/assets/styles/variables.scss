@@ -1,0 +1,104 @@
+// Цвет текста
+$font-darkColor: #424436;
+$font-lightColor: #FFFFFF;
+$font-greyColor: #8b8b8b;
+$font-light-grey: #dddddd;
+
+// Цвет фона
+$bg-color-lightTheme: #FFFFF1;
+$bg-color-darkTheme: #424436;
+$bg-color-white: #ffffff;
+$bg-color-dark: #383a2c;
+$bg-toggle-lightTheme: #8b8b8b;
+$bg-toggle-darkTheme: #ffffff;
+$bg-sale-form: linear-gradient(80.46deg, #87933d -0.68%, #55610b 66.66%);
+$bg-modalWindow: rgba(40, 40, 40, 0.4);
+$bg-modalwindow-message: #92A134;
+$bg-skeleton: #F2F6D3;
+
+// Цвет футера
+$footer-items-bg-light: #f2f6d3;
+$footer-items-bg-dark: #383a2c;
+
+//Фвет формы корзины 
+$cart-form-bg-light: #f2f6d3;
+$cart-form-bg-dark: #383a2c;
+
+//Цвет скидки
+$sale-color: #f26d22;
+$sale-color-green: #92A134;
+
+// Цвет границ
+$border-color-white: #ffffff;
+$border-color-grey: #dddddd;
+
+// Цвет кнопки
+$button-color-green: #92A134;
+$button-color-white: #FFFFF1;
+$button-border-color: #dddddd;
+
+// Цвета акцентов
+$dark-grey: #8b8b8b;
+$light-grey: #dddddd;
+$white-color: #FFFFF1;
+$green-color: #92A134;
+
+//Фвет ошибки
+$error-color: #ff0000;
+
+//Радиусы
+$radius-small: 6px;
+$radius-big: 12px;
+$radius-theme-toggle: 30px;
+
+//Размеры текста
+$main-big-title: 96px;
+$section-title: 64px;
+$common-text: 20px;
+$footer-info-text: 40px;
+$price-text: 40px;
+$small-text: 16px;
+$cart-form-text: 40px;
+$cart-total-price-text: 64px;
+$product-page-title-text: 40px;
+$product-page-price-text: 64px;
+$product-quantity-header: 12px;
+$modal-title: 40px;
+
+// Толщина шрифта
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semi-bold: 600;
+$font-weight-bold: 700;
+
+//Размеры текста при адаптиве
+$banner-L: 90px;
+$banner-M: 68px;
+$banner-S: 60px;
+$banner-XS: 52px;
+$sale-form-S: 48px;
+$section-divider-title-L: 56px;
+$section-divider-title-M: 48px;
+$section-divider-title-S: 40px;
+$footer-body-s: 28px;
+$footer-header-s: 18px;
+$section-header-m: 56px;
+$section-header-s: 48px;
+$section-header-xs: 40px;
+$price-s: 48px;
+$price-xs: 40px;
+$old-price-xs: 28px;
+$cart-price-s: 36px;
+$modal-title-s: 28px;
+$error-page-title-m: 56px;
+$error-page-title-s: 48px;
+$error-page-title-xs: 40px;
+$burger-menu-s: 24px;
+$burger-menu-xs: 18px;
+
+//Размер иконок
+$icons-size: 48px;
+$footer-icon-size: 43px;
+$cart-close-icon: 24px;
+$cart-counter-icon: 24px;
+$modal-close-icon: 44px;
