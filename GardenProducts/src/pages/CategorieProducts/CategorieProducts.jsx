@@ -1,37 +1,38 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useLoaderData, useParams, Link } from "react-router-dom";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import ProductSkeleton from "../../components/ProductSkeleton/ProductSkeleton";
+import useSkeletonLoader from "../../components/ProductSkeleton/useSkeletonLoader";
 import "./CategorieProducts.scss";
 
 export default function CategorieProducts() {
   const { categoryId } = useParams();
   const { products, category } = useLoaderData();
+  const localLoading = useSkeletonLoader(100);
+  
 
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [sortOrder, setSortOrder] = useState("default");
   const [showDiscountedOnly, setShowDiscountedOnly] = useState(false);
 
+
   const min = parseFloat(minPrice) || 0;
   const max = parseFloat(maxPrice) || Infinity;
 
-  // 1. Фильтрация по категории
   const categoryFilteredProducts = products.filter(
     (product) => product.categoryId === +categoryId
   );
 
-  // 2. Фильтрация по цене
   const priceFilteredProducts = categoryFilteredProducts.filter((product) => {
     const realPrice = product.discont_price ?? product.price;
     return realPrice >= min && realPrice <= max;
   });
 
-  // 3. Фильтрация по скидке
   const discountedFilteredProducts = showDiscountedOnly
     ? priceFilteredProducts.filter((product) => product.discont_price !== null)
     : priceFilteredProducts;
 
-  // 4. Сортировка
   let sortedProducts = [...discountedFilteredProducts];
   if (sortOrder === "price-asc") {
     sortedProducts.sort((a, b) => {
@@ -125,12 +126,14 @@ export default function CategorieProducts() {
       </div>
 
       <div className="product-grid">
-        {sortedProducts.length > 0 ? (
+        {localLoading ? (
+          <ProductSkeleton />
+        ) : sortedProducts.length > 0 ? (
           sortedProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))
         ) : (
-          <p className="no-products-on-sale">No products found</p>
+          <p>No products found</p>
         )}
       </div>
     </div>

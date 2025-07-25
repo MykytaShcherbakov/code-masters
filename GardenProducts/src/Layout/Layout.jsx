@@ -13,7 +13,6 @@ import ProductsFromCategory from "../components/ProductsFromCategory/ProductsFro
 import LikedProducts from '../components/LikedProducts/LikedProducts';
 
 
-import Header from './Header/Header';
 function Layout() {
   const navigation = useNavigation();
 

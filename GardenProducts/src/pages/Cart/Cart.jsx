@@ -4,6 +4,7 @@ import { useLoaderData } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement, removeFromCart, setCart, clearCart } from '../../store/cartSlice';
+import { resetSaleForm } from '../../store/saleFormSlice';
 
 function Cart() {
   const products = useLoaderData();
@@ -33,7 +34,7 @@ function Cart() {
   const mergedItems = cartItems
     .map(item => {
       const product = products.find(p => p.id === item.id);
-      return product ? { ...product, count: item.count } : null;
+      return product ? { ...product, ...item } : null;
     })
     .filter(Boolean);
 
@@ -90,6 +91,7 @@ function Cart() {
     e.preventDefault();
     setIsModalOpen(true);
     dispatch(clearCart());
+    dispatch(resetSaleForm());
     setForm({
       name: '',
       phone: '',

@@ -10,6 +10,9 @@ import CategoriesPage from "./pages/CategoriesPage/CategoriesPage";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import CategorieProducts from "./pages/CategorieProducts/CategorieProducts";
 import { fetchCategoryWithProducts } from "./Loader/fetchCategoryWithProducts";
+import LikedProducts from "./components/LikedProducts/LikedProducts";
+import Cart from "./pages/Cart/Cart.jsx";
+
 
 const router = createBrowserRouter([
   {

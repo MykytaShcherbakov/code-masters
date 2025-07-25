@@ -45,6 +45,7 @@ function Header() {
   const handleDiscountClick = () => {
     const today = new Date().toDateString();
     const alreadyUsed = localStorage.getItem("usedDiscountDate") === today;
+    
 
     if (alreadyUsed) {
       setShowInfoModal(true);

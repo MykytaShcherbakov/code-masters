@@ -1,40 +1,109 @@
-// components/ProductCard.jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { IoMdHeart } from 'react-icons/io';
 import { GiShoppingBag } from 'react-icons/gi';
-// import './ProductCard.scss'; // подключи, если нужно кастомное оформление
+import { Link } from 'react-router-dom';
+import './ProductCard.scss';
 
 const ProductCard = ({ product }) => {
   const hasDiscount = product.discont_price !== null;
   const currentPrice = hasDiscount ? product.discont_price : product.price;
 
+  const [isLiked, setIsLiked] = useState(false);
+  const [isInCart, setIsInCart] = useState(false);
+
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    setIsLiked(favorites.includes(String(product.id)));
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const inCart = cart.some((item) => String(item.id) === String(product.id));
+    setIsInCart(inCart);
+  }, [product.id]);
+
+  const handleHeartClick = (e) => {
+    e.preventDefault();
+
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    if (favorites.includes(String(product.id))) {
+      favorites = favorites.filter((id) => id !== String(product.id));
+      setIsLiked(false);
+    } else {
+      favorites.push(String(product.id));
+      setIsLiked(true);
+    }
+
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  };
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const productIdStr = String(product.id);
+
+    const isAlreadyInCart = cart.some(
+      (item) => String(item.id) === productIdStr
+    );
+
+    if (!isAlreadyInCart) {
+      cart.push({ id: product.id, count: 1 });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      setIsInCart(true);
+    } else {
+      // Удалить из корзины при повторном клике (если нужна логика "переключения")
+      cart = cart.filter((item) => String(item.id) !== productIdStr);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      setIsInCart(false);
+    }
+  };
+
   return (
-    <div className="product-card">
-      <img src={`http://localhost:3333${product.image}`} alt={product.title} />
+    <Link className="link-product" to={`/product/${product.id}`}>
+      <div className="product-card">
+        <img
+          src={`http://localhost:3333${product.image}`}
+          alt={product.title}
+        />
 
-      {hasDiscount && (
-        <div className="discount-badge">
-          -
-          {Math.round(
-            ((product.price - product.discont_price) / product.price) * 100
-          )}
-          %
-        </div>
-      )}
-
-      <div className="card-icons">
-        <IoMdHeart className="heart-icon-sales" />
-        <GiShoppingBag className="shopping-bag-icon-sales" />
-      </div>
-
-      <p className="product-name">{product.title}</p>
-      <div className="prices">
-        <span className="current-price">${currentPrice.toFixed(2)}</span>
         {hasDiscount && (
-          <span className="original-price">${product.price.toFixed(2)}</span>
+          <div className="discount-badge">
+            -
+            {Math.round(
+              ((product.price - product.discont_price) / product.price) * 100
+            )}
+            %
+          </div>
         )}
+
+        <div className="card-icons">
+          {isLiked ? (
+            <IoMdHeart
+              className="heart-icon-sales green"
+              onClick={handleHeartClick}
+            />
+          ) : (
+            <IoMdHeart
+              className="heart-icon-sales"
+              onClick={handleHeartClick}
+            />
+          )}
+
+          <GiShoppingBag
+            className={`shopping-bag-icon-sales ${isInCart ? 'green' : ''}`}
+            onClick={handleAddToCart}
+          />
+        </div>
+
+        <p className="product-name">{product.title}</p>
+        <div className="prices">
+          <span className="current-price">${currentPrice.toFixed(2)}</span>
+          {hasDiscount && (
+            <span className="original-price">${product.price.toFixed(2)}</span>
+          )}
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

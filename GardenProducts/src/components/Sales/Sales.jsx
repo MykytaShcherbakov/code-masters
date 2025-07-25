@@ -63,8 +63,7 @@ const Sales = () => {
 
   return (
     <section className="sales-section">
-      <d
-      iv className="container">
+      <div className="container">
         <div className="header">
           <h1 className="sale">Sale</h1>
           <div className="header-line-between"></div>
@@ -108,7 +107,7 @@ const Sales = () => {
         <div className="all-sales-button-container">
           <button className="all-sales-button">All sales</button>
         </div>
-      </d>
+      </div>
     </section>
   );
 };
