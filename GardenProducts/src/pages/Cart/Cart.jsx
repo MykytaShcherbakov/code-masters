@@ -9,6 +9,8 @@ import { resetSaleForm } from '../../store/saleFormSlice';
 function Cart() {
   const products = useLoaderData();
   const dispatch = useDispatch();
+  console.log(dispatch);
+  
   const cartItems = useSelector(state => state.cart.items);
   const [isModalOpen, setIsModalOpen] = useState(false);
 

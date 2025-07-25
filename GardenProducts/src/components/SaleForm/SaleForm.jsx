@@ -5,11 +5,12 @@ import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 import { applySaleForm } from "../../store/saleFormSlice";
 import "./SaleForm.scss";
-
 const SaleForm = () => {
   const [submitMessage, setSubmitMessage] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const dispatch = useDispatch();
+
+
 
   const {
     register,
@@ -89,7 +90,6 @@ const SaleForm = () => {
                 })}
               />
               {errors.email && <p className="error-message">{errors.email.message}</p>}
-
               {/* Сообщение при успешном заполнении формы */}
               {!hasErrors && submitMessage && (
                 <p className="submit__message">{submitMessage}</p>

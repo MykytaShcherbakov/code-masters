@@ -14,7 +14,7 @@ const CategoriesMainPage = () => {
       <div className="categories__content">
         <SectionDivider
           sectionTitle={"Categories"}
-          linkToPage={"/categories/all"}
+          linkToPage={"/categories"}
           pageTitle={"All categories"}
         />
 
@@ -24,7 +24,7 @@ const CategoriesMainPage = () => {
           ))}
 
           {!isOnCategoriesPage && (
-            <Link to={"/categories/all"} className="adaptive__link">
+            <Link to={"/categories"} className="adaptive__link">
               <Button
                 btnColor={"neutral"}
                 btnSize={"S"}

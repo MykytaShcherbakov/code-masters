@@ -1,0 +1,101 @@
+@use '../../assets/styles/variables' as nav;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: nav.$font-darkColor;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+body {
+  &.light-theme {
+    background-color: nav.$bg-color-lightTheme;
+    transition: 0.3s linear;
+  }
+
+  &.dark-theme {
+    background-color: nav.$bg-color-darkTheme;
+    transition: 0.3s linear;
+    background: nav.$bg-color-darkTheme;
+    color: nav.$font-lightColor;
+    h1,
+    h2,
+    h3.section__title {
+      color: nav.$font-lightColor;
+    }
+
+    section {
+      background-color: nav.$bg-color-darkTheme;
+    }
+    .header .header-all-sales-button {
+      background-color: nav.$bg-color-darkTheme;
+    }
+    .breadcrumb-link.active {
+      color: nav.$font-lightColor;
+    }
+    .empty-cart {
+      background-color: nav.$bg-color-darkTheme;
+      color: nav.$font-lightColor;
+    }
+    .cart-container {
+      background-color: nav.$bg-color-darkTheme;
+      color: nav.$font-lightColor;
+      .cart-item {
+        color: nav.$font-lightColor;
+        background-color: nav.$bg-color-darkTheme;
+        border: #8b8b8b solid 1px;
+        div,span,button {
+          color: nav.$font-lightColor;
+        }
+      }
+    }
+
+    div .product-grid .product-card {
+      background-color: nav.$bg-color-darkTheme;
+      border: #8b8b8b solid 1px;
+      p,
+      div.prices span.current-price {
+        color: nav.$font-lightColor;
+      }
+    }
+    footer {
+      background-color: nav.$bg-color-darkTheme;
+      color: nav.$font-lightColor;
+      div.footer-box {
+        background-color: nav.$footer-items-bg-dark;
+        p {
+          color: nav.$font-lightColor;
+        }
+      }
+    }
+    header {
+      background-color: nav.$bg-color-darkTheme;
+
+      nav ul li {
+        color: nav.$font-lightColor;
+      }
+    }
+    .container {
+      background: nav.$bg-color-darkTheme;
+      color: nav.$font-lightColor;
+    }
+  }
+}

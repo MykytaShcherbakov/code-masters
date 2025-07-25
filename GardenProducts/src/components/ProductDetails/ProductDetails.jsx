@@ -12,6 +12,9 @@ function ProductDetails() {
   const [cartState, setCartState] = useState('default');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+
+
+
   const { id } = useParams();
 
   useEffect(() => {

@@ -45,6 +45,7 @@ const DailyProductModal = ({ onClose, onDiscountUsed }) => {
     setFavourite((prev) =>
       isFavourite
         ? prev.filter((item) => item.id !== productOfTheDay.id)
+  }, [products]);
         : [...prev, productOfTheDay]
     );
   };

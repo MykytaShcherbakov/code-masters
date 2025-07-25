@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { IoMdHeart } from 'react-icons/io';
 import { GiShoppingBag } from 'react-icons/gi';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import './ProductCard.scss';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product,categories }) => {
   const hasDiscount = product.discont_price !== null;
   const currentPrice = hasDiscount ? product.discont_price : product.price;
 
   const [isLiked, setIsLiked] = useState(false);
   const [isInCart, setIsInCart] = useState(false);
+
+  console.log(categories);
+  console.log(product);
 
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -51,7 +54,6 @@ const ProductCard = ({ product }) => {
       localStorage.setItem('cart', JSON.stringify(cart));
       setIsInCart(true);
     } else {
-      // Удалить из корзины при повторном клике (если нужна логика "переключения")
       cart = cart.filter((item) => String(item.id) !== productIdStr);
       localStorage.setItem('cart', JSON.stringify(cart));
       setIsInCart(false);
@@ -59,7 +61,7 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <Link className="link-product" to={`/product/${product.id}`}>
+    <Link className="link-product" to={`/categories/${product.categoryId}/product/${product.id}`}>
       <div className="product-card">
         <img
           src={`http://localhost:3333${product.image}`}
@@ -94,7 +96,6 @@ const ProductCard = ({ product }) => {
             onClick={handleAddToCart}
           />
         </div>
-
         <p className="product-name">{product.title}</p>
         <div className="prices">
           <span className="current-price">${currentPrice.toFixed(2)}</span>
