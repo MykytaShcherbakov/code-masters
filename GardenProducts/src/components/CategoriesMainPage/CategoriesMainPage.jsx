@@ -8,13 +8,14 @@ const CategoriesMainPage = () => {
   const categories = useLoaderData() ?? [];
   const location = useLocation();
   const isOnCategoriesPage = location.pathname.startsWith("/categories");
-
+  
+   
   return (
     <section className="categories__section">
       <div className="categories__content">
         <SectionDivider
           sectionTitle={"Categories"}
-          linkToPage={"/categories/all"}
+          linkToPage={"/categories"}
           pageTitle={"All categories"}
         />
 
@@ -24,7 +25,7 @@ const CategoriesMainPage = () => {
           ))}
 
           {!isOnCategoriesPage && (
-            <Link to={"/categories/all"} className="adaptive__link">
+            <Link to={"/categories"} className="adaptive__link">
               <Button
                 btnColor={"neutral"}
                 btnSize={"S"}

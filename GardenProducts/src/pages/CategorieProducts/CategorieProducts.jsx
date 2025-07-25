@@ -1,45 +1,58 @@
-import React, { useState } from "react";
-import { useLoaderData, useParams, Link } from "react-router-dom";
-import ProductCard from "../../components/ProductCard/ProductCard";
-import "./CategorieProducts.scss";
+import React, { useState } from 'react';
+import {
+  useLoaderData,
+  useParams,
+  Link,
+  Outlet,
+  useLocation,
+} from 'react-router-dom';
+import ProductCard from '../../components/ProductCard/ProductCard';
+import './CategorieProducts.scss';
 
 export default function CategorieProducts() {
   const { categoryId } = useParams();
   const { products, category } = useLoaderData();
+  const location = useLocation();
+  console.log(location);
+  
 
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
-  const [sortOrder, setSortOrder] = useState("default");
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+  const [sortOrder, setSortOrder] = useState('default');
   const [showDiscountedOnly, setShowDiscountedOnly] = useState(false);
+
+  // Проверяем, находимся ли мы на странице товара
+  const isProductPage = location.pathname.includes('/product/');
+
+  // Если мы на странице товара, показываем только Outlet
+  if (isProductPage) {
+    return <Outlet />;
+  }
 
   const min = parseFloat(minPrice) || 0;
   const max = parseFloat(maxPrice) || Infinity;
 
-  // 1. Фильтрация по категории
   const categoryFilteredProducts = products.filter(
     (product) => product.categoryId === +categoryId
   );
 
-  // 2. Фильтрация по цене
   const priceFilteredProducts = categoryFilteredProducts.filter((product) => {
     const realPrice = product.discont_price ?? product.price;
     return realPrice >= min && realPrice <= max;
   });
 
-  // 3. Фильтрация по скидке
   const discountedFilteredProducts = showDiscountedOnly
     ? priceFilteredProducts.filter((product) => product.discont_price !== null)
     : priceFilteredProducts;
 
-  // 4. Сортировка
   let sortedProducts = [...discountedFilteredProducts];
-  if (sortOrder === "price-asc") {
+  if (sortOrder === 'price-asc') {
     sortedProducts.sort((a, b) => {
       const priceA = a.discont_price ?? a.price;
       const priceB = b.discont_price ?? b.price;
       return priceA - priceB;
     });
-  } else if (sortOrder === "price-desc") {
+  } else if (sortOrder === 'price-desc') {
     sortedProducts.sort((a, b) => {
       const priceA = a.discont_price ?? a.price;
       const priceB = b.discont_price ?? b.price;
@@ -49,28 +62,9 @@ export default function CategorieProducts() {
 
   return (
     <div className="container">
-      <nav aria-label="Breadcrumb" className="breadcrumbs">
-        <ol className="breadcrumb-list">
-          <li className="breadcrumb-item">
-            <Link to="/" className="breadcrumb-text">
-              Main page
-            </Link>
-          </li>
-          <li className="breadcrumb-separator" aria-hidden="true">
-            <span className="breadcrumb-line" />
-          </li>
-          <li className="breadcrumb-item">
-            <span className="breadcrumb-text-2">
-              {category ? category.title : "Category Products"}
-            </span>
-          </li>
-        </ol>
-      </nav>
-
       <h1 className="page-title">
-        {category ? category.title : "Category Products"}
+        {category ? category.title : 'Category Products'}
       </h1>
-
       <div className="filters-panel">
         <div className="filter-group">
           <label htmlFor="price-from" className="filter-label">
@@ -123,7 +117,6 @@ export default function CategorieProducts() {
           </select>
         </div>
       </div>
-
       <div className="product-grid">
         {sortedProducts.length > 0 ? (
           sortedProducts.map((product) => (

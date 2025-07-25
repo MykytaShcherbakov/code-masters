@@ -8,6 +8,8 @@ import { increment, decrement, removeFromCart, setCart, clearCart } from '../../
 function Cart() {
   const products = useLoaderData();
   const dispatch = useDispatch();
+  console.log(dispatch);
+  
   const cartItems = useSelector(state => state.cart.items);
   const [isModalOpen, setIsModalOpen] = useState(false);
 

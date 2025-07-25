@@ -3,8 +3,15 @@ import './LikedProducts.scss';
 import { useLoaderData, Link } from 'react-router-dom';
 import ProductCard from '../ProductCard/ProductCard';
 
+
 export default function LikedProducts() {
   const products = useLoaderData() || [];
+
+
+  
+  
+
+  
 
   const [likedProducts, setLikedProducts] = useState([]);
   const [minPrice, setMinPrice] = useState('');
@@ -42,13 +49,13 @@ export default function LikedProducts() {
   return (
     <div>
       <div className="container">
-        <div className="breadcrumbs">
+        {/* <div className="breadcrumbs">
           <Link to="/" className="breadcrumb-text">
             Main page
           </Link>
           <span className="breadcrumb-linie"></span>
           <span className="breadcrumb-text-2">Liked products</span>
-        </div>
+        </div> */}
 
         <h1 className="page-title">Liked products</h1>
 
