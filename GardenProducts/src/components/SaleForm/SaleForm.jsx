@@ -43,8 +43,8 @@ const SaleForm = () => {
       <div className="sale__form-container">
         <div className="sale__form-image__container">
           <img
-            src="../../../public/Pictures/Discount/discount-image.png"
-            alt="image"
+          src="/Pictures/Discount/discount-image.png"           
+          alt="image"
             className="sale__form-image"
           />
         </div>
