@@ -21,42 +21,38 @@ export default function LikedProducts() {
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
     const filtered = products.filter(
-      (product) => favorites.includes(String(product.id)) 
+      (product) => favorites.includes(String(product.id))
     );
     setLikedProducts(filtered);
   }, [products]);
 
-  const discountedProducts = likedProducts.filter(
-    (product) => product.discont_price !== null
-  );
-
   const min = parseFloat(minPrice) || 0;
   const max = parseFloat(maxPrice) || Infinity;
 
-  const priceFilteredProducts = discountedProducts.filter((product) => {
-    const price = product.discont_price;
+  const priceFilteredProducts = likedProducts.filter((product) => {
+    const price = product.discont_price ?? product.price;
     return price >= min && price <= max;
   });
 
   let sortedProducts = [...priceFilteredProducts];
 
   if (sortOrder === 'price-asc') {
-    sortedProducts.sort((a, b) => a.discont_price - b.discont_price);
+    sortedProducts.sort((a, b) => {
+      const priceA = a.discont_price ?? a.price;
+      const priceB = b.discont_price ?? b.price;
+      return priceA - priceB;
+    });
   } else if (sortOrder === 'price-desc') {
-    sortedProducts.sort((a, b) => b.discont_price - a.discont_price);
+    sortedProducts.sort((a, b) => {
+      const priceA = a.discont_price ?? a.price;
+      const priceB = b.discont_price ?? b.price;
+      return priceB - priceA;
+    });
   }
 
   return (
     <div>
       <div className="container">
-        {/* <div className="breadcrumbs">
-          <Link to="/" className="breadcrumb-text">
-            Main page
-          </Link>
-          <span className="breadcrumb-linie"></span>
-          <span className="breadcrumb-text-2">Liked products</span>
-        </div> */}
-
         <h1 className="page-title">Liked products</h1>
 
         <div className="filters-panel">

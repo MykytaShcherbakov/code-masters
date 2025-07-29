@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import "./SaleForm.scss";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 import { applySaleForm } from "../../store/saleFormSlice";
-import "./SaleForm.scss";
+
 const SaleForm = () => {
   const [submitMessage, setSubmitMessage] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const dispatch = useDispatch();
-
-
 
   const {
     register,
@@ -18,6 +17,9 @@ const SaleForm = () => {
     formState: { errors },
     reset,
   } = useForm();
+
+    const hasFirstOrderCompleted = localStorage.getItem("hasFirstOrderCompleted") === "true";
+  if (hasFirstOrderCompleted) return null;
 
   const onSubmit = (data) => {
     dispatch(
@@ -29,12 +31,10 @@ const SaleForm = () => {
     );
 
     setSubmitMessage("The discount has been successfully sent by email");
-
     reset();
     setIsSubmitted(true);
   };
 
-  // Определяем, есть ли какие-либо ошибки
   const hasErrors = Object.keys(errors).length > 0;
 
   return isSubmitted ? null : (
@@ -55,18 +55,20 @@ const SaleForm = () => {
                 typeName="text"
                 placeholderName="Name"
                 formClass="sale__form-control"
-                registerData={register("name", {     
+                registerData={register("name", {
                   required: "Name is required",
                 })}
               />
-              {errors.name && <p className="error-message">{errors.name.message}</p>}
+              {errors.name && (
+                <p className="error-message">{errors.name.message}</p>
+              )}
             </div>
             <div className="input__container">
               <Input
                 typeName="text"
                 placeholderName="Phone number"
                 formClass="sale__form-control"
-                registerData={register("phone", {       
+                registerData={register("phone", {
                   required: "Phone number is required",
                   pattern: {
                     value: /^\d+$/,
@@ -74,7 +76,9 @@ const SaleForm = () => {
                   },
                 })}
               />
-              {errors.phone && <p className="error-message">{errors.phone.message}</p>}
+              {errors.phone && (
+                <p className="error-message">{errors.phone.message}</p>
+              )}
             </div>
             <div className="input__container">
               <Input
@@ -89,8 +93,10 @@ const SaleForm = () => {
                   },
                 })}
               />
-              {errors.email && <p className="error-message">{errors.email.message}</p>}
-              {/* Сообщение при успешном заполнении формы */}
+              {errors.email && (
+                <p className="error-message">{errors.email.message}</p>
+              )}
+
               {!hasErrors && submitMessage && (
                 <p className="submit__message">{submitMessage}</p>
               )}

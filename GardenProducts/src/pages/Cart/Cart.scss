@@ -343,6 +343,7 @@
       text-decoration: none;
       cursor: pointer;
     }
+
     &__title {
       font-size: 18px;
       font-weight: 500;
@@ -367,7 +368,7 @@
       border: 1px solid #dddddd;
       border-radius: 7px;
       overflow: hidden;
-      margin-bottom: 7px; // отделяет счетчик от цены
+      margin-bottom: 7px; 
 
       button {
         width: 32px;
@@ -461,11 +462,40 @@
       font-weight: 500;
     }
 
-    .total-sum {
+    .price-breakdown {
+    margin: 8px 0;
+    
+    .subtotal-line {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 10px 0 10px 0;
+      margin-bottom: 4px;
+      
+      span {
+        font-size: 20px;
+        color: #8b8b8b;
+        font-weight: 500;
+      }
+    }
+    
+    .discount-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      span {
+        font-size: 18px;
+        color: #4CAF50;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .total-sum {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0 10px 0;
 
       p {
         font-size: 28px;
@@ -623,7 +653,7 @@
           &__info {
             flex: none;
             min-width: 0;
-            width: calc(100% - 154px); 
+            width: calc(100% - 154px);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -820,13 +850,13 @@
             margin-bottom: 10px;
             max-width: 230px;
             font-weight: 500;
-            word-break: break-word; 
+            word-break: break-word;
             white-space: normal;
           }
 
           &__row {
             display: flex;
-            flex-direction: column; 
+            flex-direction: column;
             align-items: flex-start;
             gap: 8px;
           }
@@ -907,6 +937,7 @@
     }
   }
 }
+
 @media (min-width: 1001px) {
   .cart {
     max-width: 1440px;
@@ -953,6 +984,7 @@
         }
       }
     }
+
     .cart-container {
       display: flex;
       flex-direction: row;
@@ -981,12 +1013,12 @@
           }
 
           &__info {
-            flex: none;
+            flex: 1;
             min-width: 0;
-            width: calc(100% - 188px); 
             display: flex;
             flex-direction: column;
             justify-content: center;
+            padding-right: 120px;
           }
 
           &__title {
@@ -1002,21 +1034,27 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            gap: 24px;
+            gap: 0px;
           }
 
           &__controls {
+
             button,
             span {
-              width: 34px;
-              height: 34px;
+              width: 30px;
+              height: 30px;
               font-size: 18px;
             }
           }
 
           &__prices {
-            margin-left: 18px;
-            margin-top: 0;
+            position: absolute;
+            right: 16px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
 
             .cart-item__price {
               font-size: 40px;
@@ -1087,63 +1125,60 @@
   }
 }
 
-// ...existing styles...
 
-.modal-overlay {
+.cart-modal-overlay {
   position: fixed;
-  top: 0;
+  z-index: 9999;
   left: 0;
   right: 0;
+  top: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1000;
-}
+  justify-content: center;
 
-.modal-content {
-  background: #92A134;
-  border-radius: 12px;
-  padding: 20px 24px;
-  max-width: 320px;
-  width: 90%;
-  position: relative;
-  text-align: left;
-  color: rgb(255, 255, 255);
-      // margin-bottom: 76px;
+  .cart-modal-content {
+    background: #92A134;
+    border-radius: 12px;
+    padding: 20px 24px;
+    width: 75vw;
+    max-width: 320px;
+    position: relative;
+    text-align: left;
+    color: rgb(255, 255, 255);
 
+    h2 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      margin-top: 20px; // уменьшить отступ сверху
+      color: white;
+    }
 
-  h2 {
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    margin-top: 76px;
-    color: white;
-  }
+    p {
+      font-size: 18px;
+      line-height: 1.4;
+      font-weight: 600;
+      color: white;
+    }
 
-  p {
-    font-size: 18px;
-    line-height: 1.1;
-     font-weight: 600;
-    color: white;
-  }
-}
+    .cart-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
 
-.modal-close {
-  position: absolute;
-  top: 16px;
-  right: 20px;
-  background: none;
-  border: none;
-  font-size: 40px;
-  color: white;
-  cursor: pointer;
-  padding: 0;
-  line-height: 1;
-
-  &:hover {
-    opacity: 0.7;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
   }
 }
 

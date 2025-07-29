@@ -1,7 +1,7 @@
 import { createBrowserRouter, Outlet } from 'react-router-dom';
 import Layout from '../Layout/Layout';
-import ErrorPage from '../Pages/ErrorPage/ErrorPage';
-import Home from '../Pages/Home/Home';
+import ErrorPage from '../pages/ErrorPage/ErrorPage';
+import Home from '../pages/Home/Home';
 import DiscountedItems from '../components/DiscountedItems/DiscountedItems';
 import CategoriesPage from '../pages/CategoriesPage/CategoriesPage';
 import ProductDetails from '../components/ProductDetails/ProductDetails';

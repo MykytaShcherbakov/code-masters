@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Sales.scss';
 import { Link } from 'react-router-dom';
-import { GiShoppingBag } from 'react-icons/gi';
-import { IoMdHeart } from 'react-icons/io';
 import ProductCard from '../ProductCard/ProductCard';
 
 const Sales = () => {
@@ -19,7 +17,6 @@ const Sales = () => {
         }
         const data = await res.json();
         setSales(data);
-        console.log();
       } catch (err) {
         setError(err);
       } finally {
@@ -33,7 +30,7 @@ const Sales = () => {
   if (loading) {
     return (
       <section className="sales-section">
-        <div className="container">Loading... Please wait</div>
+        <div>Loading... Please wait</div>
       </section>
     );
   }
@@ -41,7 +38,7 @@ const Sales = () => {
   if (error) {
     return (
       <section className="sales-section">
-        <div className="container">Error while loading: {error.message}</div>
+        <div>Error while loading: {error.message}</div>
       </section>
     );
   }
@@ -53,7 +50,7 @@ const Sales = () => {
   if (filteredSales.length === 0) {
     return (
       <section className="sales-section">
-        <div className="container">No products on sale</div>
+        <div>No products on sale</div>
       </section>
     );
   }
@@ -68,10 +65,10 @@ const Sales = () => {
           <h1 className="sale">Sale</h1>
           <div className="header-line-between"></div>
 
-          <Link to={'/discounted-items'}>
-            <button className="header-all-sales-button">All sales</button>
-          </Link>
-        </div>
+        <Link to={'/discounted-items'}>
+          <button className="header-all-sales-button">All sales</button>
+        </Link>
+      </div>
 
         <div className="product-grid-sales">
           {randomSales.map((product) => (

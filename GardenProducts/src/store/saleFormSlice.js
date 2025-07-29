@@ -4,7 +4,10 @@ const initialState = {
   email: localStorage.getItem("saleFormEmail") || "",
   name: localStorage.getItem("saleFormName") || "",
   phone: localStorage.getItem("saleFormPhone") || "",
-  isSaleFormActive: localStorage.getItem("saleFormCoupon") === "true",
+  // Форма активна только если купон есть и первый заказ не завершён
+  isSaleFormActive:
+    localStorage.getItem("saleFormCoupon") === "true" &&
+    localStorage.getItem("hasFirstOrderCompleted") !== "true",
 };
 
 const saleFormSlice = createSlice({
@@ -13,6 +16,11 @@ const saleFormSlice = createSlice({
   reducers: {
     applySaleForm: (state, action) => {
       const { email, name, phone } = action.payload;
+      // Не активируем скидку, если первый заказ уже был завершён
+      if (localStorage.getItem("hasFirstOrderCompleted") === "true") {
+        state.isSaleFormActive = false;
+        return;
+      }
       state.email = email;
       state.name = name;
       state.phone = phone;
@@ -33,9 +41,15 @@ const saleFormSlice = createSlice({
       localStorage.removeItem("saleFormName");
       localStorage.removeItem("saleFormPhone");
       localStorage.removeItem("saleFormCoupon");
+      // Не удаляем hasFirstOrderCompleted — форма не появится снова
+    },
+    // Новый reducer для установки флага первого заказа
+    setFirstOrderCompleted: (state) => {
+      localStorage.setItem("hasFirstOrderCompleted", "true");
+      state.isSaleFormActive = false;
     },
   },
 });
 
-export const { applySaleForm, resetSaleForm } = saleFormSlice.actions;
+export const { applySaleForm, resetSaleForm, setFirstOrderCompleted } = saleFormSlice.actions;
 export default saleFormSlice.reducer;

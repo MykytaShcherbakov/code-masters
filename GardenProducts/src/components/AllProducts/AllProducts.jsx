@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './AllProducts.scss';
-import { useLoaderData, Link } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import ProductCard from '../ProductCard/ProductCard';
 
 export default function AllProducts() {
@@ -15,7 +15,6 @@ export default function AllProducts() {
   const min = parseFloat(minPrice) || 0;
   const max = parseFloat(maxPrice) || Infinity;
 
- 
   const priceFilteredProducts = products.filter((product) => {
     const realPrice = product.discont_price ?? product.price;
     return realPrice >= min && realPrice <= max;

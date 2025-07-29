@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLoaderData } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../../store/cartSlice';
 import './ProductDetails.scss';
 import productImg from '../../media/5422e5af264f78b8a10da5d1979747d487daef24.png';
-import heartIcon from '../../media/basket=like.svg';
-import heartFilledIcon from '../../media/basket=liked.svg';
+import { IoMdHeart } from 'react-icons/io';
 
 function ProductDetails() {
+  const dispatch = useDispatch();
+  const cartItems = useSelector(state => state.cart.items);
+
   const [isFavorite, setIsFavorite] = useState(false);
   const [count, setCount] = useState(1);
   const [showFullDesc, setShowFullDesc] = useState(false);
@@ -16,44 +20,57 @@ function ProductDetails() {
 
 
   const { id } = useParams();
+  const product = useLoaderData();
 
   useEffect(() => {
-    const favorites = JSON.parse(localStorage.getItem('favorites') || []);
-    setIsFavorite(favorites.includes(String(id)));
+    try {
+      const favorites = JSON.parse(localStorage.getItem('favorites') ?? '[]');
+      setIsFavorite(favorites.includes(String(id)));
+    } catch {
+      setIsFavorite(false);
+    }
   }, [id]);
 
+  useEffect(() => {
+    const isInCart = cartItems.some(item => item.id === parseInt(id));
+    setCartState(isInCart ? 'added' : 'default');
+  }, [cartItems, id]);
+
   const handleFavorite = () => {
-    let favorites = JSON.parse(localStorage.getItem('favorites') || []);
-    if (isFavorite) {
-      favorites = favorites.filter(favId => favId !== String(id));
-    } else {
-      favorites.push(String(id));
+    try {
+      let favorites = JSON.parse(localStorage.getItem('favorites') ?? '[]');
+      if (isFavorite) {
+        favorites = favorites.filter(favId => favId !== String(id));
+      } else {
+        favorites.push(String(id));
+      }
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      setIsFavorite(!isFavorite);
+    } catch {
+      console.error('Ошибка при работе с избранным');
     }
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-    setIsFavorite(!isFavorite);
   };
 
+  const handleDecrement = () => setCount(c => (c > 1 ? c - 1 : 1));
+  const handleIncrement = () => setCount(c => c + 1);
 
- const product = useLoaderData();
+  if (!product) return <div>Product not found</div>;
 
+  const handleAddToCart = () => {
+    const cartItem = {
+      id: product.id,
+      count,
+      hasDiscount: false,
+      discountPrice: null,
+      originalPrice: null,
+      isDailyDeal: false 
+    };
 
-
-  const handleDecrement = () => setCount((c) => (c > 1 ? c - 1 : 1));
-  const handleIncrement = () => setCount((c) => c + 1);
-
-  if (!product) return <div>Loading...</div>;
-
-    const handleAddToCart = () => {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const existing = cart.find(item => item.id === product.id);
-
-    if (existing) {
-      existing.count += count;
-    } else {
-      cart.push({ id: product.id, count });
-    }
-    localStorage.setItem('cart', JSON.stringify(cart));
+    dispatch(addToCart(cartItem));
     setCartState('added');
+
+    // Optional reset after few seconds
+    // setTimeout(() => setCartState('default'), 3000);
   };
 
   const hasDiscount = product.discont_price && product.discont_price < product.price;
@@ -69,8 +86,7 @@ function ProductDetails() {
   const isLongDesc = product.description?.length > descLimit;
   const descToShow = showFullDesc || !isLongDesc
     ? product.description
-    : product.description?.slice(0, descLimit) + '...';
-
+    : `${product.description.slice(0, descLimit)}...`;
 
   const DiscountBadgeInImage = hasDiscount && (
     <span className="product-discount">{`-${discount}%`}</span>
@@ -86,19 +102,21 @@ function ProductDetails() {
       onClick={handleFavorite}
       aria-label="Add to favorites"
     >
-      <img
-        src={isFavorite ? heartFilledIcon : heartIcon}
-        alt="Favorite"
-        width={28}
-        height={28}
-      />
+      <IoMdHeart className={`heart-icon ${isFavorite ? 'active' : ''}`} />
     </button>
   );
 
   const handleImageClick = () => setIsModalOpen(true);
   const handleModalClose = () => setIsModalOpen(false);
+
   const ProductImage = (
-    <img src={imageUrl} alt={product.title} className="product-image" onClick={handleImageClick} style={{cursor:  'pointer'}} />
+    <img
+      src={imageUrl}
+      alt={product.title}
+      className="product-image"
+      onClick={handleImageClick}
+      style={{ cursor: 'pointer' }}
+    />
   );
 
   const PriceBlock = (
@@ -123,15 +141,15 @@ function ProductDetails() {
     </div>
   );
 
-const AddToCartBtn = (
-  <button
-    className={`add-to-cart-btn ${cartState}`}
-    onClick={handleAddToCart}
-    disabled={cartState === 'added'}
-  >
-    {cartState === 'added' ? 'Added' : 'Add to cart'}
-  </button>
-);
+  const AddToCartBtn = (
+    <button
+      className={`add-to-cart-btn ${cartState}`}
+      onClick={handleAddToCart}
+      disabled={cartState === 'added'}
+    >
+      {cartState === 'added' ? 'Added' : 'Add to cart'}
+    </button>
+  );
 
   const DescriptionBlock = (blockClass) => (
     <div className={`product-description-block ${blockClass}`}>
@@ -139,10 +157,7 @@ const AddToCartBtn = (
       <p className="product-description">
         {descToShow}
         {isLongDesc && !showFullDesc && (
-          <button
-            className="read-more-btn"
-            onClick={() => setShowFullDesc(true)}
-          >
+          <button className="read-more-btn" onClick={() => setShowFullDesc(true)}>
             Read more
           </button>
         )}
@@ -150,55 +165,53 @@ const AddToCartBtn = (
     </div>
   );
 
-
-  // ----- RETURN -----
-
   return (
-<>
+    <>
       {isModalOpen && (
-      <div className="modal-overlay" onClick={handleModalClose}>
-        <div className="modal-content" onClick={e => e.stopPropagation()}>
-          <img src={imageUrl} alt={product.title} className="modal-img" />
-          <button className="modal-close-btn" onClick={handleModalClose}>
-            &times;
-          </button>
-        </div>
-      </div>
-    )}
-
-    <section className="product-card-section mobile-only">
-      <div className="product-card">
-
-        {/* Заголовок для мобильных */}
-        <div className="product-header before768">
-          <h3 className="product-title">{product.title}</h3>
-          {FavoriteButton}
-        </div>
-
-        <div className="product-main-block">
-          <div className="product-img-block">
-            {ProductImage}
-            {DiscountBadgeInImage}
+        <div className="product-modal-overlay" onClick={handleModalClose}>
+          <div className="product-modal-content" onClick={(e) => e.stopPropagation()}>
+            <img src={imageUrl} alt={product.title} className="product-modal-img" />
+            <button className="product-modal-close-btn" onClick={handleModalClose}>
+              &times;
+            </button>
           </div>
-          <div className="product-purchase-block">
-            {/* Заголовок для адаптива 481–768 */}
-            <div className="product-header after480">
-              <h3 className="product-title">{product.title}</h3>
-              {FavoriteButton}
-            </div> 
-            {PriceBlock}
-            <div className="product-quantity-cart">
-              {QuantityControls}
-              <div className="after768">{AddToCartBtn}</div>
+        </div>
+      )}
+
+      <section className="product-info-section mobile-only">
+        <div className="product-info">
+          <div className="product-header before768">
+            <h3 className="product-title">{product.title}</h3>
+            {FavoriteButton}
+          </div>
+
+          <div className="product-main-block">
+            <div className="product-img-block">
+              {ProductImage}
+              {DiscountBadgeInImage}
             </div>
-            <div className="before768">{AddToCartBtn}</div>
-            {DescriptionBlock("desc-tablet")}
-          </div>
-        </div>
 
-        {DescriptionBlock("desc-mobile")}
-      </div>
-    </section>
+            <div className="product-purchase-block">
+              <div className="product-header after480">
+                <h3 className="product-title">{product.title}</h3>
+                {FavoriteButton}
+              </div>
+
+              {PriceBlock}
+
+              <div className="product-quantity-cart">
+                {QuantityControls}
+                <div className="after768">{AddToCartBtn}</div>
+              </div>
+
+              <div className="before768">{AddToCartBtn}</div>
+              {DescriptionBlock('desc-tablet')}
+            </div>
+          </div>
+
+          {DescriptionBlock('desc-mobile')}
+        </div>
+      </section>
     </>
   );
 }
