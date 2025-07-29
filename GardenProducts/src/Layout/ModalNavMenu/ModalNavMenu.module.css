@@ -1,187 +1,168 @@
-/* Оверлей для модального окна */
-.overlay {
-  position: fixed; /* Фиксированное позиционирование */
-  top: 0; /* Верхняя граница */
-  left: 0; /* Левая граница */
-  width: 100%; /* Полная ширина */
-  height: 100%; /* Полная высота */
-  background: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
-  z-index: 1000; /* Уровень слоя */
-  display: none; /* Скрыто по умолчанию */
-}
-
-/* Модальное окно */
 .modal {
-  background-color: #fdf9e8; /* Цвет фона модального окна */
-  position: fixed; /* Фиксированное позиционирование */
-  top: 0; /* Верхняя граница */
-  left: 0; /* Левая граница */
-  width: 100%; /* Полная ширина */
-  height: 100%; /* Полная высота */
-  display: none; /* Скрыто по умолчанию */
-  justify-content: flex-end; /* Выравнивание содержимого по правому краю */
-  z-index: 1001; /* Уровень слоя выше оверлея */
-  transition: opacity 0.3s ease-in-out; /* Плавное изменение прозрачности */
-  opacity: 0; /* Полностью прозрачно по умолчанию */
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  transition: right 0.3s ease;
 }
 
 .modal.active {
-  display: flex; /* Показываем модальное окно */
-  opacity: 1; /* Полностью видимо */
+  right: 0;
 }
 
-/* Содержимое модального окна */
 .modalContent {
-  position: relative; /* Относительное позиционирование */
-  width: 80%; /* Ширина содержимого */
-  height: 100%; /* Высота содержимого */
-  padding: 20px; /* Внутренние отступы */
-  background-color: #fdf9e8; /* Цвет фона */
-  display: flex; /* Гибкое расположение элементов */
-  flex-direction: column; /* Вертикальное расположение элементов */
-  align-items: flex-end; /* Выравнивание элементов по правому краю */
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  height: 100vh;
+  background: #FFFFF1;
+  padding: 40px 30px;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
 }
 
-/* Кнопка закрытия */
+.modal.active .modalContent {
+  transform: translateX(0);
+}
+
+.modal.night_mode .modalContent {
+  background: #333;
+}
+
 .closeButton {
-  position: absolute; /* Абсолютное позиционирование */
-  top: 10px; /* Отступ сверху */
-  right: 10px; /* Отступ справа */
-  background: none; /* Прозрачный фон */
-  border: none; /* Без границ */
-  cursor: pointer; /* Курсор в виде руки при наведении */
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
 }
 
-.closeImage {
-  width: 24px; /* Ширина иконки */
-  height: 24px; /* Высота иконки */
+.closeIcon {
+  width: 24px;
+  height: 24px;
+  color: #000000;
+  transition: all 0.3s ease;
 }
 
-/* Блок логотипа */
-.logoBlock {
-  align-self: flex-start; /* Логотип остается слева */
-  margin-bottom: 40px; /* Отступ снизу */
+.closeIcon:hover {
+  color: #92A134;
+  transform: scale(1.1);
 }
 
-.logo {
-  width: 40px; /* Ширина логотипа */
-  height: 40px; /* Высота логотипа */
+.modal.night_mode .closeIcon {
+  color: #ffffff;
 }
 
-/* Навигационное меню */
+.textDiscountContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 60px;
+}
+
 .navMenu {
-  display: flex; /* Гибкое расположение элементов */
-  flex-direction: column; /* Вертикальное расположение элементов */
-  gap: 20px; /* Расстояние между элементами */
-  width: auto; /* Автоматическая ширина */
-  align-items: flex-end; /* Выравнивание текста по правому краю */
+  width: 100%;
 }
 
 .navList {
-  list-style: none; /* Убираем маркеры списка */
-  padding: 0; /* Убираем внутренние отступы */
-  margin: 0; /* Убираем внешние отступы */
-  width: auto; /* Автоматическая ширина */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .navItem {
-  padding: 10px 0; /* Внутренние отступы */
-  text-align: right; /* Текст выравнивается по правому краю */
+  width: 100%;
 }
 
 .navLink {
-  font-weight: 500; /* Толщина шрифта */
-  font-size: 18px; /* Размер шрифта */
-  line-height: 130%; /* Высота строки */
-  color: #333333; /* Цвет текста */
-  text-decoration: none; /* Убираем подчеркивание */
-  transition: color 0.2s ease-in-out; /* Плавное изменение цвета */
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: #000000;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 12px 0;
+  transition: all 0.3s ease;
 }
 
 .navLink:hover {
-  color: #555555; /* Цвет текста при наведении */
+  color: #92A134;
+  padding-left: 10px;
 }
 
-/* Кнопка скидки */
+.modal.night_mode .navLink {
+  color: #ffffff;
+}
+
 .discountButton {
-  margin-top: 20px; /* Отступ сверху для кнопки скидки */
-  margin-left: auto; /* Автоматический отступ слева */
-  padding: 6px 16px; /* Внутренние отступы */
-  font-weight: 500; /* Толщина шрифта */
-  font-size: 16px; /* Размер шрифта */
-  line-height: 126%; /* Высота строки */
-  border: none; /* Без границ */
-  border-radius: 6px; /* Скругление углов */
-  cursor: pointer; /* Курсор в виде руки при наведении */
-  color: #ffffff; /* Цвет текста */
-  background-color: #6b8e23; /* Цвет фона */
-  transition: background-color 0.2s ease-in-out; /* Плавное изменение цвета фона */
-  align-self: flex-end; /* Кнопка скидки выравнивается по правому краю */
+  width: 100%;
+  height: 44px;
+  background-color: #92A134;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .discountButton:hover {
-  background-color: #2e8b57; /* Цвет фона при наведении */
+  background-color: #7D8F2D;
+  transform: translateY(-2px);
 }
 
-/* Адаптивные стили для экрана 360px */
-@media screen and (max-width: 360px) {
+/* 480px макет */
+@media (max-width: 480px) {
   .modalContent {
-    width: 100%; /* Полная ширина на маленьких экранах */
-    padding: 10px; /* Уменьшаем внутренние отступы */
+    width: 60%;
+    padding: 25px 20px;
   }
-
-  .navMenu {
-    gap: 15px; /* Уменьшаем расстояние между элементами */
+  
+  .closeButton {
+    top: 15px;
+    right: 15px;
   }
-
+  
+  .textDiscountContainer {
+    margin-top: 50px;
+    gap: 30px;
+  }
+  
   .navLink {
-    font-size: 16px; /* Уменьшаем размер шрифта */
+    font-size: 15px;
+    padding: 10px 0;
   }
-
+  
   .discountButton {
-    font-size: 14px; /* Уменьшаем размер шрифта */
-    padding: 5px 10px; /* Уменьшаем внутренние отступы */
-  }
-}
-
-/* Адаптивные стили для экрана 480px */
-@media screen and (min-width: 360px) and (max-width: 480px) {
-  .modalContent {
-    width: 100%; /* Полная ширина на средних экранах */
-    padding: 15px; /* Увеличиваем внутренние отступы */
-  }
-
-  .navMenu {
-    gap: 18px; /* Увеличиваем расстояние между элементами */
-  }
-
-  .navLink {
-    font-size: 17px; /* Увеличиваем размер шрифта */
-  }
-
-  .discountButton {
-    font-size: 15px; /* Увеличиваем размер шрифта */
-    padding: 5px 12px; /* Увеличиваем внутренние отступы */
+    font-size: 13px;
+    height: 38px;
   }
 }
 
-/* Адаптивные стили для больших экранов */
-@media screen and (min-width: 480px) {
+/* 360px макет */
+@media (max-width: 360px) {
   .modalContent {
-    width: 50%; /* 50% ширины на больших экранах */
-    padding: 20px; /* Внутренние отступы */
+    width: 50%;
+    padding: 20px 15px;
   }
-
-  .navMenu {
-    gap: 20px; /* Расстояние между элементами */
-  }
-
+  
   .navLink {
-    font-size: 18px; /* Размер шрифта */
+    font-size: 14px;
   }
-
+  
   .discountButton {
-    font-size: 16px; /* Размер шрифта */
-    padding: 6px 16px; /* Внутренние отступы */
+    font-size: 12px;
+    height: 36px;
   }
 }

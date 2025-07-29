@@ -1,28 +1,31 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import { IoCloseOutline } from "react-icons/io5";
 import { IoMdHeart } from "react-icons/io";
 import Button from "../UI/Button/Button";
 import { fetchProducts } from "../../Loader/fetchProducts";
+import { addToCart } from '../../store/cartSlice';
 import "./DailyProductModal.scss";
 
 const DailyProductModal = ({ onClose, onDiscountUsed }) => {
   const [products, setProducts] = useState([]);
-  const [favourite, setFavourite] = useState([]);
   const [productOfTheDay, setProductOfTheDay] = useState(null);
+  const [isFavourite, setIsFavourite] = useState(false);
+  const dispatch = useDispatch();
+  const cartItems = useSelector(state => state.cart.items);
 
- useEffect(() => {
-  const loadProducts = async () => {
-    try {
-      const data = await fetchProducts();
-      setProducts(data);
-    } catch (error) {
-      console.error("Ошибка при загрузке продуктов:", error);
-    }
-  };
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await fetchProducts();
+        setProducts(data);
+      } catch (error) {
+        console.error("Ошибка при загрузке продуктов:", error);
+      }
+    };
 
-  loadProducts();
-}, []);
-
+    loadProducts();
+  }, []);
 
   useEffect(() => {
     if (products.length > 0) {
@@ -34,22 +37,58 @@ const DailyProductModal = ({ onClose, onDiscountUsed }) => {
     }
   }, [products]);
 
-  const isFavourite = productOfTheDay && favourite.some(item => item.id === productOfTheDay.id);
+  useEffect(() => {
+    if (productOfTheDay) {
+      const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      setIsFavourite(favorites.includes(String(productOfTheDay.id)));
+    }
+  }, [productOfTheDay]);
 
   const toggleFavourite = () => {
     if (!productOfTheDay) return;
-    setFavourite(prev =>
-      isFavourite
-        ? prev.filter(item => item.id !== productOfTheDay.id)
-        : [...prev, productOfTheDay]
-    );
+
+    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+
+    if (isFavourite) {
+      favorites = favorites.filter(id => id !== String(productOfTheDay.id));
+      setIsFavourite(false);
+    } else {
+      favorites.push(String(productOfTheDay.id));
+      setIsFavourite(true);
+    }
+
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    window.dispatchEvent(new CustomEvent('favoritesChanged'));
   };
 
   const handleAddToCart = () => {
+    if (!productOfTheDay) return;
+
+    const discountedId = `${productOfTheDay.id}_daily_discount`;
+    const existingDiscounted = cartItems.find(item => item.id === discountedId);
+
+    if (existingDiscounted) {
+      alert("You already have this daily deal in your cart!");
+      return;
+    }
+
+    const cartItem = {
+      id: productOfTheDay.id,
+      count: 1,
+      hasDiscount: true,
+      discountPrice: productOfTheDay.discont_price,
+      originalPrice: productOfTheDay.price,
+      isDailyDeal: true  // ✅ ДОБАВЛЕНО: флаг товара дня
+    };
+
+    dispatch(addToCart(cartItem));
     onDiscountUsed();
   };
 
   if (!productOfTheDay) return null;
+
+  const discountedId = `${productOfTheDay.id}_daily_discount`;
+  const isAlreadyInCart = cartItems.some(item => item.id === discountedId);
 
   return (
     <div className="day__modal-background">
@@ -94,8 +133,9 @@ const DailyProductModal = ({ onClose, onDiscountUsed }) => {
         <Button
           btnColor="white"
           btnSize="L"
-          btnText="Add to cart"
+          btnText={isAlreadyInCart ? "Already in cart" : "Add to cart"}
           handleOnClick={handleAddToCart}
+          disabled={isAlreadyInCart}
         />
       </div>
     </div>

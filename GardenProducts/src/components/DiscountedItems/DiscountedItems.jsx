@@ -40,13 +40,13 @@ export default function DiscountedItems() {
   return (
     <div>
       <div className="container">
-        <div className="breadcrumbs">
+        {/* <div className="breadcrumbs">
           <Link to="/" className="breadcrumb-text">
             Main page
           </Link>
           <span className="breadcrumb-linie"></span>
           <span className="breadcrumb-text-2">All sales</span>
-        </div>
+        </div> */}
 
         <h1 className="page-title">Discounted items</h1>
 
