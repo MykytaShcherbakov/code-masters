@@ -29,6 +29,7 @@ body {
   &.light-theme {
     background-color: nav.$bg-color-lightTheme;
     transition: 0.3s linear;
+    overflow-x: hidden
   }
 
   &.dark-theme {

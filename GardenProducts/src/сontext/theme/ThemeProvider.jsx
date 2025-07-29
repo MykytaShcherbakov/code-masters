@@ -22,7 +22,7 @@ export const ThemeProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    document.body.className = theme === 'dark' ? 'light-theme' : 'dark-theme';
+    document.body.className = theme === 'light' ? 'light-theme' : 'dark-theme';
   }, [theme]);
 
   return (

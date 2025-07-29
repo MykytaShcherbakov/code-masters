@@ -73,7 +73,7 @@ const Sales = () => {
           </Link>
         </div>
 
-        <div className="product-grid">
+        <div className="product-grid-sales">
           {randomSales.map((product) => (
             <ProductCard product={product} key={product.id} />
           ))}
