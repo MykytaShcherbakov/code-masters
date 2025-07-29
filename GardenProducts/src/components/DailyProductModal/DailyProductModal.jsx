@@ -35,6 +35,7 @@ const DailyProductModal = ({ onClose, onDiscountUsed }) => {
       selected.discont_price = selected.price * 0.5;
       setProductOfTheDay(selected);
     }
+    
   }, [products]);
 
   useEffect(() => {

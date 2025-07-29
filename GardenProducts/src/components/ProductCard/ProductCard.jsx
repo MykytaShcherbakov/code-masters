@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '../../store/cartSlice';
 import './ProductCard.scss';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, categories }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
@@ -14,6 +14,9 @@ const ProductCard = ({ product }) => {
   const currentPrice = hasDiscount ? product.discont_price : product.price;
 
   const [isLiked, setIsLiked] = useState(false);
+  const [isInCart, setIsInCart] = useState(
+    cartItems.some((item) => item.id === product.id)
+  );
 
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -30,7 +33,9 @@ const ProductCard = ({ product }) => {
     };
   }, [product.id]);
 
-  const isInCart = cartItems.some((item) => item.id === product.id);
+  useEffect(() => {
+    setIsInCart(cartItems.some((item) => item.id === product.id));
+  }, [cartItems, product.id]);
 
   const handleHeartClick = (e) => {
     e.preventDefault();
@@ -48,23 +53,38 @@ const ProductCard = ({ product }) => {
     window.dispatchEvent(new CustomEvent('favoritesChanged'));
   };
 
-const handleAddToCart = (e) => {
-  e.preventDefault();
+  const handleAddToCart = (e) => {
+    e.preventDefault();
 
-  if (!isInCart) {
-    const cartItem = {
-      id: product.id,
-      count: 1,
-      hasDiscount,
-      discountPrice: hasDiscount ? product.discont_price : null,
-      originalPrice: product.price,
-      isDailyDeal: false  // ✅ ДОБАВИТЬ ЭТУ СТРОКУ
-    };
-    dispatch(addToCart(cartItem));
-  } else {
-    dispatch(removeFromCart(product.id));
-  }
-};
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const productIdStr = String(product.id);
+
+    const isAlreadyInCart = cart.some(
+      (item) => String(item.id) === productIdStr
+    );
+
+    if (!isAlreadyInCart) {
+      cart.push({ id: product.id, count: 1 });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      setIsInCart(true);
+
+      const cartItem = {
+        id: product.id,
+        count: 1,
+        hasDiscount,
+        discountPrice: hasDiscount ? product.discont_price : null,
+        originalPrice: product.price,
+        isDailyDeal: false,
+      };
+      dispatch(addToCart(cartItem));
+    } else {
+      cart = cart.filter((item) => String(item.id) !== productIdStr);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      setIsInCart(false);
+
+      dispatch(removeFromCart(product.id));
+    }
+  };
 
   return (
     <Link
@@ -90,7 +110,6 @@ const handleAddToCart = (e) => {
             onClick={handleAddToCart}
           />
         </div>
-
         <div className="product-card-details">
           <p className="product-name">{product.title}</p>
           <div className="prices">

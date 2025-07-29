@@ -61,24 +61,24 @@ const Sales = () => {
 
   return (
     <section className="sales-section">
-      <div className="header">
-        <h1 className="sale">Sale</h1>
-        <div className="header-line-between"></div>
+        <div className="header">
+          <h1 className="sale">Sale</h1>
+          <div className="header-line-between"></div>
 
         <Link to={'/discounted-items'}>
           <button className="header-all-sales-button">All sales</button>
         </Link>
       </div>
 
-      <div className="product-grid">
-        {randomSales.map((product) => (
-          <ProductCard product={product} key={product.id} />
-        ))}
-      </div>
+        <div className="product-grid-sales">
+          {randomSales.map((product) => (
+            <ProductCard product={product} key={product.id} />
+          ))}
+        </div>
 
-      <div className="all-sales-button-container">
-        <button className="all-sales-button">All sales</button>
-      </div>
+        <div className="all-sales-button-container">
+          <button className="all-sales-button">All sales</button>
+        </div>
     </section>
   );
 };

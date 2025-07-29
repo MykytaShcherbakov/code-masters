@@ -25,7 +25,7 @@ const initialState = {
 const createDiscountedItemId = (originalId) => `${originalId}_daily_discount`;
 
 const cartSlice = createSlice({
-  name: 'cart',
+  name: "cart",
   initialState,
   reducers: {
     setCart(state, action) {
@@ -102,8 +102,12 @@ const cartSlice = createSlice({
 });
 
 export const {
-  setCart, addToCart, removeFromCart,
-  increment, decrement, clearCart
+  setCart,
+  addToCart,
+  removeFromCart,
+  increment,
+  decrement,
+  clearCart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

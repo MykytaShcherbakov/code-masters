@@ -1,6 +1,8 @@
 .link-product {
   text-decoration: none;
   color: inherit;
+  
+
 }
 
 .product-card {
@@ -14,6 +16,8 @@
   border: 2px solid transparent;
   cursor: pointer;
   transition: border-color 0.2s ease-in-out;
+  min-width: 0;
+ 
 
   &:hover {
     border-color: #656262;
@@ -51,7 +55,7 @@
 
   .heart-icon-sales,
   .shopping-bag-icon-sales {
-    font-size: 48px;
+    font-size: 36px;
     stroke-width: 2px;
     fill: #ffffff;
     stroke: #424436;
@@ -67,34 +71,43 @@
   }
 }
 
-.product-card-details {
-  .product-name {
-    font-size: 20px;
-    font-weight: 500;
-    color: #333;
-    padding: 16px 16px 0 16px;
-    line-height: 1.4;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+.product-card-details{
+.product-name {
+  font-size: 20px;
+  font-weight: 500;
+  color: #333;
+  padding: 16px 16px 0 16px;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
-  .prices {
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
-    padding: 8px 16px 16px 16px;
-
-    .current-price {
-      font-size: 40px;
-      font-weight: 600;
-      color: #424436;
-    }
-
-    .original-price {
-      font-size: 20px;
-      color: #8b8b8b;
-      text-decoration: line-through;
-    }
-  }
 }
+
+.prices {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 8px 16px 16px 16px;
+ 
+}
+
+.current-price {
+  font-size: 40px;
+  font-weight: 600;
+  color: #424436;
+  color: inherit;
+}
+
+.original-price {
+  font-size: 20px;
+  color: #8b8b8b;
+  text-decoration: line-through;
+}
+}
+
+.card-dark {
+  background-color: black;
+  border-color: white;
+}
+

@@ -1,10 +1,12 @@
 import React from 'react';
 import { Outlet, useNavigation } from 'react-router-dom';
 import './Layout.css';
-
-import Header from './Header/Header.jsx';
-import Footer from './Footer/Footer.jsx';
+import DiscountedItems from '../components/DiscountedItems/DiscountedItems';
+import DiscountForm from '../components/SaleForm/SaleForm.jsx';
+import Footer from './Footer/Footer';
+import Header from './Header/Header';
 import Breadcrumbs from './Breadcrumbs/Breadcrumbs';
+
 
 function Layout() {
   const navigation = useNavigation();
@@ -22,6 +24,7 @@ function Layout() {
       <Header />
       <main>
         <Breadcrumbs />
+
         <Outlet />
       </main>
       <Footer />

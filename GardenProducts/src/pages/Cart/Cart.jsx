@@ -16,6 +16,8 @@ function Cart() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const dispatch = useDispatch();
+  console.log(dispatch);
+  
   const cartItems = useSelector(state => state.cart.items);
   const isSaleFormActive = useSelector(state => state.saleForm?.isSaleFormActive);
   const hasFirstOrderCompleted = localStorage.getItem("hasFirstOrderCompleted") === "true";

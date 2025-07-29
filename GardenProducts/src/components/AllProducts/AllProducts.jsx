@@ -41,6 +41,8 @@ export default function AllProducts() {
 
   return (
     <div className="container">
+     
+
       <h1 className="page-title">All Products</h1>
 
       <div className="filters-panel">

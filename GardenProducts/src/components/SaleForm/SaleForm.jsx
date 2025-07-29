@@ -110,7 +110,7 @@ const SaleForm = () => {
           />
         </form>
       </div>
-    </section>
+    </section>  
   );
 };
 
