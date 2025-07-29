@@ -25,11 +25,11 @@ const useFavoritesCount = () => {
 
   useEffect(() => {
     updateCount();
-    window.addEventListener('storage', updateCount);
-    const interval = setInterval(updateCount, 1000);
+    addEventListener('storage', updateCount);
+    const interval = setInterval(updateCount, 200);
 
     return () => {
-      window.removeEventListener('storage', updateCount);
+      removeEventListener('storage', updateCount);
       clearInterval(interval);
     };
   }, []);
