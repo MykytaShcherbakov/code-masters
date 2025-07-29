@@ -40,16 +40,14 @@ const DailyProductModal = ({ onClose, onDiscountUsed }) => {
   const isFavourite =
     productOfTheDay && favourite.some((item) => item.id === productOfTheDay.id);
 
-  const toggleFavourite = () => {
-    if (!productOfTheDay) return;
-    setFavourite((prev) =>
-      isFavourite
-        ? prev.filter((item) => item.id !== productOfTheDay.id)
-  }, [products]);
-        : [...prev, productOfTheDay]
-    );
-  };
-
+const toggleFavourite = () => {
+  if (!productOfTheDay) return;
+  setFavourite((prev) =>
+    isFavourite
+      ? prev.filter((item) => item.id !== productOfTheDay.id)
+      : [...prev, productOfTheDay]
+  );
+};
  const handleAddToCart = () => {
   if (!productOfTheDay) return;
   dispatch(

@@ -1,6 +1,7 @@
 .link-product {
   text-decoration: none;
   color: inherit;
+  
 
 }
 
@@ -15,6 +16,7 @@
   border: 2px solid transparent;
   cursor: pointer;
   transition: border-color 0.2s ease-in-out;
+  min-width: 0;
  
 
   &:hover {
@@ -53,7 +55,7 @@
 
   .heart-icon-sales,
   .shopping-bag-icon-sales {
-    font-size: 48px;
+    font-size: 36px;
     stroke-width: 2px;
     fill: #ffffff;
     stroke: #424436;
@@ -109,6 +111,3 @@
   border-color: white;
 }
 
-.product-card-info .info-dark{
-  color: red;;
-}

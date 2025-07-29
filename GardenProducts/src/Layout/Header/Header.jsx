@@ -22,10 +22,9 @@ function Header() {
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [hasUsedDiscountToday, setHasUsedDiscountToday] = useState(false);
   
-  useEffect(() => {
-    const stored = localStorage.getItem("usedDiscountDate");
+ 
     const { theme, switchTheme } = useContext(ThemeContext); 
-    console.log(theme);
+    
 
   useEffect(() => {
     const stored = localStorage.getItem('usedDiscountDate');
@@ -41,7 +40,7 @@ function Header() {
         setNavMenuActive(false);
       }
     };
-    window.addEventListener('resize', handleResize);
+    addEventListener('resize', handleResize);
     handleResize();
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -75,7 +74,7 @@ function Header() {
                 onClick={switchTheme} 
               >
                 <img
-                  src={theme === 'dark' ? ModeDayIcon : ModeNightIcon}
+                  src={theme === 'dark' ? ModeNightIcon : ModeDayIcon}
                   alt={
                     theme === 'dark'
                       ? 'Иконка светлого режима'
