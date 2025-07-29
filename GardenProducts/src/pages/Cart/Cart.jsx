@@ -5,6 +5,7 @@ import { increment, decrement, removeFromCart, clearCart } from '../../store/car
 import { setFirstOrderCompleted } from '../../store/saleFormSlice';
 import { fetchProducts } from '../../Loader/fetchProducts';
 import './Cart.scss';
+import { backendUrl } from '../../apiConfig';
 
 function Cart() {
   const [products, setProducts] = useState([]);
@@ -64,7 +65,7 @@ function Cart() {
     if (!product) return null;
 
     const imageUrl = product.image?.startsWith('/')
-      ? `http://localhost:3333${product.image}`
+      ? `${backendUrl}${product.image}`
       : product.image;
 
     return (
