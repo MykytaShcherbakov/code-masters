@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Sales.scss';
 import { Link } from 'react-router-dom';
 import ProductCard from '../ProductCard/ProductCard';
+import { backendUrl } from '../../apiConfig';
 
 const Sales = () => {
   const [sales, setSales] = useState([]);
@@ -11,7 +12,7 @@ const Sales = () => {
   useEffect(() => {
     const getSales = async () => {
       try {
-        const res = await fetch('http://localhost:3333/products/all');
+        const res = await fetch(`${backendUrl}/products/all`);
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }

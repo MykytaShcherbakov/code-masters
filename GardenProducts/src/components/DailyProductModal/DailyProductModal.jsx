@@ -6,6 +6,7 @@ import Button from "../UI/Button/Button";
 import { fetchProducts } from "../../Loader/fetchProducts";
 import { addToCart } from '../../store/cartSlice';
 import "./DailyProductModal.scss";
+import { backendUrl } from "../../apiConfig";
 
 const DailyProductModal = ({ onClose, onDiscountUsed }) => {
   const [products, setProducts] = useState([]);
@@ -107,7 +108,7 @@ const DailyProductModal = ({ onClose, onDiscountUsed }) => {
         <div className="day__product-card">
           <div className="product__image">
             <img
-              src={`http://localhost:3333${productOfTheDay.image}`}
+              src={`${backendUrl}${productOfTheDay.image}`}
               alt={productOfTheDay.title}
             />
             <span className="discount__badge">-50%</span>

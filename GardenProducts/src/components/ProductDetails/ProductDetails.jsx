@@ -5,6 +5,7 @@ import { addToCart } from '../../store/cartSlice';
 import './ProductDetails.scss';
 import productImg from '../../media/5422e5af264f78b8a10da5d1979747d487daef24.png';
 import { IoMdHeart } from 'react-icons/io';
+import { backendUrl } from '../../apiConfig';
 
 function ProductDetails() {
   const dispatch = useDispatch();
@@ -79,7 +80,7 @@ function ProductDetails() {
     : 0;
 
   const imageUrl = product.image?.startsWith('/')
-    ? `http://localhost:3333${product.image}`
+    ? `${backendUrl}${product.image}`
     : product.image || productImg;
 
   const descLimit = 220;

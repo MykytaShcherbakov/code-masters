@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '../../store/cartSlice';
 import './ProductCard.scss';
-
-const ProductCard = ({ product, categories }) => {
+import { backendUrl } from '../../apiConfig';
+const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
@@ -92,7 +92,7 @@ const ProductCard = ({ product, categories }) => {
       to={`/categories/${product.categoryId}/product/${product.id}`}
     >
       <div className="product-card">
-        <img src={`http://localhost:3333${product.image}`} alt={product.title} />
+        <img src={`${backendUrl}${product.image}`} alt={product.title} />
 
         {hasDiscount && (
           <div className="discount-badge">

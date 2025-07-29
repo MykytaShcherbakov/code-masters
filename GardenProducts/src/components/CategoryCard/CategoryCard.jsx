@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./CategoryCard.scss";
-
+import { backendUrl } from "../../apiConfig";
 function CategoryCard({ category }) {
     
   return (
@@ -8,7 +8,7 @@ function CategoryCard({ category }) {
       <Link to={`/categories/${category.id}`} className="categories__item-link">
         <img
           className="categories__item-image"
-          src={`http://localhost:3333${category.image}`}
+          src={`${backendUrl}${category.image}`}
           alt={category.title}
         />
         <p className={"categories__item-title"}>
