@@ -101,7 +101,6 @@ function ProductDetails() {
     <button
       className={`favorite-btn${isFavorite ? ' active' : ''}`}
       onClick={handleFavorite}
-      aria-label="Add to favorites"
     >
       <IoMdHeart className={`heart-icon ${isFavorite ? 'active' : ''}`} />
     </button>

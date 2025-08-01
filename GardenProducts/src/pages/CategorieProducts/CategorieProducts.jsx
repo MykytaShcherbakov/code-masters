@@ -1,27 +1,25 @@
-import ProductSkeleton from "../../components/ProductSkeleton/ProductSkeleton";
-import useSkeletonLoader from "../../components/ProductSkeleton/useSkeletonLoader";
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   useLoaderData,
   useParams,
-  Link,
   Outlet,
   useLocation,
 } from 'react-router-dom';
+import ProductSkeleton from "../../components/ProductSkeleton/ProductSkeleton";
+import useSkeletonLoader from "../../components/ProductSkeleton/useSkeletonLoader";
 import ProductCard from '../../components/ProductCard/ProductCard';
 import './CategorieProducts.scss';
 
 export default function CategorieProducts() {
   const { categoryId } = useParams();
   const { products, category } = useLoaderData();
-
+  const location = useLocation();
   const localLoading = useSkeletonLoader(100);
+
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [sortOrder, setSortOrder] = useState("default");
   const [showDiscountedOnly, setShowDiscountedOnly] = useState(false);
-  const location = useLocation();
-  console.log(location);
   
 
   // Проверяем, находимся ли мы на странице товара

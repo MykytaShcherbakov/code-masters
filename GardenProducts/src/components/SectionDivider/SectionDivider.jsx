@@ -12,7 +12,6 @@ const SectionDivider = ({ sectionTitle, linkToPage, pageTitle }) => {
         <Link to={linkToPage}>
           <Button btnColor={"neutral"} btnSize={"S"} btnText={pageTitle} />
         </Link>
-        {/* Переход на страницу */}
       </div>
     </div>
   );

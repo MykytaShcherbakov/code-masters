@@ -1,12 +1,16 @@
 import "./Button.scss";
 
-const Button = ({ btnColor, btnSize, btnText, handleOnClick }) => {
+// Универсальный компонент кнопки с кастомными стилями
+const Button = ({ btnColor, btnSize, btnText, handleOnClick, type = "button", disabled = false }) => {
   return (
-    <>
-      <button className={`btn color-${btnColor} size-${btnSize}`} onClick={handleOnClick}>
-        {btnText}
-      </button>
-    </>
+    <button
+      className={`btn color-${btnColor} size-${btnSize}`}
+      onClick={handleOnClick}
+      type={type}
+      disabled={disabled}
+    >
+      {btnText}
+    </button>
   );
 };
 

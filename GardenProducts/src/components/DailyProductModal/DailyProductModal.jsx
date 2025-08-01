@@ -5,8 +5,8 @@ import { IoMdHeart } from "react-icons/io";
 import Button from "../UI/Button/Button";
 import { fetchProducts } from "../../Loader/fetchProducts";
 import { addToCart } from '../../store/cartSlice';
-import "./DailyProductModal.scss";
 import { backendUrl } from "../../apiConfig";
+import "./DailyProductModal.scss";
 
 const DailyProductModal = ({ onClose, onDiscountUsed }) => {
   const [products, setProducts] = useState([]);

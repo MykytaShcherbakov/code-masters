@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import "./CategoryCard.scss";
 import { backendUrl } from "../../apiConfig";
-function CategoryCard({ category }) {
+import "./CategoryCard.scss";
+
+// Компонент для отображения одной категории
+const CategoryCard = ({ category }) => {
     
   return (
     <div className="categories__item">

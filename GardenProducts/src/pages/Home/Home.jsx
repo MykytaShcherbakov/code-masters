@@ -1,4 +1,3 @@
-import React from 'react';
 import Sales from '../../components/Sales/Sales';
 import SaleForm from '../../components/SaleForm/SaleForm';
 import Banner from '../../components/Banner/Banner';

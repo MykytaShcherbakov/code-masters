@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './AllProducts.scss';
 import { useLoaderData } from 'react-router-dom';
 import ProductCard from '../ProductCard/ProductCard';
+import './AllProducts.scss';
 
 export default function AllProducts() {
   const products = useLoaderData() || [];

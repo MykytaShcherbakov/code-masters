@@ -34,6 +34,8 @@ body {
     background: nav.$bg-color-darkTheme;
     color: nav.$font-lightColor;
 
+
+    p,
     h1,
     h2,
     h3.section__title {
@@ -135,6 +137,14 @@ body {
           }
         }
       }
+    }
+
+    .sales-section h1 {
+      color: nav.$font-lightColor;
+    }
+
+    .sales-section span {
+      color: nav.$font-lightColor;
     }
 
     div .product-grid .product-card {

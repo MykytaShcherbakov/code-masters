@@ -1,4 +1,3 @@
-import React from "react";
 import bannerImage from '../../media/banner.jpg';import './Banner.css';
 import { Link } from "react-router-dom";
 
@@ -15,4 +14,3 @@ const Banner = () => {
 };
 
 export default Banner;
-

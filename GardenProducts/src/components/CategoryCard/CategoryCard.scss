@@ -14,17 +14,13 @@
         object-fit: cover;
         border-radius: $radius-big;
       }
+    }
 
-      &-title {
-        font-size: $common-text;
-        font-weight: $font-weight-medium;
-        margin-top: 16px;
-        text-align: center;
-
-        &__dark {
-          color: $font-lightColor;
-        }
-      }
+    &-title {
+      font-size: $common-text;
+      font-weight: $font-weight-medium;
+      padding-top: 16px;
+      text-align: center;
     }
   }
 }

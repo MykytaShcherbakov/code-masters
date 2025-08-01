@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './Sales.scss';
 import { Link } from 'react-router-dom';
 import ProductCard from '../ProductCard/ProductCard';
 import { backendUrl } from '../../apiConfig';
