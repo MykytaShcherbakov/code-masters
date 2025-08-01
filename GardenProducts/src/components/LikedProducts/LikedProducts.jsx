@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import './LikedProducts.scss';
 import { useLoaderData, Link } from 'react-router-dom';
 import ProductCard from '../ProductCard/ProductCard';
-import './LikedProducts.scss';
+
 
 export default function LikedProducts() {
   const products = useLoaderData() || [];
+
+
+  
+  
+
+  
 
   const [likedProducts, setLikedProducts] = useState([]);
   const [minPrice, setMinPrice] = useState('');

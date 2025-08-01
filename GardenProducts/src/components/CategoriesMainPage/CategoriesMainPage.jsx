@@ -5,14 +5,13 @@ import Button from "../UI/Button/Button";
 import "./CategoriesMainPage.scss";
 
 const CategoriesMainPage = () => {
-  const categories = useLoaderData() ?? []; // Загружаем данные о категориях
-  const location = useLocation();  // Получаем текущий путь (URL), чтобы определить, находимся ли на странице всех категорий
-  const isOnCategoriesPage = location.pathname.startsWith("/categories"); // Проверка: если путь начинается с "/categories"
+  const categories = useLoaderData() ?? [];
+  const location = useLocation();
+  const isOnCategoriesPage = location.pathname.startsWith("/categories");
 
   return (
     <section className="categories__section">
       <div className="categories__content">
-         {/* Компонент с заголовком и кнопкой-ссылкой на полную страницу категорий */}
         <SectionDivider
           sectionTitle={"Categories"}
           linkToPage={"/categories"}
@@ -23,7 +22,7 @@ const CategoriesMainPage = () => {
           {categories.slice(0, 4).map((category) => (
             <CategoryCard key={category.id} category={category} />
           ))}
-           {/* Если мы не на странице /categories, показываем кнопку "All categories" */}
+
           {!isOnCategoriesPage && (
             <Link to={"/categories"} className="adaptive__link">
               <Button

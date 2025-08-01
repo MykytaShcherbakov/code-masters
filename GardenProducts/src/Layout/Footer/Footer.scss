@@ -1,17 +1,20 @@
 footer {
   background-color: #fffff1;
+  padding: 40px 0;
   font-family: 'Montserrat', Arial, sans-serif;
-  margin: 60px 20px;
+
 
   .footer-content {
-    max-width: 1440px;    
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 0px;
   }
 
   h2 {
-    font-size: 64px;
+    font-size: 44px;
     font-weight: 700;
     margin-bottom: 32px;
-    color: #424436;
+    color: #444;
     text-align: left;
     margin-left: 0;
     padding-left: 0;
@@ -45,7 +48,7 @@ footer {
       font-size: 2rem;
       font-weight: 600;
       margin: 0;
-      color: #424436;
+      color: #222;
       word-break: break-word;
     }
   }
@@ -61,7 +64,7 @@ footer {
       justify-content: center;
       font-size: 28px;
       margin-right: 0;
-      color: #424436;
+      color: #222;
       background: none;
       border: none;
       transition: color 0.2s;
@@ -89,11 +92,18 @@ footer {
 
   // Media Queries
   @media (max-width: 1440px) {
+    .footer-content {
+      max-width: 95vw;
+      padding: 0 16px;
+    }
     .footer-grid {
       gap: 18px;
     }
     .footer-map iframe {
       height: 220px;
+    }
+    h2 {
+      font-size: 36px;
     }
   }
 
@@ -105,7 +115,7 @@ footer {
     }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     .footer-content {
       padding: 0 8px;
     }
@@ -120,7 +130,7 @@ footer {
     }
 
     h2 {
-      font-size: 46px;
+      font-size: 32px;
       padding-left: 0;
       margin-left: 0;
     }

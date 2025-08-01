@@ -3,6 +3,8 @@
   align-items: center;
   justify-content: flex-start;
   white-space: nowrap;
+  margin-left: 40px;
+  margin-top: 40px;
 }
 
 .breadcrumb-wrapper {
@@ -38,7 +40,21 @@
 
 .breadcrumb-separator {
   display: inline-block;
-  width: 20px;
+  width: 16px;
   height: 1px;
   background-color: rgb(221, 221, 221);
 }
+
+@media (max-width: 1000px) {
+  .breadcrumbs {
+    margin-left: 20px;
+    margin-top: 40px;
+  }
+}
+@media (max-width: 768px) {
+  .breadcrumbs {
+    margin-left: 20px;
+    margin-top: 32px;
+  }
+}
+

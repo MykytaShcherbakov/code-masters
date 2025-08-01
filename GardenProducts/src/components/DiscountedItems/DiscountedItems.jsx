@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { GiShoppingBag } from 'react-icons/gi';
-import { IoMdHeart } from 'react-icons/io';
 import ProductCard from '../ProductCard/ProductCard';
 import './DiscountedItems.scss';
 
@@ -41,12 +38,14 @@ export default function DiscountedItems() {
     <div>
       <div className="container">
         {/* <div className="breadcrumbs">
+        {/* <div className="breadcrumbs">
           <Link to="/" className="breadcrumb-text">
             Main page
           </Link>
           <span className="breadcrumb-linie"></span>
           <span className="breadcrumb-text-2">All sales</span>
         </div> */}
+        </div>
 
         <h1 className="page-title">Discounted items</h1>
 
@@ -96,6 +95,5 @@ export default function DiscountedItems() {
           ))}
         </div>
       </div>
-    </div>
   );
 }

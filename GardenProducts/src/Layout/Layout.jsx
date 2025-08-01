@@ -21,9 +21,11 @@ function Layout() {
       <main>
         <Breadcrumbs />
 
+        <Breadcrumbs />
+
         <Outlet />
       </main>
-      <Footer />
+      <Footer  />
     </div>
   );
 }

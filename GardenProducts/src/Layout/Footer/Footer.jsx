@@ -1,10 +1,11 @@
 import  {React, useContext } from 'react';
+import './Footer.scss';
 import instagramIconWhite  from '../../media/ic-instagram-white.png';
 import whatsappIconWhite from '../../media/ic-whatsapp-white.png';
 import instagramIcon from '../../media/ic-instagram.png';
 import whatsappIcon from '../../media/ic-whatsapp.png';
+
 import { ThemeContext } from '../../context/theme/ThemeContext.js';
-import './Footer.scss';
 
 function Footer() {
   const { theme } = useContext(ThemeContext);

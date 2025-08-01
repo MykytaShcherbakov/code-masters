@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useLoaderData } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
+import './ProductDetails.scss';
 import productImg from '../../media/5422e5af264f78b8a10da5d1979747d487daef24.png';
 import { IoMdHeart } from 'react-icons/io';
 import { backendUrl } from '../../apiConfig';
-import './ProductDetails.scss';
 
 function ProductDetails() {
   const dispatch = useDispatch();
@@ -16,6 +16,9 @@ function ProductDetails() {
   const [showFullDesc, setShowFullDesc] = useState(false);
   const [cartState, setCartState] = useState('default');
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+
 
   const { id } = useParams();
   const product = useLoaderData();
