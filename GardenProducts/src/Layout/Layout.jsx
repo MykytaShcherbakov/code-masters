@@ -20,9 +20,6 @@ function Layout() {
       <Header />
       <main>
         <Breadcrumbs />
-
-        <Breadcrumbs />
-
         <Outlet />
       </main>
       <Footer  />

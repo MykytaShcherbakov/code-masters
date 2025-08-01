@@ -322,8 +322,16 @@ body {
         }
       }
     }
-.product-card-details .product-name{
-  color: #fff;
+
+.product-card-details{
+  background-color: #424436;
+  border: #8b8b8b solid 1px;
+  p{
+    color: #fff;
+  }
+  .original-price{
+    color: #8b8b8b;
+  }
 }
 
   }
