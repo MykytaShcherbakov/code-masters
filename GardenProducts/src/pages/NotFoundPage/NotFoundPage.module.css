@@ -1,0 +1,266 @@
+/* Глобальные переменные (должны быть определены в :root или index.css) */
+:root {
+  --black: #333;
+  --grey: #666;
+  --white: #fff;
+  --green: #92A134;
+  --txt-white: #fff;
+}
+
+/* Обертка страницы */
+.wrapper {
+  min-height: 100vh; /* Полная высота экрана */
+  background-color: #E8F0E6; /* Из index.css */
+  display: flex; /* Используем flex для горизонтального центрирования */
+  justify-content: center; /* Центрируем горизонтально */
+  width: 100%; /* Занимаем всю ширину */
+  margin: 0; /* Убираем внешние отступы */
+  padding: 0; /* Убираем внутренние отступы */
+}
+
+/* Контейнер */
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Центрируем внутри контейнера */
+}
+
+/* Блок контента */
+.contentBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Центрируем содержимое горизонтально */
+  justify-content: center; /* Центрируем содержимое вертикально внутри блока */
+  gap: 32px;
+  width: 760px;
+  height: 530px;
+  opacity: 1;
+  transform: rotate(0deg);
+  margin-top: 20px; /* Отступ 20px от верха */
+}
+
+/* Блок изображений */
+.imgBlock {
+  display: flex;
+  align-items: center; /* Выравниваем изображения по вертикали */
+  justify-content: center; /* Центрируем изображения горизонтально */
+  gap: 16px;
+}
+
+.image {
+  width: 80px;
+  height: 100px;
+}
+
+.imageCactus {
+  width: 131px;
+  height: 118px;
+}
+
+/* Блок заголовка и текста */
+.titleBlock {
+  text-align: center; /* Центрируем текст горизонтально */
+  width: 100%; /* Занимаем всю ширину блока */
+  display: flex; /* Используем flex для вертикального центрирования */
+  flex-direction: column;
+  align-items: center; /* Центрируем содержимое горизонтально */
+  justify-content: center; /* Центрируем содержимое вертикально */
+  flex: 1; /* Распределяем пространство внутри .contentBlock */
+}
+
+.title {
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  color: var(--black);
+  margin: 0;
+  line-height: 130%;
+}
+
+.text {
+  font-weight: 500;
+  font-size: 18px;
+  margin: 12px 0 24px;
+  color: var(--grey);
+  max-width: 400px;
+  text-align: center; /* Центрируем текст горизонтально */
+  line-height: 130%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Вертикальное центрирование текста */
+}
+
+.text span {
+  display: block; /* Разрываем строку для <span> */
+  margin-top: 8px; /* Добавляем небольшой отступ между строками, если нужно */
+}
+
+/* Кнопка */
+.button {
+  border-radius: 6px;
+  padding: 12px 52px;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--txt-white);
+  background: var(--green);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center; /* Вертикальное центрирование кнопки */
+  justify-content: center; /* Горизонтальное центрирование текста внутри кнопки */
+}
+
+.button:hover,
+.button:focus {
+  background-color: #7D8F2D; /* Темный зеленый при наведении */
+  color: var(--black);
+}
+
+/* Темная тема */
+.night_mode .title {
+  color: var(--white);
+}
+
+/* Медиа-запросы */
+
+/* 480px */
+@media screen and (min-width: 480px) {
+  .contentBlock {
+    width: 480px;
+    height: 391px;
+    gap: 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 20px; /* Сохраняем отступ 20px */
+  }
+  .image {
+    width: 109px;
+    height: 150px;
+  }
+  .imageCactus {
+    width: 181px;
+    height: 162px;
+  }
+  .title {
+    font-size: 48px;
+  }
+  .text span {
+    display: block;
+  }
+  .text {
+    margin-bottom: 24px;
+  }
+}
+
+/* 768px */
+@media screen and (min-width: 768px) {
+  .wrapper {
+    margin-top: 60px; /* Восстанавливаем, если это часть дизайна */
+  }
+  .contentBlock {
+    width: 768px;
+    height: 488px;
+    gap: 32px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 20px; /* Сохраняем отступ 20px */
+  }
+  .image {
+    width: 161px;
+    height: 220px;
+  }
+  .imageCactus {
+    width: 266px;
+    height: 240px;
+  }
+  .title {
+    font-size: 56px;
+  }
+  .text {
+    margin-bottom: 32px;
+    font-size: 20px;
+  }
+  .text span {
+    display: block;
+  }
+  .button {
+    padding: 16px 56px;
+    font-size: 20px;
+  }
+}
+
+/* 1000px */
+@media screen and (min-width: 1000px) {
+  .contentBlock {
+    width: 760px;
+    height: 530px;
+    margin-top: 20px; /* Сохраняем отступ 20px */
+  }
+  .image {
+    width: 180px;
+    height: 246px;
+  }
+  .imageCactus {
+    width: 300px;
+    height: 270px;
+  }
+  .title {
+    margin-top: 16px;
+    font-size: 64px;
+  }
+  .text span {
+    display: block;
+  }
+}
+
+/* 1440px */
+@media screen and (min-width: 1440px) {
+  .wrapper {
+    margin-top: 80px;
+  }
+  .contentBlock {
+    width: 760px;
+    height: 530px;
+    margin-top: 20px; /* Сохраняем отступ 20px */
+  }
+  .text span {
+    display: block;
+  }
+}
+
+/* 360px (минимальное разрешение) */
+@media screen and (max-width: 360px) {
+  .contentBlock {
+    width: 360px;
+    height: 381.81817626953125px;
+    gap: 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 20px; /* Сохраняем отступ 20px */
+  }
+  .title {
+    font-size: 24px;
+  }
+  .text {
+    font-size: 10px;
+  }
+  .text span {
+    display: block;
+  }
+  .button {
+    padding: 4px 16px;
+    font-size: 10px;
+  }
+  .image {
+    width: 80px;
+    height: 100px;
+  }
+  .imageCactus {
+    width: 131px;
+    height: 118px;
+  }
+}

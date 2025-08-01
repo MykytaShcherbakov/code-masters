@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import './AllProducts.scss';
-import { useLoaderData, Link } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import ProductCard from '../ProductCard/ProductCard';
+import './AllProducts.scss';
 
 export default function AllProducts() {
   const products = useLoaderData() || [];
+  const categories = useLoaderData() || []
 
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
@@ -14,18 +15,15 @@ export default function AllProducts() {
   const min = parseFloat(minPrice) || 0;
   const max = parseFloat(maxPrice) || Infinity;
 
-  // 1. Фильтрация по цене
   const priceFilteredProducts = products.filter((product) => {
     const realPrice = product.discont_price ?? product.price;
     return realPrice >= min && realPrice <= max;
   });
 
-  // 2. Фильтрация по скидке
   const discountedFilteredProducts = showDiscountedOnly
     ? priceFilteredProducts.filter((product) => product.discont_price !== null)
     : priceFilteredProducts;
 
-  // 3. Сортировка
   let sortedProducts = [...discountedFilteredProducts];
   if (sortOrder === 'price-asc') {
     sortedProducts.sort((a, b) => {
@@ -43,21 +41,7 @@ export default function AllProducts() {
 
   return (
     <div className="container">
-      <nav aria-label="Breadcrumb" className="breadcrumbs">
-        <ol className="breadcrumb-list">
-          <li className="breadcrumb-item">
-            <Link to="/" className="breadcrumb-text">
-              Main page
-            </Link>
-          </li>
-          <li className="breadcrumb-separator" aria-hidden="true">
-            <span className="breadcrumb-line" />
-          </li>
-          <li className="breadcrumb-item">
-            <span className="breadcrumb-text-2">All products</span>
-          </li>
-        </ol>
-      </nav>
+     
 
       <h1 className="page-title">All Products</h1>
 
@@ -117,7 +101,7 @@ export default function AllProducts() {
       <div className="product-grid">
         {sortedProducts.length > 0 ? (
           sortedProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} categories={categories} />
           ))
         ) : (
           <p className="no-products-on-sale">No products on sale</p>

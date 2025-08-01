@@ -1,0 +1,337 @@
+@use '../../assets/styles/variables' as nav;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: nav.$font-darkColor;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+body {
+  &.light-theme {
+    background-color: nav.$bg-color-lightTheme;
+  }
+
+  &.dark-theme {
+    background-color: nav.$bg-color-darkTheme;
+    background: nav.$bg-color-darkTheme;
+    color: nav.$font-lightColor;
+
+
+    p,
+    h1,
+    h2,
+    h3.section__title {
+      color: nav.$font-lightColor;
+    }
+
+    section {
+      background-color: nav.$bg-color-darkTheme;
+    }
+
+    .header .header-all-sales-button {
+      background-color: nav.$bg-color-darkTheme;
+    }
+
+    .breadcrumb-link.active {
+      color: nav.$font-lightColor;
+    }
+
+    .empty-cart {
+      background-color: nav.$bg-color-darkTheme;
+      color: nav.$font-lightColor;
+    }
+
+    .cart {
+      background-color: nav.$bg-color-darkTheme;
+
+      .cart-header {
+        h2 {
+          color: nav.$font-lightColor;
+        }
+      }
+
+      .cart-container {
+        .cart-items {
+          .cart-item {
+            background-color: nav.$bg-color-dark;
+            border-radius: 10px;
+
+            .cart-item__info {
+              color: nav.$font-lightColor;
+
+              span {
+                border: none;
+              }
+            }
+
+            .cart-item__title {
+              color: nav.$font-lightColor;
+            }
+
+            .cart-item__price {
+              color: nav.$font-lightColor;
+              border: none;
+            }
+
+            .cart-item__old-price {
+              color: #8b8b8b;
+              border: none;
+            }
+
+            .cart-item__remove {
+              color: nav.$font-lightColor;
+              border: none;
+
+            }
+
+
+            button {
+              background-color: nav.$bg-color-dark;
+              color: nav.$font-lightColor;
+              border: 1px solid #8b8b8b;
+            }
+
+            span {
+              background-color: nav.$bg-color-dark;
+              color: nav.$font-lightColor;
+              border: 1px solid #8b8b8b;
+            }
+          }
+        }
+
+        .order-details {
+          background-color: nav.$bg-color-dark;
+
+          h3 {
+            color: nav.$font-lightColor;
+          }
+
+          p {
+            color: nav.$bg-toggle-lightTheme;
+          }
+
+          .total-sum {
+
+            p,
+            span {
+              color: nav.$font-lightColor;
+            }
+          }
+        }
+      }
+    }
+
+    .sales-section h1 {
+      color: nav.$font-lightColor;
+    }
+
+    .sales-section span {
+      color: nav.$font-lightColor;
+    }
+
+    div .product-grid .product-card {
+      background-color: nav.$bg-color-darkTheme;
+      border: #8b8b8b solid 1px;
+
+      p,
+      div.prices span.current-price {
+        color: nav.$font-lightColor;
+      }
+    }
+
+    footer {
+      background-color: nav.$bg-color-darkTheme;
+      color: nav.$font-lightColor;
+
+      div.footer-box {
+        background-color: nav.$footer-items-bg-dark;
+
+        p {
+          color: nav.$font-lightColor;
+        }
+      }
+    }
+
+    header {
+      background-color: nav.$bg-color-darkTheme;
+
+      nav ul li {
+        color: nav.$font-lightColor;
+      }
+
+      .icon-heart,
+      .icon-bag,
+      .icon-burger {
+        fill: none;
+        stroke: nav.$font-lightColor;
+      }
+    }
+
+    .modal-nav-menu {
+      div {
+        background-color: nav.$bg-color-darkTheme;
+        color: nav.$font-lightColor;
+
+        a {
+          color: nav.$font-lightColor;
+        }
+
+        button {
+          color: #fff;
+        }
+
+        svg {
+          fill: nav.$font-lightColor;
+        }
+      }
+    }
+
+    .container {
+      background: nav.$bg-color-darkTheme;
+      color: nav.$font-lightColor;
+    }
+
+    // ProductDetails страница
+    .product-info-section {
+      background-color: nav.$bg-color-darkTheme;
+      color: nav.$font-lightColor;
+
+      // Базовые элементы
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      span,
+      div,
+      label {
+        color: nav.$font-lightColor;
+      }
+
+      // Цены - добавил более специфичные селекторы
+      .product-price,
+      .current-price,
+      .price,
+      span[class*="price"],
+      .product-prices .product-price,
+      .old-price-discount-wrap .product-price,
+      .product-main-block .product-purchase-block .product-prices .product-price,
+      .product-purchase-block .product-prices .product-price {
+        color: nav.$font-lightColor;
+      }
+
+      .product-old-price,
+      .old-price,
+      .old-price-discount-wrap .product-old-price {
+        color: #8b8b8b;
+      }
+
+      // Скидка
+      .product-discount,
+      .product-discount-inprice,
+      .old-price-discount-wrap .product-discount-inprice {
+        background-color: #f7941d;
+        color: white;
+      }
+
+
+      // Кнопки - убрал read-more-btn отсюда
+      button {
+        background-color: nav.$bg-color-darkTheme;
+        color: nav.$font-lightColor;
+        border: 1px solid #8b8b8b;
+
+        &:hover {
+          background-color: #4a4a4a;
+        }
+      }
+
+      // Кнопка "Read more" - отдельные селекторы
+      .read-more-btn,
+      button.read-more-btn,
+      .product-description .read-more-btn,
+      .product-description-block .read-more-btn,
+      .product-description-block .product-description .read-more-btn {
+        color: nav.$font-lightColor;
+        background: transparent;
+        border: none;
+      }
+
+      // Избранное
+      .favorite-btn,
+      .product-header .favorite-btn,
+      .before768 .favorite-btn {
+        background-color: transparent;
+        border: none;
+
+        .heart-icon,
+        svg {
+          color: nav.$bg-color-darkTheme;
+          stroke: nav.$font-lightColor;
+          fill: nav.$bg-color-darkTheme;
+          stroke-width: 40;
+
+          &.active,
+          &:hover {
+            color: nav.$green-color;
+            stroke: nav.$green-color;
+            fill: nav.$green-color;
+          }
+        }
+      }
+
+      // Заголовок товара
+      .product-title,
+      .product-header .product-title,
+      .before768 .product-title {
+        color: nav.$font-lightColor;
+      }
+
+      // Изображение товара
+      .product-img-block {
+        background-color: nav.$bg-color-darkTheme;
+
+        .product-image {
+          border: 1px solid #777;
+        }
+      }
+
+      // Описание
+      .product-description-block {
+        background-color: transparent;
+
+        .product-description-title {
+          color: nav.$font-lightColor;
+        }
+
+        .product-description {
+          color: nav.$font-lightColor;
+        }
+      }
+    }
+.product-card-details .product-name{
+  color: #fff;
+}
+
+  }
+}

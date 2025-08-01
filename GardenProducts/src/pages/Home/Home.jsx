@@ -1,15 +1,14 @@
-import React from 'react';
 import Sales from '../../components/Sales/Sales';
-import DiscountForm from '../../components/DiscountForm/DiscountForm';
-import Categories from '../../components/Categories/Categories';
+import SaleForm from '../../components/SaleForm/SaleForm';
 import Banner from '../../components/Banner/Banner';
+import CategoriesMainPage from '../../components/CategoriesMainPage/CategoriesMainPage';
 
 export default function Home() {
   return (
     <div>
       <Banner/>
-      <Categories />
-      <DiscountForm />
+      <CategoriesMainPage />
+      <SaleForm />
       <Sales />
     </div>
   );

@@ -6,7 +6,7 @@
 .container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 20px;
   box-sizing: border-box;
   background-color: #fffff1;
 }
@@ -17,7 +17,6 @@
   font-size: 16px;
   color: #666;
   margin-left: 16px;
-  /* padding-top: 40px; */
 
   .breadcrumb-list {
     display: flex;
@@ -28,8 +27,6 @@
     align-items: center;
   }
 }
-
-
 
 .breadcrumb-text {
   padding: 8px 16px;
@@ -66,6 +63,7 @@
   font-size: 64px;
   font-weight: 700;
   color: rgb(66, 68, 54);
+  padding: 20px 0;
 }
 
 .filters-panel {
@@ -152,7 +150,7 @@
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(316px, 1fr));
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
   gap: 32px;
   margin-bottom: 0px;
 
@@ -273,14 +271,14 @@
 
 @media (max-width: 1440px) {
   .product-grid {
-    grid-template-columns: repeat(4, minmax(225px, 1fr));
+    grid-template-columns: repeat(4, minmax(130px, 1fr));
     gap: 20px;
   }
 }
 
 @media (max-width: 1000px) {
   .product-grid {
-    grid-template-columns: repeat(4, minmax(225px, 1fr));
+    grid-template-columns: repeat(4, minmax(130px, 1fr));
     gap: 20px;
 
   }
@@ -288,7 +286,7 @@
 
 @media (max-width: 768px) {
   .product-grid {
-    grid-template-columns: repeat(2, minmax(354px, 1fr));
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
     gap: 20px;
   }
   .sales-section .container,
@@ -316,7 +314,7 @@
 
 @media (max-width: 480px) {
   .product-grid {
-    grid-template-columns: repeat(2, minmax(210px, 1fr));
+    grid-template-columns: repeat(2, minmax(130px, 1fr));
     gap: 16px;
   }
   .sales-section .container,

@@ -1,0 +1,227 @@
+.day__modal-background {
+  background-color: rgba(40, 40, 40, 0.4);
+  position: fixed;
+  overflow-y: auto;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  padding: 0 20px;
+
+  .day__modal-window {
+    background-color: #92a134;
+    border-radius: 12px;
+    position: relative;
+    top: 100px;
+    left: 50%;
+    transform: translate(-50%);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 548px;
+
+    .day__modal-header {
+      display: flex;
+      text-align: start;
+      justify-content: space-between;
+      gap: 16px;
+      color: #ffffff;
+
+      .modal__header-title {
+        font-size: 40px;
+        font-weight: 600;
+        max-width: 568px;
+        margin: 0;
+      }
+
+      .day__modal-close__icon {
+        display: flex;
+        font-size: 44px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+      }
+    }
+
+    .day__product-card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .product__image {
+      position: relative;
+      border-bottom: 1px solid #dddddd;
+
+      img {
+        width: 100%;
+        object-fit: cover;
+        display: block;
+        aspect-ratio: 4/3;
+      }
+
+      .discount__badge {
+        background-color: linear-gradient(
+          80.46deg,
+          #87933d -0.68%,
+          #55610b 66.66%
+        );
+        color: #ffffff;
+        background-color: #f26d22;
+        font-weight: 600;
+        font-size: 20px;
+        padding: 4px 8px;
+        border-radius: 6px;
+        position: absolute;
+        top: 16px;
+        left: 16px;
+      }
+
+      .icon {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        font-size: 48px;
+        color: #ffffff;
+        stroke: #424436;
+        stroke-width: 20px;
+        cursor: pointer;
+      }
+
+      .icon__favourite {
+        color: #92a134;
+        stroke: #424436;
+        stroke-width: 20px;
+      } 
+    }
+
+    .product__description {
+      padding: 20px 32px 32px;
+      display: flex;
+      flex-direction: column;
+      text-align: start;
+      gap: 16px;
+
+      &-name {
+        font-size: 20px;
+        font-weight: 500;
+        color: #424436;
+      }
+
+      .product__pricing {
+        display: flex;
+        gap: 16px;
+        align-items: baseline;
+
+        .product__price {
+          font-size: 40px;
+          font-weight: 600;
+          color: #424436;
+        }
+
+        .original__price {
+          font-size: 20px;
+          color: #8b8b8b;
+          font-weight: 500;
+          text-decoration: line-through;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .day__modal-background {
+    padding: 0 10px;
+
+    .day__modal-window {
+      top: 80px; // ниже, чтобы не выходило за пределы экрана
+      padding: 24px;
+
+      border-radius: 8px;
+      gap: 12px;
+
+      .day__modal-header {
+      .modal__header-title {
+        font-size: 44px;
+        max-width: 100%;
+      }
+    }
+      .product__description {
+        padding: 16px 24px 24px;
+
+        &-name {
+          font-size: 18px;
+        }
+
+        .product__pricing {
+          gap: 12px;
+
+          .product__price {
+            font-size: 32px;
+          }
+
+          .original__price {
+            font-size: 16px;
+          }
+        }
+      }
+
+      .product__image {
+        .icon {
+          display: none; // опционально скрыть избранное
+        }
+
+        .discount__badge {
+          font-size: 16px;
+          padding: 3px 6px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .day__modal-background {   
+    .day__modal-window {
+      position: relative;
+      top: 180px;
+      left: 46%;
+      transform: translate(-50%);
+      margin: 0 10px;
+
+      
+      .day__modal-header {
+      .modal__header-title {
+        font-size: 46px;
+        max-width: 100%;
+      }
+     }   
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .day__modal-background {   
+    .day__modal-window {
+      position: relative;
+      top: 180px;
+      left: 44%;
+      transform: translate(-50%);
+      margin: 0 10px;
+
+      .day__modal-header {
+      .modal__header-title {
+        font-size: 32px;
+        max-width: 100%;
+      }
+       .day__modal-close__icon {
+        font-size: 34px;    
+      }
+     }   
+    }     
+  }
+}

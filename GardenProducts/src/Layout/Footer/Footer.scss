@@ -1,0 +1,132 @@
+footer {
+  background-color: #fffff1;
+  font-family: 'Montserrat', Arial, sans-serif;
+  margin: 60px 20px;
+
+  .footer-content {
+    max-width: 1440px;    
+  }
+
+  h2 {
+    font-size: 64px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    color: #424436;
+    text-align: left;
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 100%;
+    margin: 0 0 30px 0;
+  }
+
+  .footer-box {
+    background-color: #eff1cc;
+    padding: 24px 24px 18px 24px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    p:first-child {
+      font-size: 15px;
+      color: #888;
+      margin-bottom: 8px;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+
+    p:last-child {
+      font-size: 2rem;
+      font-weight: 600;
+      margin: 0;
+      color: #424436;
+      word-break: break-word;
+    }
+  }
+
+  .footer-socials {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-right: 0;
+      color: #424436;
+      background: none;
+      border: none;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #6c7a00;
+      }
+    }
+  }
+
+  .footer-map {
+    margin-top: 24px;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      border-radius: 12px;
+      display: block;
+    }
+  }
+
+  // Media Queries
+  @media (max-width: 1440px) {
+    .footer-grid {
+      gap: 18px;
+    }
+    .footer-map iframe {
+      height: 220px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .footer-content,
+    .footer-grid,
+    .footer-map {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .footer-content {
+      padding: 0 8px;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .footer-map {
+      margin-top: 18px;
+    }
+
+    h2 {
+      font-size: 46px;
+      padding-left: 0;
+      margin-left: 0;
+    }
+
+    .footer-box p:last-child {
+      font-size: 1.3rem;
+    }
+  }
+}

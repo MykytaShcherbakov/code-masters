@@ -1,6 +1,9 @@
+import { backendUrl } from "../apiConfig";
+
+
 export async function fetchProducts() {
   try {
-    const response = await fetch('http://localhost:3333/products/all');
+    const response = await fetch(`${backendUrl}/products/all`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

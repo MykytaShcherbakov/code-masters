@@ -1,10 +1,16 @@
-import React from 'react'
-import "./Footer.css"
-import instagramIcon from './ic-instagram.png'
-import whatsappIcon from './ic-whatsapp.png'
-
+import  {React, useContext } from 'react';
+import instagramIconWhite  from '../../media/ic-instagram-white.png';
+import whatsappIconWhite from '../../media/ic-whatsapp-white.png';
+import instagramIcon from '../../media/ic-instagram.png';
+import whatsappIcon from '../../media/ic-whatsapp.png';
+import { ThemeContext } from '../../context/theme/ThemeContext.js';
+import './Footer.scss';
 
 function Footer() {
+  const { theme } = useContext(ThemeContext);
+
+  const isDark = theme === 'dark';
+
   return (
     <footer>
       <div className="footer-content">
@@ -17,11 +23,31 @@ function Footer() {
           <div className="footer-box">
             <p>Socials</p>
             <div className="footer-socials">
-              <a href="#" aria-label="Instagram">
-                <img src={instagramIcon} alt="Instagram" width={28} height={28} />
+              <a
+                href="https://www.instagram.com/startainstitute/"
+                aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={isDark ? instagramIconWhite : instagramIcon}
+                  alt="Instagram"
+                  width={28}
+                  height={28}
+                />
               </a>
-              <a href="#" aria-label="WhatsApp">
-                <img src={whatsappIcon} alt="WhatsApp" width={28} height={28} />
+              <a
+                href="tel:+491717788664"
+                aria-label="WhatsApp"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={isDark ? whatsappIconWhite : whatsappIcon}
+                  alt="WhatsApp"
+                  width={28}
+                  height={28}
+                />
               </a>
             </div>
           </div>
@@ -44,7 +70,7 @@ function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
 
-export default Footer
+export default Footer;
