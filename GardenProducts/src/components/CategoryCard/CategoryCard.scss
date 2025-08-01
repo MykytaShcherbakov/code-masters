@@ -1,0 +1,30 @@
+@import "../../assets/styles/variables.scss";
+
+.categories {
+  &__item {
+    &-link {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: $font-darkColor;
+
+      img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: $radius-big;
+      }
+
+      &-title {
+        font-size: $common-text;
+        font-weight: $font-weight-medium;
+        margin-top: 16px;
+        text-align: center;
+
+        &__dark {
+          color: $font-lightColor;
+        }
+      }
+    }
+  }
+}

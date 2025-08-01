@@ -1,65 +1,53 @@
-// Импортируем React для создания компонента
 import React from "react";
+import { Link } from "react-router-dom";
+import { IoClose } from "react-icons/io5";
 import styles from "./ModalNavMenu.module.css";
-import LogoIcon from "../Images/Icons/logo.png";
-import CloseDayIcon from "../Images/Icons/closeDay.svg"; // для дневного режима как изображения
-import CloseNightIcon from "../Images/Icons/close.svg"; //иконки закрытия для ночного режима 
 
-const ModalNavMenu = ({ navMenuActive, setNavMenuActive, nightMode }) => {
-  // Обработчик закрытия модального окна
+const ModalNavMenu = ({ navMenuActive, setNavMenuActive }) => {
   const closeMenu = () => {
-    setNavMenuActive(false); // Скрываем модальное окно
+    setNavMenuActive(false);
   };
 
-  // Рендеринг компонента только если меню активно
-  return navMenuActive ? (
-    <div className={`${styles.modal} ${navMenuActive ? styles.active : ""}`}>
+  if (!navMenuActive) return null;
+
+  return (
+    <div className={`${styles.modal} ${styles.active} modal-nav-menu`}>
       <div className={styles.modalContent}>
-        {/* Кнопка закрытия в правом верхнем углу с использованием изображения в зависимости от nightMode */}
         <button className={styles.closeButton} onClick={closeMenu}>
-          <img
-            src={nightMode ? CloseNightIcon : CloseDayIcon}
-            alt={nightMode ? "Закрыть меню (ночной режим)" : "Закрыть меню (дневной режим)"}
-            className={styles.closeImage}
-          />
+          <IoClose className={styles.closeIcon} />
         </button>
-
-        {/* Логотип в верхнем левом углу */}
-        <div className={styles.logoBlock}>
-          <img src={LogoIcon} alt="Логотип сайта" className={styles.logo} />
+        <div className={styles.textDiscountContainer}>
+          <nav className={styles.navMenu}>
+            <ul className={styles.navList}>
+              <li className={styles.navItem}>
+                <Link to="/" className={styles.navLink} onClick={closeMenu}>
+                  Main Page
+                </Link>
+              </li>
+              <li className={styles.navItem}>
+                <Link to="/categories" className={styles.navLink} onClick={closeMenu}>
+                  Categories
+                </Link>
+              </li>
+              <li className={styles.navItem}>
+                <Link to="/products" className={styles.navLink} onClick={closeMenu}>
+                  All products
+                </Link>
+              </li>
+              <li className={styles.navItem}>
+                <Link to="/sales" className={styles.navLink} onClick={closeMenu}>
+                  All sales
+                </Link>
+              </li>
+            </ul>
+          </nav>
+          <button className={styles.discountButton} onClick={closeMenu}>
+            1 day discount!
+          </button>
         </div>
-
-        {/* Навигационное меню */}
-        <nav className={styles.navMenu}>
-          <ul className={styles.navList}>
-            <li className={styles.navItem}><a href="/" className={styles.navLink}>Main Page</a></li>
-            <li className={styles.navItem}><a href="/categories" className={styles.navLink}>Categories</a></li>
-            <li className={styles.navItem}><a href="/products" className={styles.navLink}>All products</a></li>
-            <li className={styles.navItem}><a href="/sales" className={styles.navLink}></a>All sales</li>
-          </ul>
-        </nav>
-
-        {/* Кнопка скидки внизу */}
-        <button className={styles.discountButton}>1 day discount!</button>
       </div>
     </div>
-  ) : null; // Если меню не активно, ничего не рендерим
+  );
 };
 
 export default ModalNavMenu;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

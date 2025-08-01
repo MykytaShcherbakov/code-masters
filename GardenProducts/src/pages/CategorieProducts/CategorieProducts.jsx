@@ -1,0 +1,138 @@
+import ProductSkeleton from "../../components/ProductSkeleton/ProductSkeleton";
+import useSkeletonLoader from "../../components/ProductSkeleton/useSkeletonLoader";
+import React, { useState } from 'react';
+import {
+  useLoaderData,
+  useParams,
+  Link,
+  Outlet,
+  useLocation,
+} from 'react-router-dom';
+import ProductCard from '../../components/ProductCard/ProductCard';
+import './CategorieProducts.scss';
+
+export default function CategorieProducts() {
+  const { categoryId } = useParams();
+  const { products, category } = useLoaderData();
+
+  const localLoading = useSkeletonLoader(100);
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [sortOrder, setSortOrder] = useState("default");
+  const [showDiscountedOnly, setShowDiscountedOnly] = useState(false);
+  const location = useLocation();
+  console.log(location);
+  
+
+  // Проверяем, находимся ли мы на странице товара
+  const isProductPage = location.pathname.includes('/product/');
+
+  // Если мы на странице товара, показываем только Outlet
+  if (isProductPage) {
+    return <Outlet />;
+  }
+
+  const min = parseFloat(minPrice) || 0;
+  const max = parseFloat(maxPrice) || Infinity;
+
+  const categoryFilteredProducts = products.filter(
+    (product) => product.categoryId === +categoryId
+  );
+
+  const priceFilteredProducts = categoryFilteredProducts.filter((product) => {
+    const realPrice = product.discont_price ?? product.price;
+    return realPrice >= min && realPrice <= max;
+  });
+
+  const discountedFilteredProducts = showDiscountedOnly
+    ? priceFilteredProducts.filter((product) => product.discont_price !== null)
+    : priceFilteredProducts;
+
+  let sortedProducts = [...discountedFilteredProducts];
+
+  if (sortOrder === 'price-asc') {
+    sortedProducts.sort((a, b) => {
+      const priceA = a.discont_price ?? a.price;
+      const priceB = b.discont_price ?? b.price;
+      return priceA - priceB;
+    });
+  } else if (sortOrder === 'price-desc') {
+    sortedProducts.sort((a, b) => {
+      const priceA = a.discont_price ?? a.price;
+      const priceB = b.discont_price ?? b.price;
+      return priceB - priceA;
+    });
+  }
+
+  return (
+    <div className="container">
+      <h1 className="page-title">
+        {category ? category.title : 'Category Products'}
+      </h1>
+      <div className="filters-panel">
+        <div className="filter-group">
+          <label htmlFor="price-from" className="filter-label">
+            Price
+          </label>
+          <input
+            type="number"
+            id="price-from"
+            placeholder="from"
+            className="filter-input"
+            value={minPrice}
+            onChange={(e) => setMinPrice(e.target.value)}
+          />
+          <input
+            type="number"
+            id="price-to"
+            placeholder="to"
+            className="filter-input"
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(e.target.value)}
+          />
+        </div>
+
+        <div className="checkbox-container">
+          <label className="checkbox-label" htmlFor="discounted-items">
+            Discounted items
+          </label>
+          <input
+            className="checkbox-input"
+            type="checkbox"
+            id="discounted-items"
+            checked={showDiscountedOnly}
+            onChange={(e) => setShowDiscountedOnly(e.target.checked)}
+          />
+        </div>
+
+        <div className="filter-group-sorted">
+          <label htmlFor="sort-by" className="filter-label">
+            Sorted
+          </label>
+          <select
+            id="sort-by"
+            className="filter-select"
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+          >
+            <option value="default">by default</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="product-grid">
+        {localLoading ? (
+          <ProductSkeleton />
+        ) : sortedProducts.length > 0 ? (
+          sortedProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))
+        ) : (
+          <p className="no-products-on-sale">No products found</p>
+        )}
+      </div>
+    </div>
+  );
+}

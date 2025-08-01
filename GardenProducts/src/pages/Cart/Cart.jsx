@@ -1,68 +1,135 @@
-import React, { useEffect, useState } from 'react';
-import './Cart.scss';
-import { useLoaderData } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement, removeFromCart, setCart, clearCart } from '../../store/cartSlice';
+import { increment, decrement, removeFromCart, clearCart } from '../../store/cartSlice';
+import { setFirstOrderCompleted } from '../../store/saleFormSlice';
+import { fetchProducts } from '../../Loader/fetchProducts';
+import './Cart.scss';
+import { backendUrl } from '../../apiConfig';
 
 function Cart() {
-  const products = useLoaderData();
-  const dispatch = useDispatch();
-  const cartItems = useSelector(state => state.cart.items);
+  const [products, setProducts] = useState([]);
+  const [form, setForm] = useState({
+    name: '',
+    phone: '',
+    email: ''
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const dispatch = useDispatch();
+  console.log(dispatch);
+  
+  const cartItems = useSelector(state => state.cart.items);
+  console.log(cartItems);
+  
+  const isSaleFormActive = useSelector(state => state.saleForm?.isSaleFormActive);
+  const hasFirstOrderCompleted = localStorage.getItem("hasFirstOrderCompleted") === "true";
+
   useEffect(() => {
-    try {
-      const local = localStorage.getItem('cart');
-      if (local) {
-        const parsedCart = JSON.parse(local);
-        if (parsedCart && parsedCart.length > 0 && cartItems.length === 0) {
-          dispatch(setCart(parsedCart));
-        }
+    const loadProducts = async () => {
+      try {
+        const data = await fetchProducts();
+        setProducts(data);
+      } catch (error) {
+        console.error('Ошибка при загрузке продуктов:', error);
       }
-    } catch (error) {
-      console.error('Error parsing cart from localStorage:', error);
-      localStorage.removeItem('cart');
-    }
+    };
+
+    loadProducts();
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cartItems));
-  }, [cartItems]);
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  };
 
-  const mergedItems = cartItems
-    .map(item => {
-      const product = products.find(p => p.id === item.id);
-      return product ? { ...product, count: item.count } : null;
-    })
-    .filter(Boolean);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Order submitted:', { form, cartItems });
+
+    dispatch(clearCart());
+    dispatch(setFirstOrderCompleted());
+    setForm({ name: '', phone: '', email: '' });
+
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const renderCartItem = (item) => {
-    const imageUrl = item.image?.startsWith('/')
-      ? `http://localhost:3333${item.image}`
-      : item.image;
+    const productId = item.isDiscountItem ? item.originalId : item.id;
+    const product = products.find(p => p.id === productId);
+
+    if (!product) return null;
+
+    const imageUrl = product.image?.startsWith('/')
+      ? `${backendUrl}${product.image}`
+      : product.image;
 
     return (
       <div className="cart-item" key={item.id}>
-        <img src={imageUrl} alt={item.title} className="cart-item__img" />
+        <img src={imageUrl} alt={product.title} className="cart-item__img" />
+
+        {/* Бейдж скидки */}
+        {item.isDiscountItem && (
+          <div className="discount-badge">Daily Deal -50%</div>
+        )}
+
         <div className="cart-item__info">
-          <Link to={`/product/${item.id}`} className="cart-item__title-link">
-            <div className="cart-item__title">{item.title}</div>
+          <Link to={`/categories/${product.categoryId}/product/${product.id}`} className="cart-item__title-link">
+            <div className="cart-item__title">{product.title}</div>
           </Link>
+
           <div className="cart-item__row">
-            <div className="cart-item__controls">
-              <button onClick={() => dispatch(decrement(item.id))}>-</button>
-              <span>{item.count}</span>
-              <button onClick={() => dispatch(increment(item.id))}>+</button>
-            </div>
+            {/* Блокируем счетчик для скидочных товаров */}
+            {item.isDiscountItem ? (
+              <div className="cart-item__fixed-quantity">
+                <span className="fixed-qty-label">1 (Daily Deal Offer)</span>
+              </div>
+            ) : (
+              <div className="cart-item__controls">
+                <button
+                  className="cart-item__btn"
+                  onClick={() => dispatch(decrement(item.id))}
+                >
+                  -
+                </button>
+                <span className="cart-item__quantity">{item.count}</span>
+                <button
+                  className="cart-item__btn"
+                  onClick={() => dispatch(increment(item.id))}
+                >
+                  +
+                </button>
+              </div>
+            )}
+
             <div className="cart-item__prices">
-              <span className="cart-item__price">${(item.discont_price || item.price).toFixed(2)}</span>
-              {item.discont_price && (
-                <span className="cart-item__old-price">${item.price.toFixed(2)}</span>
+              {item.isDiscountItem ? (
+                <>
+                  <span className="cart-item__price">${item.discountPrice.toFixed(2)}</span>
+                  <span className="cart-item__old-price">${item.originalPrice.toFixed(2)}</span>
+                </>
+              ) : (
+                <>
+                  <span className="cart-item__price">
+                    ${((product.discont_price || product.price) * item.count).toFixed(2)}
+                  </span>
+                  {product.discont_price && (
+                    <span className="cart-item__old-price">
+                      ${(product.price * item.count).toFixed(2)}
+                    </span>
+                  )}
+                </>
               )}
             </div>
           </div>
         </div>
+
         <button
           className="cart-item__remove"
           onClick={() => dispatch(removeFromCart(item.id))}
@@ -73,38 +140,26 @@ function Cart() {
     );
   };
 
-  const [form, setForm] = useState({
-    name: '',
-    phone: '',
-    email: '',
-  });
+  const subtotal = cartItems.reduce((sum, item) => {
+    if (item.isDiscountItem) {
+      return sum + item.discountPrice;
+    }
 
-  const handleChange = e => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
+    const product = products.find(p => p.id === item.id);
+    if (!product) return sum;
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    setIsModalOpen(true);
-    dispatch(clearCart());
-    setForm({
-      name: '',
-      phone: '',
-      email: '',
-    });
-  };
+    const price = product.discont_price || product.price;
+    return sum + (price * item.count);
+  }, 0);
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  // Скидка только если форма активна и первый заказ не завершён
+  const discount = (isSaleFormActive && !hasFirstOrderCompleted) ? subtotal * 0.05 : 0;
+  const totalSum = subtotal - discount;
 
-  if (mergedItems.length === 0 && !isModalOpen) {
+  if (cartItems.length === 0) {
     return (
-      <div className="empty-cart">
-        <div className="empty-cart__header">
+      <div className="cart">
+        <div className="cart__header">
           <h2>Shopping cart</h2>
           <span className="header-divider"></span>
           <Link to={'/'}>
@@ -113,18 +168,14 @@ function Cart() {
             </button>
           </Link>
         </div>
-        <p>
-          Looks like you have no items in your basket currently.
-        </p>
-        <Link to={'/'}>
+        <div className="empty-cart">
+          <p>Looks like you have no items in your basket currently.</p>
+          <Link to="/">
             <button className="continue-btn">
-          Continue Shopping
-        </button>
+              Continue Shopping
+            </button>
           </Link>
-        <Link to={'/'}><button className="breadcrumb-btn-bottom">
-          Back to the store
-        </button>
-        </Link>
+        </div>
       </div>
     );
   }
@@ -143,20 +194,34 @@ function Cart() {
 
       <div className="cart-container">
         <div className="cart-items">
-          {mergedItems.map(renderCartItem)}
+          {cartItems.map(renderCartItem)}
         </div>
         <div className="order-details">
           <h3>Order details</h3>
-          <p>{mergedItems.length} items</p>
+          <p>{cartItems.length} items</p>
+
+          {/* Показываем детали расчета */}
+          {(isSaleFormActive && !hasFirstOrderCompleted) && (
+            <div className="price-breakdown">
+              <div className="subtotal-line">
+                <span>Subtotal</span>
+                <span>${subtotal.toFixed(2)}</span>
+              </div>
+              <div className="discount-line">
+                <span>🎉 First order discount (5%)</span>
+                <span>-${discount.toFixed(2)}</span>
+              </div>
+            </div>
+          )}
+
+          {/* Итоговая сумма всегда одна */}
           <div className="total-sum">
             <p>Total</p>
             <span className="sum">
-              ${mergedItems.reduce(
-                (sum, item) => sum + (item.discont_price || item.price) * item.count,
-                0
-              ).toFixed(2)}
+              ${totalSum.toFixed(2)}
             </span>
           </div>
+
           <form className="order-form" onSubmit={handleSubmit}>
             <input
               type="text"
@@ -191,9 +256,9 @@ function Cart() {
 
       {/* Модальное окно */}
       {isModalOpen && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={closeModal}>×</button>
+        <div className="cart-modal-overlay" onClick={closeModal}>
+          <div className="cart-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="cart-modal-close" onClick={closeModal}>×</button>
             <h2>Congratulations!</h2>
             <p>Your order has been successfully placed on the website.</p>
             <p>A manager will contact you shortly to confirm your order.</p>
