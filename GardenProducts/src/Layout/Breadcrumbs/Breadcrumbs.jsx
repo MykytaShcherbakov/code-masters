@@ -4,12 +4,7 @@ import './Breadcrumbs.scss';
 const Breadcrumbs = () => {
   const matches = useMatches();
   const location = useLocation();
-
-  console.log(matches);
-  console.log(location);
   
-  
-
   // Прячем крошки на главной и в корзине
   if (
     location.pathname === '/' ||

@@ -24,6 +24,8 @@ function Cart() {
   console.log(dispatch);
 
   const cartItems = useSelector(state => state.cart.items);
+  console.log(cartItems);
+  
   const isSaleFormActive = useSelector(state => state.saleForm?.isSaleFormActive);
   const hasFirstOrderCompleted = localStorage.getItem("hasFirstOrderCompleted") === "true";
 
