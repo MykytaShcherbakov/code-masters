@@ -8,3 +8,4 @@ export const store = configureStore({
     saleForm: saleFormReducer, // Добавить этот reducer
   }
 });
+console.log(store);
