@@ -1,0 +1,129 @@
+.product-prices {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin-bottom: 10px;
+  position: relative;
+
+  .product-price {
+    font-size: 48px;
+    font-weight: 700;
+    color: #424436;
+  }
+
+  .old-price-discount-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 8px;
+
+    .product-old-price {
+      font-size: 28px;
+      color: #bdbdbd;
+      text-decoration: line-through;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .product-discount-inprice {
+      display: none;
+      background: #f77c2c;
+      color: #fff;
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 0.76rem;
+      font-weight: 500;
+      position: absolute;
+      top: 0;
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .product-prices {
+    justify-content: center;
+  }
+}
+
+@media (min-width: 361px) and (max-width: 480px) {
+  .product-prices {
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-bottom: 12px;
+  }
+
+  .product-price {
+    font-size: 48px;
+  }
+
+  .old-price-discount-wrap .product-old-price {
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .product-prices {
+    justify-content: flex-start;
+    align-items: flex-end;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .product-price {
+    font-size: 56px;
+  }
+
+  .old-price-discount-wrap .product-old-price {
+    font-size: 32px;
+  }
+
+  .product-prices .old-price-discount-wrap .product-discount-inprice,
+  .product-discount-inprice {
+    display: inline-block;
+    font-size: 14px;
+    position: absolute;
+    top: 0;
+    right: -38px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1000px) {
+  .product-price {
+    font-size: 64px;
+  }
+
+  .old-price-discount-wrap .product-old-price {
+    font-size: 40px;
+  }
+
+  .product-prices .old-price-discount-wrap .product-discount-inprice,
+  .product-discount-inprice {
+    display: inline-block;
+    font-size: 14px;
+    position: absolute;
+    top: 0;
+    right: -38px;
+  }
+}
+
+@media (min-width: 1001px) {
+  .product-prices {
+    // если нужны специфичные стили для .product-prices
+  }
+  .product-price {
+    font-size: 64px;
+  }
+  .old-price-discount-wrap .product-old-price {
+    font-size: 40px;
+  }
+  .product-prices .old-price-discount-wrap .product-discount-inprice,
+  .product-discount-inprice {
+    display: inline-block;
+    font-size: 14px;
+    position: absolute;
+    top: 0;
+    right: -38px;
+  }
+}

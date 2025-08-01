@@ -80,7 +80,7 @@ const DailyProductModal = ({ onClose, onDiscountUsed }) => {
       hasDiscount: true,
       discountPrice: productOfTheDay.discont_price,
       originalPrice: productOfTheDay.price,
-      isDailyDeal: true  // ✅ ДОБАВЛЕНО: флаг товара дня
+      isDailyDeal: true
     };
 
     dispatch(addToCart(cartItem));

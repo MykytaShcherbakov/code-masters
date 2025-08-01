@@ -1,0 +1,57 @@
+
+
+.cart-modal-overlay {
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .cart-modal-content {
+    background: #92A134;
+    border-radius: 12px;
+    padding: 20px 24px;
+    width: 75vw;
+    max-width: 320px;
+    position: relative;
+    text-align: left;
+    color: rgb(255, 255, 255);
+
+    h2 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      margin-top: 20px; // уменьшить отступ сверху
+      color: white;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.4;
+      font-weight: 600;
+      color: white;
+    }
+
+    .cart-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}

@@ -6,6 +6,13 @@ import './ProductDetails.scss';
 import productImg from '../../media/5422e5af264f78b8a10da5d1979747d487daef24.png';
 import { IoMdHeart } from 'react-icons/io';
 import { backendUrl } from '../../apiConfig';
+import QuantityControls from './parts/QuantityControls';
+import AddToCartBtn from './parts/AddToCartBtn';
+import PriceBlock from './parts/PriceBlock';
+import DescriptionBlock from './parts/DescriptionBlock';
+import FavoriteButton from './parts/FavoriteButton';
+import ProductImage from './parts/ProductImage';
+import ProductModal from './parts/ProductModal';
 
 function ProductDetails() {
   const dispatch = useDispatch();
@@ -16,10 +23,6 @@ function ProductDetails() {
   const [showFullDesc, setShowFullDesc] = useState(false);
   const [cartState, setCartState] = useState('default');
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-
-
-
   const { id } = useParams();
   const product = useLoaderData();
 
@@ -64,14 +67,11 @@ function ProductDetails() {
       hasDiscount: false,
       discountPrice: null,
       originalPrice: null,
-      isDailyDeal: false 
+      isDailyDeal: false
     };
 
     dispatch(addToCart(cartItem));
     setCartState('added');
-
-    // Optional reset after few seconds
-    // setTimeout(() => setCartState('default'), 3000);
   };
 
   const hasDiscount = product.discont_price && product.discont_price < product.price;
@@ -97,120 +97,80 @@ function ProductDetails() {
     <span className="product-discount-inprice">{`-${discount}%`}</span>
   );
 
-  const FavoriteButton = (
-    <button
-      className={`favorite-btn${isFavorite ? ' active' : ''}`}
-      onClick={handleFavorite}
-      aria-label="Add to favorites"
-    >
-      <IoMdHeart className={`heart-icon ${isFavorite ? 'active' : ''}`} />
-    </button>
-  );
-
   const handleImageClick = () => setIsModalOpen(true);
   const handleModalClose = () => setIsModalOpen(false);
-
-  const ProductImage = (
-    <img
-      src={imageUrl}
-      alt={product.title}
-      className="product-image"
-      onClick={handleImageClick}
-      style={{ cursor: 'pointer' }}
-    />
-  );
-
-  const PriceBlock = (
-    <div className="product-prices">
-      <span className="product-price">
-        ${hasDiscount ? product.discont_price : product.price}
-      </span>
-      {hasDiscount && (
-        <span className="old-price-discount-wrap">
-          <span className="product-old-price">${product.price}</span>
-          {DiscountBadgeInPrice}
-        </span>
-      )}
-    </div>
-  );
-
-  const QuantityControls = (
-    <div className="quantity-controls">
-      <button className="quantity-btn quantity-btn-minus" onClick={handleDecrement}>-</button>
-      <span className="quantity-value">{count}</span>
-      <button className="quantity-btn quantity-btn-plus" onClick={handleIncrement}>+</button>
-    </div>
-  );
-
-  const AddToCartBtn = (
-    <button
-      className={`add-to-cart-btn ${cartState}`}
-      onClick={handleAddToCart}
-      disabled={cartState === 'added'}
-    >
-      {cartState === 'added' ? 'Added' : 'Add to cart'}
-    </button>
-  );
-
-  const DescriptionBlock = (blockClass) => (
-    <div className={`product-description-block ${blockClass}`}>
-      <h4 className="product-description-title">Description</h4>
-      <p className="product-description">
-        {descToShow}
-        {isLongDesc && !showFullDesc && (
-          <button className="read-more-btn" onClick={() => setShowFullDesc(true)}>
-            Read more
-          </button>
-        )}
-      </p>
-    </div>
-  );
 
   return (
     <>
       {isModalOpen && (
-        <div className="product-modal-overlay" onClick={handleModalClose}>
-          <div className="product-modal-content" onClick={(e) => e.stopPropagation()}>
-            <img src={imageUrl} alt={product.title} className="product-modal-img" />
-            <button className="product-modal-close-btn" onClick={handleModalClose}>
-              &times;
-            </button>
-          </div>
-        </div>
-      )}
+  <ProductModal
+    imageUrl={imageUrl}
+    title={product.title}
+    onClose={handleModalClose}
+  />
+)}
 
       <section className="product-info-section mobile-only">
         <div className="product-info">
           <div className="product-header before768">
             <h3 className="product-title">{product.title}</h3>
-            {FavoriteButton}
+            <FavoriteButton isFavorite={isFavorite} onClick={handleFavorite} />
           </div>
 
           <div className="product-main-block">
             <div className="product-img-block">
-              {ProductImage}
+              <ProductImage
+                src={imageUrl}
+                alt={product.title}
+                onClick={handleImageClick}
+              />
               {DiscountBadgeInImage}
             </div>
 
             <div className="product-purchase-block">
               <div className="product-header after480">
                 <h3 className="product-title">{product.title}</h3>
-                {FavoriteButton}
+                <FavoriteButton isFavorite={isFavorite} onClick={handleFavorite} />
               </div>
 
-              {PriceBlock}
+              <PriceBlock
+                price={product.price}
+                discountPrice={product.discont_price}
+                discountPercent={discount}
+                hasDiscount={hasDiscount}
+              />
 
               <div className="product-quantity-cart">
-                {QuantityControls}
-                <div className="after768">{AddToCartBtn}</div>
+                <QuantityControls
+                  count={count}
+                  onDecrement={handleDecrement}
+                  onIncrement={handleIncrement}
+                />
+                <div className="after768">
+                  <AddToCartBtn state={cartState} onClick={handleAddToCart} />
+                </div>
               </div>
 
-              <div className="before768">{AddToCartBtn}</div>
-              {DescriptionBlock('desc-tablet')}
+              <div className="before768">
+                <AddToCartBtn state={cartState} onClick={handleAddToCart} />
+              </div>
+              <DescriptionBlock
+                descToShow={descToShow}
+                isLongDesc={isLongDesc}
+                showFullDesc={showFullDesc}
+                setShowFullDesc={setShowFullDesc}
+                blockClass="desc-tablet"
+              />
             </div>
           </div>
 
-          {DescriptionBlock('desc-mobile')}
+          <DescriptionBlock
+            descToShow={descToShow}
+            isLongDesc={isLongDesc}
+            showFullDesc={showFullDesc}
+            setShowFullDesc={setShowFullDesc}
+            blockClass="desc-mobile"
+          />
         </div>
       </section>
     </>

@@ -17,8 +17,6 @@
   cursor: pointer;
   transition: border-color 0.2s ease-in-out;
   min-width: 0;
- 
-
   &:hover {
     border-color: #656262;
   }
@@ -72,6 +70,7 @@
 }
 
 .product-card-details{
+background-color: #ffffff;
 .product-name {
   font-size: 20px;
   font-weight: 500;
