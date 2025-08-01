@@ -1,0 +1,47 @@
+.product-modal-overlay {
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-modal-content {
+  position: relative;
+}
+
+.product-modal-img {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 32px 0 rgba(0, 0, 0, 0.14);
+}
+
+.product-modal-close-btn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #fdacacc2;
+  border: none;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 1rem;
+  color: #10110b;
+  cursor: pointer;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+
+  &:hover {
+    background: #f7f7e9;
+  }
+}

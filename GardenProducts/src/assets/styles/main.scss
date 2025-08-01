@@ -208,13 +208,9 @@ body {
       background: nav.$bg-color-darkTheme;
       color: nav.$font-lightColor;
     }
-
-    // ProductDetails страница
     .product-info-section {
       background-color: nav.$bg-color-darkTheme;
       color: nav.$font-lightColor;
-
-      // Базовые элементы
       h1,
       h2,
       h3,
@@ -228,7 +224,6 @@ body {
         color: nav.$font-lightColor;
       }
 
-      // Цены - добавил более специфичные селекторы
       .product-price,
       .current-price,
       .price,
@@ -245,18 +240,18 @@ body {
       .old-price-discount-wrap .product-old-price {
         color: #8b8b8b;
       }
-
-      // Скидка
       .product-discount,
       .product-discount-inprice,
       .old-price-discount-wrap .product-discount-inprice {
         background-color: #f7941d;
         color: white;
       }
-
-
-      // Кнопки - убрал read-more-btn отсюда
-      button {
+      .quantity-controls{
+        background-color: nav.$bg-color-darkTheme;
+        color: nav.$font-lightColor;
+        border: 1px solid #8b8b8b;
+      }
+      .quantity-btn {
         background-color: nav.$bg-color-darkTheme;
         color: nav.$font-lightColor;
         border: 1px solid #8b8b8b;
@@ -265,8 +260,10 @@ body {
           background-color: #4a4a4a;
         }
       }
-
-      // Кнопка "Read more" - отдельные селекторы
+      .quantity-value { 
+        background-color: nav.$bg-color-darkTheme;
+        color: nav.$font-lightColor;
+      }
       .read-more-btn,
       button.read-more-btn,
       .product-description .read-more-btn,
@@ -277,7 +274,6 @@ body {
         border: none;
       }
 
-      // Избранное
       .favorite-btn,
       .product-header .favorite-btn,
       .before768 .favorite-btn {
@@ -299,15 +295,13 @@ body {
           }
         }
       }
-
-      // Заголовок товара
+      
       .product-title,
       .product-header .product-title,
       .before768 .product-title {
         color: nav.$font-lightColor;
       }
 
-      // Изображение товара
       .product-img-block {
         background-color: nav.$bg-color-darkTheme;
 
@@ -316,7 +310,6 @@ body {
         }
       }
 
-      // Описание
       .product-description-block {
         background-color: transparent;
 

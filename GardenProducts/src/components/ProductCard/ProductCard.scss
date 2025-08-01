@@ -1,6 +1,8 @@
 .link-product {
   text-decoration: none;
   color: inherit;
+  
+
 }
 
 .product-card {
@@ -15,7 +17,6 @@
   cursor: pointer;
   transition: border-color 0.2s ease-in-out;
   min-width: 0;
- 
   &:hover {
     border-color: #656262;
   }
@@ -69,16 +70,17 @@
 }
 
 .product-card-details{
-  background-color: white;
+background-color: #ffffff;
 .product-name {
   font-size: 20px;
   font-weight: 500;
-  color: #424436;
+  color: #333;
   padding: 16px 16px 0 16px;
   line-height: 1.4;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
 }
 
 .prices {
@@ -86,7 +88,7 @@
   align-items: baseline;
   gap: 16px;
   padding: 8px 16px 16px 16px;
-  color: #424436;
+ 
 }
 
 .current-price {
@@ -107,3 +109,4 @@
   background-color: black;
   border-color: white;
 }
+

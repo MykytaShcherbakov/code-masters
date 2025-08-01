@@ -1,6 +1,6 @@
 import React from 'react';
-
-function DescriptionBlock({ descToShow, isLongDesc, showFullDesc, setShowFullDesc, blockClass }) {
+import './DescriptionBlock.scss';
+export default function DescriptionBlock({ descToShow, isLongDesc, showFullDesc, setShowFullDesc, blockClass }) {
   return (
     <div className={`product-description-block ${blockClass}`}>
       <h4 className="product-description-title">Description</h4>
@@ -15,5 +15,3 @@ function DescriptionBlock({ descToShow, isLongDesc, showFullDesc, setShowFullDes
     </div>
   );
 }
-
-export default DescriptionBlock;

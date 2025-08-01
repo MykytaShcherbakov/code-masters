@@ -27,9 +27,9 @@ const ProductCard = ({ product }) => {
       setIsLiked(updatedFavorites.includes(String(product.id)));
     };
 
-    window.addEventListener('favoritesChanged', syncFavorites);
+    addEventListener('favoritesChanged', syncFavorites);
     return () => {
-      window.removeEventListener('favoritesChanged', syncFavorites);
+      removeEventListener('favoritesChanged', syncFavorites);
     };
   }, [product.id]);
 

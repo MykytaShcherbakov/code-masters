@@ -1,0 +1,244 @@
+.empty-cart {
+  max-width: 1440px;
+  background: #fffff1;
+  // border: 2px solid black; // потом убрать 
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 40px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h2 {
+      font-family: "Montserrat";
+      font-weight: 700;
+      font-style: Bold;
+      font-size: 56px;
+      line-height: 110%;
+      letter-spacing: 0%;
+      padding-right: 16px;
+      color: #000000;
+    }
+
+    .header-divider {
+      flex: 1 1 auto;
+      height: 2px;
+      background: #dddddd;
+      border-radius: 2px;
+    }
+
+    .breadcrumb-btn {
+      border: 1px solid #dddddd;
+      height: 36;
+      gap: 10px;
+      opacity: 0.8;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border-width: 1px;
+      background-color: #fffff1;
+      color: #8B8B8B;
+      cursor: pointer;
+    }
+
+  }
+
+  p {
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 130%;
+    letter-spacing: 0%;
+  }
+
+  button.continue-btn {
+    width: 313;
+    height: 58;
+    gap: 10px;
+    opacity: 1;
+    padding: 16px 56px;
+    background-color: #92A134;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-family: "Montserrat";
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 130%;
+    letter-spacing: 0%;
+    text-align: center;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+  }
+
+  button.breadcrumb-btn-bottom {
+    display: none;
+    border: 1px solid #dddddd;
+    height: 36;
+    gap: 10px;
+    opacity: 0.8;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border-width: 1px;
+    background-color: #fffff1;
+    color: #8B8B8B;
+  }
+}
+
+@media (max-width: 1000px) {
+  .empty-cart {
+    max-width: 960px;
+    padding: 0 20px;
+
+    &__header {
+      h2 {
+        padding-right: 12px 32px;
+      }
+
+      .breadcrumb-btn {
+        font-size: 14px;
+        height: 32px;
+        padding: 6px 14px;
+        border-radius: 6px;
+      }
+    }
+
+    button.continue-btn {
+      width: 220px;
+      height: 46px;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 6px;
+    }
+  }
+}
+
+@media(max-width: 768px) {
+  .empty-cart {
+    max-width: 728px;
+    padding: 0 20px;
+
+    &__header {
+      h2 {
+        font-size: 36px;
+        padding-right: 8px;
+      }
+
+      .header-divider {
+        display: block;
+      }
+
+      .breadcrumb-btn {
+        font-size: 14px;
+        height: 32px;
+        padding: 6px 12px;
+        border-radius: 4px;
+        white-space: nowrap;
+      }
+    }
+
+    button.continue-btn {
+      width: 100%;
+      max-width: 320px;
+      padding: 16px 0;
+      padding: 16px 56px;
+      letter-spacing: 0%;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .empty-cart {
+    max-width: 440px;
+    padding: 0 20px;
+
+    &__header {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      h2 {
+        font-size: 32px;
+        padding-right: 4px;
+      }
+
+      .header-divider {
+        display: block;
+      }
+
+      .breadcrumb-btn {
+        font-size: 16px;
+        height: 32px;
+        padding: 8px 16px;
+        border-radius: 4px;
+        white-space: nowrap;
+        text-align: center;
+        align-self: flex-start;
+        margin-top: 28px;
+      }
+    }
+
+    p {
+      font-size: 18px;
+      // margin-bottom: 10px;
+    }
+
+    button.continue-btn {
+      width: 100%;
+      max-width: 285px;
+      height: 47px;
+      padding: 12px 52px;
+      font-size: 18px;
+      border-radius: 5px;
+      margin-top: 12px;
+      white-space: nowrap;
+
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .empty-cart {
+    padding: 0 20px;
+    max-width: 320px;
+
+    .empty-cart__header {
+      flex-direction: column;
+      align-items: flex-start;
+
+      h2 {
+        font-size: 22px;
+        margin-bottom: 8px;
+        padding-right: 0;
+      }
+
+      .breadcrumb-btn {
+        display: none;
+      }
+    }
+
+
+
+    button.continue-btn {
+      max-width: 100%;
+      height: 40px;
+      font-size: 14px;
+      padding: 10px 0;
+      border-radius: 5px;
+      margin-top: 12px;
+    }
+
+    button.breadcrumb-btn-bottom {
+      display: block;
+      width: 100%;
+      max-width: 320px;
+      height: 40px;
+      font-size: 14px;
+      padding: 10px 0;
+      border-radius: 5px;
+      margin-top: 12px;
+    }
+  }
+}
