@@ -36,7 +36,6 @@ const SaleForm = () => {
    // Функция обработки отправки формы
   const onSubmit = (data) => {
     dispatch(applySaleForm(data)); // Сохраняем данные в Redux и localStorage
-    dispatch(setFirstOrderCompleted()); // Отмечаем, что первый заказ завершён
 
     const message = "The discount has been successfully sent by email";
     setSubmitMessage(message);
