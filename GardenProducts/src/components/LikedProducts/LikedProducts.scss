@@ -1,20 +1,22 @@
+@use '../../assets/styles/variables' as nav;
+
 .container {
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 40px;
   box-sizing: border-box;
-  background-color: #fffff1;
+  background-color: nav.$bg-color-lightTheme;
 }
 
 .no-products-on-sale {
-  color: #424436;
+  color: nav.$font-darkColor;
   padding: 0 20px;
 }
 
 .page-title {
   font-size: 64px;
   font-weight: 700;
-  color: #424436;
+  color: nav.$font-darkColor;
 }
 
 .filters-panel {
@@ -64,7 +66,7 @@
   margin-bottom: 24px;
 
   .product-card {
-    background-color: #fff;
+    background-color: nav.$bg-color-white;
     border-radius: 12px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     overflow: hidden;
@@ -106,12 +108,12 @@
       .current-price {
         font-size: 40px;
         font-weight: 600;
-        color: #424436;
+        color: nav.$font-darkColor;
       }
 
       .original-price {
         font-size: 20px;
-        color: #8b8b8b;
+        color: nav.$font-greyColor;
         text-decoration: line-through;
       }
     }
@@ -123,8 +125,8 @@
   top: 16px;
   left: 16px;
   max-width: calc(100% - 80px);
-  background-color: #f26d22;
-  color: #fff;
+  background-color: nav.$sale-color;
+  color: nav.$font-lightColor;
   font-weight: bold;
   font-size: 14px;
   padding: 4px 8px;
@@ -146,8 +148,8 @@
   .shopping-bag-icon-sales {
     font-size: 48px;
     stroke-width: 20px;
-    fill: #ffffff;
-    stroke: #424436;
+    fill: nav.$font-lightColor;
+    stroke: nav.$font-darkColor;
   }
 }
 
@@ -158,8 +160,8 @@
 
   .all-sales-button {
     font-size: 16px;
-    color: #8b8b8b;
-    background-color: #fffff1;
+    color: nav.$font-greyColor;
+    background-color: nav.$bg-color-lightTheme;
     border: 1px solid #ddd;
     padding: 12px 24px;
     border-radius: 8px;

@@ -1,11 +1,12 @@
+@use '../../assets/styles/variables' as nav;
+
 .product-skeleton-item {
-  background-color: #F2F6D3;
+  background-color: nav.$bg-skeleton;
   border-radius: 12px;
   height: 422px;
   width: 100%;
   box-sizing: border-box;
 }
-
 
 @media (max-width: 1000px) {
   .product-skeleton-item {

@@ -1,9 +1,11 @@
+@use '../../../assets/styles/variables' as nav;
+
 .add-to-cart-btn {
   width: 100%;
   padding: 12px 0;
-  background: #92a134;
+  background: nav.$button-color-green;
   border-radius: 5px;
-  color: #fff;
+  color: nav.$font-lightColor;
   font-weight: 700;
   font-size: 18px;
   border: none;
@@ -12,13 +14,13 @@
   margin-top: 2px;
 
   &:hover:not(:disabled) {
-    background: #7a8a2b;
+    background: #7a8a2b; // нет переменной, оставлено как есть
   }
 
   &:disabled,
   &.added {
-    background: #d8e3ab;
-    color: #8ca05a;
+    background: #d8e3ab; // нет переменной, оставлено как есть
+    color: #8ca05a;      // нет переменной, оставлено как есть
     cursor: not-allowed;
   }
 }

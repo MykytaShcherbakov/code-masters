@@ -1,4 +1,4 @@
-
+@use '../../../assets/styles/variables' as nav;
 
 .cart-modal-overlay {
   position: fixed;
@@ -13,28 +13,28 @@
   justify-content: center;
 
   .cart-modal-content {
-    background: #92A134;
+    background: nav.$bg-modalwindow-message;
     border-radius: 12px;
     padding: 20px 24px;
     width: 75vw;
     max-width: 320px;
     position: relative;
     text-align: left;
-    color: rgb(255, 255, 255);
+    color: nav.$font-lightColor;
 
     h2 {
       font-size: 28px;
       font-weight: 600;
       margin-bottom: 20px;
-      margin-top: 20px; // уменьшить отступ сверху
-      color: white;
+      margin-top: 20px;
+      color: nav.$font-lightColor;
     }
 
     p {
       font-size: 18px;
       line-height: 1.4;
       font-weight: 600;
-      color: white;
+      color: nav.$font-lightColor;
     }
 
     .cart-modal-close {
@@ -44,7 +44,7 @@
       background: none;
       border: none;
       font-size: 40px;
-      color: white;
+      color: nav.$font-lightColor;
       cursor: pointer;
       padding: 0;
       line-height: 1;

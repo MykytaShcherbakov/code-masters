@@ -32,14 +32,14 @@ export default function CartItem({ item, product, increment, decrement, removeFr
           ) : (
             <div className="cart-item__controls">
               <button
-                className="cart-item__btn"
+                className="cart-item__btn-minus"
                 onClick={() => dispatch(decrement(item.id))}
               >
                 -
               </button>
               <span className="cart-item__quantity">{item.count}</span>
               <button
-                className="cart-item__btn"
+                className="cart-item__btn-plus"
                 onClick={() => dispatch(increment(item.id))}
               >
                 +
