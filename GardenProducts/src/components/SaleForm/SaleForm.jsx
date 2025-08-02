@@ -5,7 +5,6 @@ import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 import {
   applySaleForm,
-  setFirstOrderCompleted,
 } from "../../store/saleFormSlice";
 import "./SaleForm.scss";
 
@@ -36,7 +35,6 @@ const SaleForm = () => {
    // Функция обработки отправки формы
   const onSubmit = (data) => {
     dispatch(applySaleForm(data)); // Сохраняем данные в Redux и localStorage
-    dispatch(setFirstOrderCompleted()); // Отмечаем, что первый заказ завершён
 
     const message = "The discount has been successfully sent by email";
     setSubmitMessage(message);

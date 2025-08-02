@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from '../ProductCard/ProductCard';
 import { backendUrl } from '../../apiConfig';
+import "./Sales.scss";
 
 const Sales = () => {
   const [sales, setSales] = useState([]);

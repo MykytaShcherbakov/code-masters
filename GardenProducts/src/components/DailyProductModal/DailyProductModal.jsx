@@ -15,6 +15,7 @@ const DailyProductModal = ({ onClose, onDiscountUsed }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector(state => state.cart.items);
 
+ // Загрузка всех продуктов с сервера при монтировании компонента
   useEffect(() => {
     const loadProducts = async () => {
       try {
@@ -28,6 +29,7 @@ const DailyProductModal = ({ onClose, onDiscountUsed }) => {
     loadProducts();
   }, []);
 
+   // Когда загрузились продукты, выбираем один как "товар дня"
   useEffect(() => {
     if (products.length > 0) {
       const day = new Date().getDate();
@@ -36,33 +38,35 @@ const DailyProductModal = ({ onClose, onDiscountUsed }) => {
       selected.discont_price = selected.price * 0.5;
       setProductOfTheDay(selected);
     }
-    
   }, [products]);
 
+  // Проверяем, есть ли продукт дня в избранных (localStorage)
   useEffect(() => {
     if (productOfTheDay) {
       const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
       setIsFavourite(favorites.includes(String(productOfTheDay.id)));
     }
   }, [productOfTheDay]);
-
+// Переключение избранного состояния продукта
   const toggleFavourite = () => {
     if (!productOfTheDay) return;
 
     let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-
+      // Удаляем из избранного
     if (isFavourite) {
       favorites = favorites.filter(id => id !== String(productOfTheDay.id));
       setIsFavourite(false);
+      // Добавляем в избранное
     } else {
       favorites.push(String(productOfTheDay.id));
       setIsFavourite(true);
     }
 
     localStorage.setItem('favorites', JSON.stringify(favorites));
-    window.dispatchEvent(new CustomEvent('favoritesChanged'));
+    window.dispatchEvent(new CustomEvent('favoritesChanged')); // Вызываем глобальное событие (можно слушать в других компонентах)
   };
 
+  // Обработка добавления товара дня в корзину
   const handleAddToCart = () => {
     if (!productOfTheDay) return;
 
@@ -73,21 +77,21 @@ const DailyProductModal = ({ onClose, onDiscountUsed }) => {
       alert("You already have this daily deal in your cart!");
       return;
     }
-
+// Создаем объект товара со скидкой
     const cartItem = {
       id: productOfTheDay.id,
       count: 1,
       hasDiscount: true,
       discountPrice: productOfTheDay.discont_price,
       originalPrice: productOfTheDay.price,
-      isDailyDeal: true  // ✅ ДОБАВЛЕНО: флаг товара дня
+      isDailyDeal: true 
     };
 
     dispatch(addToCart(cartItem));
     onDiscountUsed();
   };
 
-  if (!productOfTheDay) return null;
+  if (!productOfTheDay) return null; // Пока товар дня не загружен — ничего не отображаем
 
   const discountedId = `${productOfTheDay.id}_daily_discount`;
   const isAlreadyInCart = cartItems.some(item => item.id === discountedId);

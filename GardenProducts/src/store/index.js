@@ -7,9 +7,6 @@ export const store = configureStore({
     cart: cartReducer,
     saleForm: saleFormReducer, // Добавить этот reducer
   }
-<<<<<<< HEAD
 });
-=======
-});
-console.log(store);
->>>>>>> development
+
+

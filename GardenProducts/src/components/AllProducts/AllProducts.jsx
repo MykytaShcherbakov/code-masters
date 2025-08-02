@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import ProductCard from '../ProductCard/ProductCard';
+import useSkeletonLoader from '../ProductSkeleton/useSkeletonLoader';
+import ProductSkeleton from "../ProductSkeleton/ProductSkeleton";
 import './AllProducts.scss';
 
 export default function AllProducts() {
   const products = useLoaderData() || [];
   const categories = useLoaderData() || []
+  const localLoading = useSkeletonLoader(100);
 
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
@@ -99,12 +102,14 @@ export default function AllProducts() {
       </div>
 
       <div className="product-grid">
-        {sortedProducts.length > 0 ? (
+        {localLoading ? (
+          <ProductSkeleton />
+        ) : sortedProducts.length > 0 ? (
           sortedProducts.map((product) => (
-            <ProductCard key={product.id} product={product} categories={categories} />
+            <ProductCard key={product.id} product={product} categories={categories}/>
           ))
         ) : (
-          <p className="no-products-on-sale">No products on sale</p>
+          <p className="no-products-on-sale">No products found</p>
         )}
       </div>
     </div>

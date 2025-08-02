@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import './LikedProducts.scss';
 import { useLoaderData, Link } from 'react-router-dom';
 import ProductCard from '../ProductCard/ProductCard';
+import useSkeletonLoader from '../ProductSkeleton/useSkeletonLoader';
+import ProductSkeleton from '../ProductSkeleton/ProductSkeleton';
+import './LikedProducts.scss';
 
 
 export default function LikedProducts() {
   const products = useLoaderData() || [];
-
-
-  
-  
-
-  
+  const localLoading = useSkeletonLoader(100);
 
   const [likedProducts, setLikedProducts] = useState([]);
   const [minPrice, setMinPrice] = useState('');
@@ -101,9 +98,15 @@ export default function LikedProducts() {
           </p>
         ) : (
           <div className="product-grid">
-            {sortedProducts.map((product) => (
-              <ProductCard product={product} key={product.id} />
-            ))}
+           {localLoading ? (
+          <ProductSkeleton />
+        ) : sortedProducts.length > 0 ? (
+          sortedProducts.map((product) => (
+            <ProductCard key={product.id} product={product} categories={categories}/>
+          ))
+        ) : (
+          <p className="no-products-on-sale">No products found</p>
+        )}
           </div>
         )}
       </div>

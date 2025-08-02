@@ -128,7 +128,7 @@ export default function CategorieProducts() {
             <ProductCard key={product.id} product={product} />
           ))
         ) : (
-          <p className="no-products-on-sale">No products found</p>
+          <p className="no-products">No products found</p>
         )}
       </div>
     </div>
