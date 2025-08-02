@@ -64,6 +64,7 @@
   grid-template-columns: repeat(4, minmax(130px, 1fr));
   gap: 32px;
   margin-bottom: 24px;
+  padding: 0 20px;
 }
 
 .product-grid .product-card {
@@ -145,6 +146,7 @@
   .product-grid {
     grid-template-columns: repeat(4, minmax(130px, 1fr));
     gap: 20px;
+    padding: 0 20px;
   }
   .container {
     padding: 0 20px;
