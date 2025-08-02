@@ -32,6 +32,7 @@
       display: flex;
     }
 
+
     &.after480 {
       display: none;
     }
@@ -64,6 +65,7 @@
       margin-bottom: 16px;
       position: relative;
 
+
       .product-discount {
         display: inline-block;
         position: absolute;
@@ -89,6 +91,7 @@
       .product-quantity-cart {
         width: 100%;
         display: flex;
+        justify-content: flex-start;
         justify-content: flex-start;
         margin-bottom: 14px;
 

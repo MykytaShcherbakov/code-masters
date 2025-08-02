@@ -135,7 +135,7 @@
     padding: 0 10px;
 
     .day__modal-window {
-      top: 80px;
+      top: 100px;
       padding: 24px;
       border-radius: 8px;
       gap: 12px;
@@ -184,8 +184,8 @@
   .day__modal-background {   
     .day__modal-window {
       position: relative;
-      top: 180px;
-      left: 46%;
+      top: 100px;
+      left: 47%;
       transform: translate(-50%);
       margin: 0 10px;
 
@@ -199,12 +199,12 @@
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 400px) {
   .day__modal-background {   
     .day__modal-window {
       position: relative;
-      top: 180px;
-      left: 44%;
+      top: 100px;
+      left: 46%;
       transform: translate(-50%);
       margin: 0 10px;
 

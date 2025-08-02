@@ -98,7 +98,7 @@ export default function AllProducts() {
             <ProductCard key={product.id} product={product} />
           ))
         ) : (
-          <p className="no-products-on-sale">No products on sale</p>
+          <p className="no-products-on-sale">No products found</p>
         )}
       </div>
     </div>

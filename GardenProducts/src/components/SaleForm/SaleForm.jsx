@@ -5,7 +5,6 @@ import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 import {
   applySaleForm,
-  setFirstOrderCompleted,
 } from "../../store/saleFormSlice";
 import "./SaleForm.scss";
 
