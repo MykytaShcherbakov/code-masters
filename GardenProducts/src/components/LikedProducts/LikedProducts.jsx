@@ -102,7 +102,7 @@ export default function LikedProducts() {
           <ProductSkeleton />
         ) : sortedProducts.length > 0 ? (
           sortedProducts.map((product) => (
-            <ProductCard key={product.id} product={product} categories={categories}/>
+            <ProductCard key={product.id} product={product}/>
           ))
         ) : (
           <p className="no-products-on-sale">No products found</p>
