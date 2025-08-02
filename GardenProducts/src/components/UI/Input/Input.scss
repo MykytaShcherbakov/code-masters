@@ -1,3 +1,5 @@
+@use '../../../assets/styles/variables' as nav;
+
 .input {
   padding: 16px 32px;
   font-size: 20px;
@@ -7,22 +9,18 @@
 
 .sale__form-control {
   background: none;
-  border-color: #FFFFF1;
+  border-color: nav.$bg-color-lightTheme;
 
   &::placeholder {
-    color: #FFFFFF;
+    color: nav.$font-lightColor;
   }
 }
 
 .order__form-control {
-   background-color: #ffffff;
-   border-color: #dddddd;
+   background-color: nav.$bg-color-white;
+   border-color: nav.$font-light-grey;
    
    &::placeholder {
-    color: #8b8b8b;
+    color: nav.$font-greyColor;
   }
 }
-
-.input-dark{
-    background-color: #424436;
-  }

@@ -1,0 +1,44 @@
+@use '../../../assets/styles/variables' as nav;
+
+.product-description-block {
+  margin-top: 12px;
+
+  .product-description-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: nav.$font-darkColor;
+    margin-bottom: 3px;
+  }
+
+  .product-description {
+    color: nav.$font-darkColor;
+    font-size: 14px;
+    line-height: 1.55;
+    margin-bottom: 0;
+
+    .read-more-btn {
+      background: none;
+      border: none;
+      color: nav.$font-darkColor;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+      margin-left: 8px;
+      padding: 0;
+      font-size: 14px;
+    }
+  }
+}
+
+.product-description-block.desc-tablet {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .product-description-block.desc-tablet {
+    display: block;
+  }
+  .product-description-block.desc-mobile {
+    display: none;
+  }
+}

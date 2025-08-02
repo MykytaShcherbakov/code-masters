@@ -1,3 +1,5 @@
+@use '../../assets/styles/variables' as nav;
+
 .info-modal__overlay {
   background-color: rgba(0, 0, 0, 0.4);
   position: fixed;
@@ -12,7 +14,7 @@
 }
 
 .info-modal__window {
-  background-color: #ffffff;
+  background-color: nav.$bg-color-white;
   padding: 24px 32px;
   border-radius: 12px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -30,14 +32,14 @@
 
 .info-modal__title {
   font-size: 20px;
-  color: #424436;
+  color: nav.$font-darkColor;
   font-weight: 600;
   margin: 0;
 }
 
 .info-modal__close-icon {
   font-size: 24px;
-  color: #424436;
+  color: nav.$font-darkColor;
   cursor: pointer;
   position: absolute;
   top: 0;

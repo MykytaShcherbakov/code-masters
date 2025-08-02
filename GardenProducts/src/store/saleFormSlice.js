@@ -4,7 +4,7 @@ const initialState = {
   email: localStorage.getItem("saleFormEmail") || "",
   name: localStorage.getItem("saleFormName") || "",
   phone: localStorage.getItem("saleFormPhone") || "",
-  // Форма активна только если купон есть и первый заказ не завершён
+
   isSaleFormActive:
     localStorage.getItem("saleFormCoupon") === "true" &&
     localStorage.getItem("hasFirstOrderCompleted") !== "true",
@@ -14,13 +14,17 @@ const saleFormSlice = createSlice({
   name: "saleForm",
   initialState,
   reducers: {
+    // Действие при отправке формы
     applySaleForm: (state, action) => {
       const { email, name, phone } = action.payload;
-      // Не активируем скидку, если первый заказ уже был завершён
+
+      // Если первый заказ уже был завершён — больше не активировать купон
+
       if (localStorage.getItem("hasFirstOrderCompleted") === "true") {
         state.isSaleFormActive = false;
         return;
       }
+
       state.email = email;
       state.name = name;
       state.phone = phone;
@@ -31,6 +35,9 @@ const saleFormSlice = createSlice({
       localStorage.setItem("saleFormPhone", phone);
       localStorage.setItem("saleFormCoupon", "true");
     },
+
+    // Сброс данных формы
+
     resetSaleForm: (state) => {
       state.email = "";
       state.name = "";
@@ -41,9 +48,9 @@ const saleFormSlice = createSlice({
       localStorage.removeItem("saleFormName");
       localStorage.removeItem("saleFormPhone");
       localStorage.removeItem("saleFormCoupon");
-      // Не удаляем hasFirstOrderCompleted — форма не появится снова
     },
-    // Новый reducer для установки флага первого заказа
+    // Установка завершения первого заказа
+
     setFirstOrderCompleted: (state) => {
       localStorage.setItem("hasFirstOrderCompleted", "true");
       state.isSaleFormActive = false;
@@ -51,5 +58,6 @@ const saleFormSlice = createSlice({
   },
 });
 
-export const { applySaleForm, resetSaleForm, setFirstOrderCompleted } = saleFormSlice.actions;
+export const { applySaleForm, resetSaleForm, setFirstOrderCompleted } =
+  saleFormSlice.actions;
 export default saleFormSlice.reducer;

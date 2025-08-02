@@ -5,8 +5,8 @@ import { IoMdHeart } from "react-icons/io";
 import Button from "../UI/Button/Button";
 import { fetchProducts } from "../../Loader/fetchProducts";
 import { addToCart } from '../../store/cartSlice';
-import "./DailyProductModal.scss";
 import { backendUrl } from "../../apiConfig";
+import "./DailyProductModal.scss";
 
 const DailyProductModal = ({ onClose, onDiscountUsed }) => {
   const [products, setProducts] = useState([]);
@@ -80,7 +80,7 @@ const DailyProductModal = ({ onClose, onDiscountUsed }) => {
       hasDiscount: true,
       discountPrice: productOfTheDay.discont_price,
       originalPrice: productOfTheDay.price,
-      isDailyDeal: true  // ✅ ДОБАВЛЕНО: флаг товара дня
+      isDailyDeal: true
     };
 
     dispatch(addToCart(cartItem));

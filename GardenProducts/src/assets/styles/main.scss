@@ -34,6 +34,7 @@ body {
     background: nav.$bg-color-darkTheme;
     color: nav.$font-lightColor;
 
+    p,
     h1,
     h2,
     h3.section__title {
@@ -90,7 +91,7 @@ body {
             }
 
             .cart-item__old-price {
-              color: #8b8b8b;
+              color: nav.$font-greyColor;
               border: none;
             }
 
@@ -100,17 +101,16 @@ body {
 
             }
 
-
             button {
               background-color: nav.$bg-color-dark;
               color: nav.$font-lightColor;
-              border: 1px solid #8b8b8b;
+              border: 1px solid nav.$font-greyColor;
             }
 
             span {
               background-color: nav.$bg-color-dark;
               color: nav.$font-lightColor;
-              border: 1px solid #8b8b8b;
+              border: 1px solid nav.$font-greyColor;
             }
           }
         }
@@ -137,16 +137,26 @@ body {
       }
     }
 
+    .sales-section h1 {
+      color: nav.$font-lightColor;
+    }
+
+    .sales-section span {
+      color: nav.$font-lightColor;
+    }
+
     div .product-grid .product-card {
       background-color: nav.$bg-color-darkTheme;
-      border: #8b8b8b solid 1px;
+      border: nav.$font-greyColor solid 1px;
 
       p,
       div.prices span.current-price {
         color: nav.$font-lightColor;
       }
     }
-
+    .not-found-page {
+     background: nav.$bg-color-darkTheme;
+    }
     footer {
       background-color: nav.$bg-color-darkTheme;
       color: nav.$font-lightColor;
@@ -185,7 +195,7 @@ body {
         }
 
         button {
-          color: #fff;
+          color: nav.$font-lightColor;
         }
 
         svg {
@@ -199,12 +209,10 @@ body {
       color: nav.$font-lightColor;
     }
 
-    // ProductDetails страница
     .product-info-section {
       background-color: nav.$bg-color-darkTheme;
       color: nav.$font-lightColor;
 
-      // Базовые элементы
       h1,
       h2,
       h3,
@@ -218,7 +226,6 @@ body {
         color: nav.$font-lightColor;
       }
 
-      // Цены - добавил более специфичные селекторы
       .product-price,
       .current-price,
       .price,
@@ -233,30 +240,37 @@ body {
       .product-old-price,
       .old-price,
       .old-price-discount-wrap .product-old-price {
-        color: #8b8b8b;
+        color: nav.$font-greyColor;
       }
 
-      // Скидка
       .product-discount,
       .product-discount-inprice,
       .old-price-discount-wrap .product-discount-inprice {
-        background-color: #f7941d;
-        color: white;
+        background-color: nav.$sale-color;
+        color: nav.$font-lightColor;
       }
 
-
-      // Кнопки - убрал read-more-btn отсюда
-      button {
+      .quantity-controls {
         background-color: nav.$bg-color-darkTheme;
         color: nav.$font-lightColor;
-        border: 1px solid #8b8b8b;
+        border: 1px solid nav.$font-greyColor;
+      }
+
+      .quantity-btn {
+        background-color: nav.$bg-color-darkTheme;
+        color: nav.$font-lightColor;
+        border: 1px solid nav.$font-greyColor;
 
         &:hover {
           background-color: #4a4a4a;
         }
       }
 
-      // Кнопка "Read more" - отдельные селекторы
+      .quantity-value {
+        background-color: nav.$bg-color-darkTheme;
+        color: nav.$font-lightColor;
+      }
+
       .read-more-btn,
       button.read-more-btn,
       .product-description .read-more-btn,
@@ -267,7 +281,6 @@ body {
         border: none;
       }
 
-      // Избранное
       .favorite-btn,
       .product-header .favorite-btn,
       .before768 .favorite-btn {
@@ -290,14 +303,12 @@ body {
         }
       }
 
-      // Заголовок товара
       .product-title,
       .product-header .product-title,
       .before768 .product-title {
         color: nav.$font-lightColor;
       }
 
-      // Изображение товара
       .product-img-block {
         background-color: nav.$bg-color-darkTheme;
 
@@ -306,7 +317,6 @@ body {
         }
       }
 
-      // Описание
       .product-description-block {
         background-color: transparent;
 
@@ -319,9 +329,18 @@ body {
         }
       }
     }
-.product-card-details .product-name{
-  color: #fff;
-}
 
+    .product-card-details {
+      background-color: nav.$bg-color-darkTheme;
+      border: nav.$font-greyColor solid 1px;
+
+      p {
+        color: nav.$font-lightColor;
+      }
+
+      .original-price {
+        color: nav.$font-greyColor;
+      }
+    }
   }
 }

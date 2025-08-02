@@ -5,12 +5,20 @@ const Breadcrumbs = () => {
   const matches = useMatches();
   const location = useLocation();
 
-  console.log(matches);
-  console.log(location);
-  
-  
+  const productsMatch = matches.find(
+    (m) => Array.isArray(m.data?.products) 
+  );
+  const products = productsMatch?.data?.products || [];
 
-  // Мы скрываем в этом месте кода крошки на главной стринице и в корзине
+  const match = location.pathname.match(/^\/categories\/\d+\/product\/(\d+)$/);
+  if (match) {
+    const productId = Number(match[1]);
+    if (productId > products.length) {
+      return null;
+    }
+  }
+
+  // Прячем крошки на главной и в корзине
   if (
     location.pathname === '/' ||
     location.pathname === '/cart' ||
@@ -23,7 +31,6 @@ const Breadcrumbs = () => {
     <nav className="breadcrumbs">
       {matches
         .map((match) => {
-          // Берём лейбл из handle.breadcrumb (функция или строка)
           const label =
             typeof match.handle?.breadcrumb === 'function'
               ? match.handle?.breadcrumb(match.params, match.data)
@@ -32,7 +39,7 @@ const Breadcrumbs = () => {
           const href = match.pathname || '/';
           return { label, href };
         })
-        .filter(Boolean) // удаляем null-ы если label не был найден
+        .filter(Boolean)
         .map(({ label, href }, index, array) => {
           const isLast = index === array.length - 1;
           return (

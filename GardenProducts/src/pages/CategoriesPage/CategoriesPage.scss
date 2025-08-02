@@ -1,3 +1,5 @@
+@use '../../assets/styles/variables' as nav;
+
 .categories {
   &__page-section {
     padding: 0 20px;
@@ -8,12 +10,13 @@
   &__section-title {
     font-size: 64px;
     font-weight: 700;
-    color: #424436;
-    margin: 40px 0;
+    color: nav.$font-darkColor;
+    padding: 20px 0;
+    justify-items: center;
   }
 
   &__title-dark {
-    color: #FFFFFF;
+    color: nav.$font-lightColor;
   }
 
   &__content {
@@ -29,19 +32,15 @@
   }
 }
 
-@media (max-width: 1000px) {
-  .categories__page-section {
-    padding: 40px 20px 0;
+@media (max-width: 768px) {   
+  .categories__section-title {
+    font-size: 56px;
   }
-}
 
-@media (max-width: 768px) {
-  .categories__page-section {
-    padding: 32px 20px 0;
-    
-    .categories__section-title {
-      font-size: 56px;
-    }
+  .categories__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    gap: 24px;
   }
 }
 
@@ -52,7 +51,8 @@
 
   .categories__list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
   }
 }
 

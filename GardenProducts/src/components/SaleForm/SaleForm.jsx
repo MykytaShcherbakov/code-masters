@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import "./SaleForm.scss";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
-import { applySaleForm } from "../../store/saleFormSlice";
+import {
+  applySaleForm,
+  setFirstOrderCompleted,
+} from "../../store/saleFormSlice";
+import "./SaleForm.scss";
 
 const SaleForm = () => {
-  const [submitMessage, setSubmitMessage] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const dispatch = useDispatch();
+  const [submitMessage, setSubmitMessage] = useState(""); // Сообщение об успешной отправке
+  const [isSubmitted, setIsSubmitted] = useState(false); // Была ли форма отправлена
 
+  // Инициализация React Hook Form
   const {
     register,
     handleSubmit,
@@ -18,33 +22,39 @@ const SaleForm = () => {
     reset,
   } = useForm();
 
-    const hasFirstOrderCompleted = localStorage.getItem("hasFirstOrderCompleted") === "true";
-  if (hasFirstOrderCompleted) return null;
+  // Проверка, была ли форма уже отправлена ранее
+  useEffect(() => {
+    const submitted = localStorage.getItem("isSaleFormSubmitted") === "true";
+    const message = localStorage.getItem("saleFormMessage");
 
+    if (submitted && message) {
+      setIsSubmitted(true);
+      setSubmitMessage(message); // Отображаем сообщение об успешной отправке
+    }
+  }, []);
+
+   // Функция обработки отправки формы
   const onSubmit = (data) => {
-    dispatch(
-      applySaleForm({
-        email: data.email,
-        name: data.name,
-        phone: data.phone,
-      })
-    );
+    dispatch(applySaleForm(data)); // Сохраняем данные в Redux и localStorage
 
-    setSubmitMessage("The discount has been successfully sent by email");
-    reset();
+    const message = "The discount has been successfully sent by email";
+    setSubmitMessage(message);
     setIsSubmitted(true);
+    reset();
+
+    // Сохраняем данные в localStorage, чтобы они не терялись после обновления
+    localStorage.setItem("isSaleFormSubmitted", "true");
+    localStorage.setItem("saleFormMessage", message);
   };
 
-  const hasErrors = Object.keys(errors).length > 0;
-
-  return isSubmitted ? null : (
+  return (
     <section className="sale__form-section">
       <h3>5% off on the first order</h3>
       <div className="sale__form-container">
         <div className="sale__form-image__container">
           <img
-          src="/Pictures/Discount/discount-image.png"           
-          alt="image"
+            src="/Pictures/Discount/discount-image.png"
+            alt="Discount"
             className="sale__form-image"
           />
         </div>
@@ -96,8 +106,7 @@ const SaleForm = () => {
               {errors.email && (
                 <p className="error-message">{errors.email.message}</p>
               )}
-
-              {!hasErrors && submitMessage && (
+              {submitMessage && (
                 <p className="submit__message">{submitMessage}</p>
               )}
             </div>
@@ -106,11 +115,12 @@ const SaleForm = () => {
             type="submit"
             btnColor={submitMessage ? "submitted" : "white"}
             btnText={submitMessage ? "Request Submitted" : "Get a discount"}
-            btnSize={"L"}
+            btnSize="L"
+            disabled={isSubmitted}
           />
         </form>
       </div>
-    </section>  
+    </section>
   );
 };
 

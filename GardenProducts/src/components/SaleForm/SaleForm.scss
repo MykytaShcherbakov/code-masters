@@ -1,8 +1,10 @@
+@use '../../assets/styles/variables' as nav;
+
 .sale__form {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  width: 38%;
+  width: 40%;
   padding: 32px 32px 32px 0;
 
   &-inputs {
@@ -18,20 +20,20 @@
   }
 
   &-section {
-    background: linear-gradient(80.46deg, #87933d -0.68%, #55610b 66.66%);
+    background: nav.$bg-sale-form;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     text-align: center;
     gap: 24px;
-    margin: 0 20px;
+    margin: 0 20px 60px 20px;
     overflow: hidden;
 
     h3 {
       padding: 32px 0 0 0;
       font-size: 64px;
       font-weight: 700;
-      color: #ffffff;
+      color: nav.$font-lightColor;
       margin: 0 auto;
     }
   }
@@ -39,8 +41,7 @@
   &-container {
     display: flex;
     justify-content: space-between;
-    gap: 32px;
-    // justify-content: space-between;
+    gap: 32px; 
     max-width: 100%;
     max-height: 100%;
 
@@ -57,54 +58,45 @@
   .error-message {
     font-size: 16px;
     font-weight: 500;
-    color: #ff0000;
+    color: #b80000; // нет переменной, оставлено как есть
     margin-top: 8px;
     text-align: start;
   }
 
   .submit__message {
     margin-top: 8px;
-    color: #ffffff;
+    color: nav.$font-lightColor;
     font-size: 16px;
     font-weight: 500;
     text-align: start;
   }
 }
+
 @media (max-width: 1000px) {
   .sale__form {
     width: 70%;
-  }
-}
 
-@media (max-width: 768px) {
-  .sale__form {
-    padding: 0 20px 20px 0;
-    gap: 20px;
+     &-section {
 
-    &-inputs {
-      padding-top: 0;
-    } 
-
-    &-section {
     h3 {
-        font-size: 56px;
+        font-size: 52px;
         padding: 24px 20px 0 20px;
       }
    }
-  }
-
-   
+  } 
 }
 
 @media (max-width: 767px) {
   .sale__form {
     padding: 24px 20px 0 20px;
     width: 100%;
+    gap: 20px;
+
     &-section {
       padding: 24px 20px 0;
 
       h3 {
-        font-size: 54px;
+        font-size: 48px;
         padding: 24px 20px 0 20px;
       }
     }
@@ -116,6 +108,15 @@
 
     &-inputs {
       padding: 0;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .sale__form-section {
+    h3 {
+      font-size: 46px;
+      padding: 24px 20px 0 20px;
     }
   }
 }
