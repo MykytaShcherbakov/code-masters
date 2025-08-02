@@ -1,34 +1,51 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLoaderData, Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from '../ProductCard/ProductCard';
-import {
-  setProducts,
-  setMinPrice,
-  setMaxPrice,
-  setSortOrder,
-  selectSortedProducts,
-  selectLikedProducts,
-} from '../../store/productsSlice';
+import useSkeletonLoader from '../ProductSkeleton/useSkeletonLoader';
+import ProductSkeleton from '../ProductSkeleton/ProductSkeleton';
 import './LikedProducts.scss';
 
+
 export default function LikedProducts() {
-  const dispatch = useDispatch();
-  const loadedProducts = useLoaderData() || [];
+  const products = useLoaderData() || [];
+  const localLoading = useSkeletonLoader(100);
+
+  const [likedProducts, setLikedProducts] = useState([]);
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+  const [sortOrder, setSortOrder] = useState('default');
 
   useEffect(() => {
-    if (Array.isArray(loadedProducts) && loadedProducts.length > 0) {
-      dispatch(setProducts(loadedProducts));
-    }
-  }, [dispatch, loadedProducts]);
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const filtered = products.filter(
+      (product) => favorites.includes(String(product.id))
+    );
+    setLikedProducts(filtered);
+  }, [products]);
 
-  const minPrice = useSelector((state) => state.products.minPrice);
-  const maxPrice = useSelector((state) => state.products.maxPrice);
-  const sortOrder = useSelector((state) => state.products.sortOrder);
+  const min = parseFloat(minPrice) || 0;
+  const max = parseFloat(maxPrice) || Infinity;
 
-  const sortedAndFilteredLikedProducts = useSelector((state) =>
-    selectSortedProducts(state, selectLikedProducts)
-  );
+  const priceFilteredProducts = likedProducts.filter((product) => {
+    const price = product.discont_price ?? product.price;
+    return price >= min && price <= max;
+  });
+
+  let sortedProducts = [...priceFilteredProducts];
+
+  if (sortOrder === 'price-asc') {
+    sortedProducts.sort((a, b) => {
+      const priceA = a.discont_price ?? a.price;
+      const priceB = b.discont_price ?? b.price;
+      return priceA - priceB;
+    });
+  } else if (sortOrder === 'price-desc') {
+    sortedProducts.sort((a, b) => {
+      const priceA = a.discont_price ?? a.price;
+      const priceB = b.discont_price ?? b.price;
+      return priceB - priceA;
+    });
+  }
 
   return (
     <div>
@@ -46,7 +63,7 @@ export default function LikedProducts() {
               placeholder="from"
               className="filter-input"
               value={minPrice}
-              onChange={(e) => dispatch(setMinPrice(e.target.value))}
+              onChange={(e) => setMinPrice(e.target.value)}
             />
             <input
               type="number"
@@ -54,7 +71,7 @@ export default function LikedProducts() {
               placeholder="to"
               className="filter-input"
               value={maxPrice}
-              onChange={(e) => dispatch(setMaxPrice(e.target.value))}
+              onChange={(e) => setMaxPrice(e.target.value)}
             />
           </div>
 
@@ -66,7 +83,7 @@ export default function LikedProducts() {
               id="sort-by"
               className="filter-select"
               value={sortOrder}
-              onChange={(e) => dispatch(setSortOrder(e.target.value))}
+              onChange={(e) => setSortOrder(e.target.value)}
             >
               <option value="default">by default</option>
               <option value="price-asc">Price: Low to High</option>
@@ -75,16 +92,21 @@ export default function LikedProducts() {
           </div>
         </div>
 
-        {sortedAndFilteredLikedProducts.length === 0 ? (
+        {sortedProducts.length === 0 ? (
           <p className="empty-favorites">
-            No liked products found in selected filters.{' '}
-            <Link to="/products">Explore our products</Link>
+            No liked products found in selected filters.
           </p>
         ) : (
           <div className="product-grid">
-            {sortedAndFilteredLikedProducts.map((product) => (
-              <ProductCard product={product} key={product.id} />
-            ))}
+           {localLoading ? (
+          <ProductSkeleton />
+        ) : sortedProducts.length > 0 ? (
+          sortedProducts.map((product) => (
+            <ProductCard key={product.id} product={product} categories={categories}/>
+          ))
+        ) : (
+          <p className="no-products-on-sale">No products found</p>
+        )}
           </div>
         )}
       </div>
