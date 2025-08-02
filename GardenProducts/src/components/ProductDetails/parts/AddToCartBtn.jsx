@@ -1,15 +1,14 @@
 import React from 'react';
+import './AddToCartBtn.scss';
 
-function AddToCartBtn({ onClick, cartState }) {
+export default function AddToCartBtn({ state, onClick }) {
   return (
     <button
-      className={`add-to-cart-btn ${cartState}`}
+      className={`add-to-cart-btn ${state}`}
       onClick={onClick}
-      disabled={cartState === 'added'}
+      disabled={state === 'added'}
     >
-      {cartState === 'added' ? 'Added' : 'Add to cart'}
+      {state === 'added' ? 'Added' : 'Add to cart'}
     </button>
   );
 }
-
-export default AddToCartBtn;

@@ -1,3 +1,5 @@
+@use '../../assets/styles/variables' as nav;
+
 .sale__form {
   display: flex;
   flex-direction: column;
@@ -18,7 +20,7 @@
   }
 
   &-section {
-    background: linear-gradient(80.46deg, #87933d -0.68%, #55610b 66.66%);
+    background: nav.$bg-sale-form;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
@@ -31,7 +33,7 @@
       padding: 32px 0 0 0;
       font-size: 64px;
       font-weight: 700;
-      color: #ffffff;
+      color: nav.$font-lightColor;
       margin: 0 auto;
     }
   }
@@ -56,14 +58,14 @@
   .error-message {
     font-size: 16px;
     font-weight: 500;
-    color: #b80000;
+    color: #ff0000;
     margin-top: 8px;
     text-align: start;
   }
 
   .submit__message {
     margin-top: 8px;
-    color: #ffffff;
+    color: nav.$font-lightColor;
     font-size: 16px;
     font-weight: 500;
     text-align: start;

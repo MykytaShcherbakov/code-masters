@@ -1,3 +1,5 @@
+@use '../../assets/styles/variables' as nav;
+
 .section {
   &__header {
     display: flex;
@@ -6,7 +8,7 @@
     .section__title {
       font-size: 64px;
       font-weight: 700;
-      color: #424436;
+      color: nav.$font-darkColor;
       white-space: nowrap;
     }
   }
@@ -20,7 +22,7 @@
   &__line {
     width: 100%;
     height: 1px;
-    background-color: #dddddd;
+    background-color: nav.$font-light-grey;
   }
 }
 
@@ -45,7 +47,7 @@
 }
 
 @media (max-width: 578px) {
-    .section__header {
+  .section__header {
     .section__title {
       white-space: wrap;
     }

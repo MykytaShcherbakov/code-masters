@@ -1,108 +1,87 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from '../ProductCard/ProductCard';
-import useSkeletonLoader from '../ProductSkeleton/useSkeletonLoader';
-import ProductSkeleton from '../ProductSkeleton/ProductSkeleton';
+import {
+  setProducts,
+  setMinPrice,
+  setMaxPrice,
+  setSortOrder,
+  selectSortedProducts,
+  selectDiscountedItems,
+} from '../../store/productsSlice';
 import './DiscountedItems.scss';
 
 export default function DiscountedItems() {
-  const products = useLoaderData();
-  const localLoading = useSkeletonLoader(100);
+  const dispatch = useDispatch();
+  const loadedProducts = useLoaderData() || [];
 
-  const [minPrice, setMinPrice] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
-  const [sortOrder, setSortOrder] = useState('default');
+  useEffect(() => {
+    if (Array.isArray(loadedProducts) && loadedProducts.length > 0) {
+      dispatch(setProducts(loadedProducts));
+    }
+  }, [dispatch, loadedProducts]);
 
-  const discountedProducts = products.filter(
-    (product) => product.discont_price !== null
+  const minPrice = useSelector((state) => state.products.minPrice);
+  const maxPrice = useSelector((state) => state.products.maxPrice);
+  const sortOrder = useSelector((state) => state.products.sortOrder);
+
+  const sortedAndFilteredDiscountedProducts = useSelector((state) =>
+    selectSortedProducts(state, selectDiscountedItems)
   );
-
-  const min = parseFloat(minPrice) || 0;
-  const max = parseFloat(maxPrice) || Infinity;
-
-  const priceFilteredProducts = discountedProducts.filter((product) => {
-    const price = product.discont_price;
-    return price >= min && price <= max;
-  });
-
-  let sortedProducts = [...priceFilteredProducts];
-
-  if (sortOrder === 'price-asc') {
-    sortedProducts.sort((a, b) => a.discont_price - b.discont_price);
-  } else if (sortOrder === 'price-desc') {
-    sortedProducts.sort((a, b) => b.discont_price - a.discont_price);
-  }
-
-  // if (priceFilteredProducts.length === 0) {
-  //   return <h1 className='no-products-on-sale'>No Products on sale</h1>;
-  // }
 
   return (
     <div>
-      <div className="container">
-        {/* <div className="breadcrumbs">
-        {/* <div className="breadcrumbs">
-          <Link to="/" className="breadcrumb-text">
-            Main page
-          </Link>
-          <span className="breadcrumb-linie"></span>
-          <span className="breadcrumb-text-2">All sales</span>
-        </div> */}
+      <div className="container"></div>
+      <h1 className="page-title">Discounted items</h1>
+      <div className="filters-panel">
+        <div className="filter-group">
+          <label htmlFor="price-from" className="filter-label">
+            Price
+          </label>
+          <input
+            type="number"
+            id="price-from"
+            placeholder="from"
+            className="filter-input"
+            value={minPrice}
+            onChange={(e) => dispatch(setMinPrice(e.target.value))}
+          />
+          <input
+            type="number"
+            id="price-to"
+            placeholder="to"
+            className="filter-input"
+            value={maxPrice}
+            onChange={(e) => dispatch(setMaxPrice(e.target.value))}
+          />
         </div>
 
-        <h1 className="page-title">Discounted items</h1>
-
-        <div className="filters-panel">
-          <div className="filter-group">
-            <label htmlFor="price-from" className="filter-label">
-              Price
-            </label>
-            <input
-              type="number"
-              id="price-from"
-              placeholder="from"
-              className="filter-input"
-              value={minPrice}
-              onChange={(e) => setMinPrice(e.target.value)}
-            />
-            <input
-              type="number"
-              id="price-to"
-              placeholder="to"
-              className="filter-input"
-              value={maxPrice}
-              onChange={(e) => setMaxPrice(e.target.value)}
-            />
-          </div>
-
-          <div className="filter-group-sorted">
-            <label htmlFor="sort-by" className="filter-label">
-              Sorted
-            </label>
-            <select
-              id="sort-by"
-              className="filter-select"
-              value={sortOrder}
-              onChange={(e) => setSortOrder(e.target.value)}
-            >
-              <option value="default">by default</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="product-grid">
-          {localLoading ? (
-          <ProductSkeleton />
-        ) : sortedProducts.length > 0 ? (
-          sortedProducts.map((product) => (
-            <ProductCard key={product.id} product={product}/>
-          ))
-        ) : (
-          <p className="no-products-on-sale">No products found</p>
-        )}
+        <div className="filter-group-sorted">
+          <label htmlFor="sort-by" className="filter-label">
+            Sorted
+          </label>
+          <select
+            id="sort-by"
+            className="filter-select"
+            value={sortOrder}
+            onChange={(e) => dispatch(setSortOrder(e.target.value))}
+          >
+            <option value="default">by default</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+          </select>
         </div>
       </div>
+      <div className="product-grid">
+        {sortedAndFilteredDiscountedProducts.length > 0 ? (
+          sortedAndFilteredDiscountedProducts.map((product) => (
+            <ProductCard product={product} key={product.id} />
+          ))
+        ) : (
+          <p className="no-products-on-sale">No discounted products found</p>
+        )}
+      </div>
+    </div>
   );
 }
