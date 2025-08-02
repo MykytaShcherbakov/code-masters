@@ -1,47 +1,53 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from '../ProductCard/ProductCard';
-import {
-  setProducts,
-  setMinPrice,
-  setMaxPrice,
-  setSortOrder,
-  setShowDiscountedOnly,
-  selectSortedProducts,
-  selectProducts, 
-} from '../../store/productsSlice';
+import useSkeletonLoader from '../ProductSkeleton/useSkeletonLoader';
+import ProductSkeleton from '../ProductSkeleton/ProductSkeleton';
 import './AllProducts.scss';
 
 export default function AllProducts() {
-  const dispatch = useDispatch();
-  const loadedProducts = useLoaderData() || [];
+  const products = useLoaderData() || [];
+  const categories = useLoaderData() || []
+  const localLoading = useSkeletonLoader(100);
 
-  useEffect(() => {
-    if (Array.isArray(loadedProducts) && loadedProducts.length > 0) {
-      dispatch(setProducts(loadedProducts));
-    }
-  }, [dispatch, loadedProducts]);
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+  const [sortOrder, setSortOrder] = useState('default');
+  const [showDiscountedOnly, setShowDiscountedOnly] = useState(false);
 
-  const minPrice = useSelector((state) => state.products.minPrice);
-  const maxPrice = useSelector((state) => state.products.maxPrice);
-  const sortOrder = useSelector((state) => state.products.sortOrder);
-  const showDiscountedOnly = useSelector(
-    (state) => state.products.showDiscountedOnly
-  );
+  const min = parseFloat(minPrice) || 0;
+  const max = parseFloat(maxPrice) || Infinity;
 
-  const sortedAndFilteredProducts = useSelector((state) =>
-    selectSortedProducts(state, (innerState) => {
-      const allProds = selectProducts(innerState);
-      return showDiscountedOnly
-        ? allProds.filter((product) => product.discont_price !== null)
-        : allProds;
-    })
-  );
+  const priceFilteredProducts = products.filter((product) => {
+    const realPrice = product.discont_price ?? product.price;
+    return realPrice >= min && realPrice <= max;
+  });
+
+  const discountedFilteredProducts = showDiscountedOnly
+    ? priceFilteredProducts.filter((product) => product.discont_price !== null)
+    : priceFilteredProducts;
+
+  let sortedProducts = [...discountedFilteredProducts];
+  if (sortOrder === 'price-asc') {
+    sortedProducts.sort((a, b) => {
+      const priceA = a.discont_price ?? a.price;
+      const priceB = b.discont_price ?? b.price;
+      return priceA - priceB;
+    });
+  } else if (sortOrder === 'price-desc') {
+    sortedProducts.sort((a, b) => {
+      const priceA = a.discont_price ?? a.price;
+      const priceB = b.discont_price ?? b.price;
+      return priceB - priceA;
+    });
+  }
 
   return (
     <div className="container">
+     
+
       <h1 className="page-title">All Products</h1>
+
       <div className="filters-panel">
         <div className="filter-group">
           <label htmlFor="price-from" className="filter-label">
@@ -53,7 +59,7 @@ export default function AllProducts() {
             placeholder="from"
             className="filter-input"
             value={minPrice}
-            onChange={(e) => dispatch(setMinPrice(e.target.value))}
+            onChange={(e) => setMinPrice(e.target.value)}
           />
           <input
             type="number"
@@ -61,9 +67,10 @@ export default function AllProducts() {
             placeholder="to"
             className="filter-input"
             value={maxPrice}
-            onChange={(e) => dispatch(setMaxPrice(e.target.value))}
+            onChange={(e) => setMaxPrice(e.target.value)}
           />
         </div>
+
         <div className="checkbox-container">
           <label className="checkbox-label" htmlFor="discounted-items">
             Discounted items
@@ -73,9 +80,10 @@ export default function AllProducts() {
             type="checkbox"
             id="discounted-items"
             checked={showDiscountedOnly}
-            onChange={(e) => dispatch(setShowDiscountedOnly(e.target.checked))}
+            onChange={(e) => setShowDiscountedOnly(e.target.checked)}
           />
         </div>
+
         <div className="filter-group-sorted">
           <label htmlFor="sort-by" className="filter-label">
             Sorted
@@ -84,7 +92,7 @@ export default function AllProducts() {
             id="sort-by"
             className="filter-select"
             value={sortOrder}
-            onChange={(e) => dispatch(setSortOrder(e.target.value))}
+            onChange={(e) => setSortOrder(e.target.value)}
           >
             <option value="default">by default</option>
             <option value="price-asc">Price: Low to High</option>
@@ -92,13 +100,16 @@ export default function AllProducts() {
           </select>
         </div>
       </div>
+
       <div className="product-grid">
-        {sortedAndFilteredProducts.length > 0 ? (
-          sortedAndFilteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+        {localLoading ? (
+          <ProductSkeleton />
+        ) : sortedProducts.length > 0 ? (
+          sortedProducts.map((product) => (
+            <ProductCard key={product.id} product={product} categories={categories}/>
           ))
         ) : (
-          <p className="no-products-on-sale">No products on sale</p>
+          <p className="no-products-on-sale">No products found</p>
         )}
       </div>
     </div>
