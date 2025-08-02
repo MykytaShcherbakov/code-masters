@@ -30,7 +30,7 @@ const Sales = () => {
 
   if (loading) {
     return (
-      <section className="sales-section">
+      <section className="sales-section-sales">
         <div>Loading... Please wait</div>
       </section>
     );
@@ -38,7 +38,7 @@ const Sales = () => {
 
   if (error) {
     return (
-      <section className="sales-section">
+      <section className="sales-section-sales">
         <div>Error while loading: {error.message}</div>
       </section>
     );
@@ -50,7 +50,7 @@ const Sales = () => {
 
   if (filteredSales.length === 0) {
     return (
-      <section className="sales-section">
+      <section className="sales-section-sales">
         <div>No products on sale</div>
       </section>
     );
@@ -61,25 +61,27 @@ const Sales = () => {
     .slice(0, 4);
 
   return (
-    <section className="sales-section">
-        <div className="header">
-          <h1 className="sale">Sale</h1>
-          <div className="header-line-between"></div>
+    <section className="sales-section-sales">
+      <div className="container-sales">
+        <div className="header-sales">
+          <h1 className="sale-sales">Sale</h1>
+          <div className="header-line-between-sales"></div>
 
-        <Link to={'/discounted-items'}>
-          <button className="header-all-sales-button">All sales</button>
-        </Link>
-      </div>
+          <Link to={'/discounted-items'}>
+            <button className="header-all-sales-button-sales">All sales</button>
+          </Link>
+        </div>
 
-        <div className="product-grid-sales">
+        <div className="product-grid-sales-sales">
           {randomSales.map((product) => (
             <ProductCard product={product} key={product.id} />
           ))}
         </div>
 
-        <div className="all-sales-button-container">
-          <button className="all-sales-button">All sales</button>
+        <div className="all-sales-button-container-sales">
+          <button className="all-sales-button-sales">All sales</button>
         </div>
+      </div>
     </section>
   );
 };
