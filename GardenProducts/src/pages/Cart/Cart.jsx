@@ -21,11 +21,8 @@ function Cart() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const dispatch = useDispatch();
-  console.log(dispatch);
 
   const cartItems = useSelector(state => state.cart.items);
-  console.log(cartItems);
-  
   const isSaleFormActive = useSelector(state => state.saleForm?.isSaleFormActive);
   const hasFirstOrderCompleted = localStorage.getItem("hasFirstOrderCompleted") === "true";
 
@@ -51,12 +48,9 @@ function Cart() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Order submitted:', { form, cartItems });
-
     dispatch(clearCart());
     dispatch(setFirstOrderCompleted());
     setForm({ name: '', phone: '', email: '' });
-
     setIsModalOpen(true);
   };
 
@@ -68,19 +62,22 @@ function Cart() {
     if (item.isDiscountItem) {
       return sum + item.discountPrice;
     }
-
     const product = products.find(p => p.id === item.id);
     if (!product) return sum;
-
     const price = product.discont_price || product.price;
     return sum + (price * item.count);
   }, 0);
-  
+
   const discount = (isSaleFormActive && !hasFirstOrderCompleted) ? subtotal * 0.05 : 0;
   const totalSum = subtotal - discount;
 
   if (cartItems.length === 0) {
-    return <EmptyCart />;
+    return (
+      <>
+        <EmptyCart />
+        {isModalOpen && <CartModal closeModal={closeModal} />}
+      </>
+    );
   }
 
   return (

@@ -1,7 +1,8 @@
+@use '../../../assets/styles/variables' as nav;
+
 .empty-cart {
   max-width: 1440px;
-  background: #fffff1;
-  // border: 2px solid black; // потом убрать 
+  background: nav.$bg-color-lightTheme;
   flex-direction: column;
   align-items: flex-start;
   padding: 0 40px;
@@ -19,29 +20,28 @@
       line-height: 110%;
       letter-spacing: 0%;
       padding-right: 16px;
-      color: #000000;
+      color: nav.$font-darkColor;
     }
 
     .header-divider {
       flex: 1 1 auto;
       height: 2px;
-      background: #dddddd;
+      background: nav.$font-light-grey;
       border-radius: 2px;
     }
 
     .breadcrumb-btn {
-      border: 1px solid #dddddd;
-      height: 36;
+      border: 1px solid nav.$font-light-grey;
+      height: 36px;
       gap: 10px;
       opacity: 0.8;
       padding: 8px 16px;
       border-radius: 8px;
       border-width: 1px;
-      background-color: #fffff1;
-      color: #8B8B8B;
+      background-color: nav.$bg-color-lightTheme;
+      color: nav.$font-greyColor;
       cursor: pointer;
     }
-
   }
 
   p {
@@ -53,17 +53,16 @@
   }
 
   button.continue-btn {
-    width: 313;
-    height: 58;
+    width: 313px;
+    height: 58px;
     gap: 10px;
     opacity: 1;
     padding: 16px 56px;
-    background-color: #92A134;
-    color: #FFFFFF;
+    background-color: nav.$sale-color-green;
+    color: nav.$font-lightColor;
     font-size: 20px;
     font-family: "Montserrat";
     font-weight: 600;
-    font-size: 20px;
     line-height: 130%;
     letter-spacing: 0%;
     text-align: center;
@@ -74,15 +73,15 @@
 
   button.breadcrumb-btn-bottom {
     display: none;
-    border: 1px solid #dddddd;
-    height: 36;
+    border: 1px solid nav.$font-light-grey;
+    height: 36px;
     gap: 10px;
     opacity: 0.8;
     padding: 8px 16px;
     border-radius: 8px;
     border-width: 1px;
-    background-color: #fffff1;
-    color: #8B8B8B;
+    background-color: nav.$bg-color-lightTheme;
+    color: nav.$font-greyColor;
   }
 }
 
@@ -93,7 +92,7 @@
 
     &__header {
       h2 {
-        padding-right: 12px 32px;
+        padding-right: 12px;
       }
 
       .breadcrumb-btn {
@@ -142,7 +141,6 @@
       width: 100%;
       max-width: 320px;
       padding: 16px 0;
-      padding: 16px 56px;
       letter-spacing: 0%;
     }
   }
@@ -182,7 +180,6 @@
 
     p {
       font-size: 18px;
-      // margin-bottom: 10px;
     }
 
     button.continue-btn {
@@ -194,7 +191,6 @@
       border-radius: 5px;
       margin-top: 12px;
       white-space: nowrap;
-
     }
   }
 }
@@ -218,8 +214,6 @@
         display: none;
       }
     }
-
-
 
     button.continue-btn {
       max-width: 100%;

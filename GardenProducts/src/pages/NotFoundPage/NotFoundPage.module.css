@@ -1,52 +1,39 @@
-/* Глобальные переменные (должны быть определены в :root или index.css) */
-:root {
-  --black: #333;
-  --grey: #666;
-  --white: #fff;
-  --green: #92A134;
-  --txt-white: #fff;
-}
-
-/* Обертка страницы */
 .wrapper {
-  min-height: 100vh; /* Полная высота экрана */
-  background-color: #E8F0E6; /* Из index.css */
-  display: flex; /* Используем flex для горизонтального центрирования */
-  justify-content: center; /* Центрируем горизонтально */
-  width: 100%; /* Занимаем всю ширину */
-  margin: 0; /* Убираем внешние отступы */
-  padding: 0; /* Убираем внутренние отступы */
+  min-height: 100vh;
+  background-color: #fffff1;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-/* Контейнер */
 .container {
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 20px;
   width: 100%;
   display: flex;
-  justify-content: center; /* Центрируем внутри контейнера */
+  justify-content: center;
 }
 
-/* Блок контента */
 .contentBlock {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Центрируем содержимое горизонтально */
-  justify-content: center; /* Центрируем содержимое вертикально внутри блока */
+  align-items: center;
+  justify-content: center;
   gap: 32px;
   width: 760px;
   height: 530px;
   opacity: 1;
   transform: rotate(0deg);
-  margin-top: 20px; /* Отступ 20px от верха */
+  margin-top: 20px;
 }
 
-/* Блок изображений */
 .imgBlock {
   display: flex;
-  align-items: center; /* Выравниваем изображения по вертикали */
-  justify-content: center; /* Центрируем изображения горизонтально */
+  align-items: center;
+  justify-content: center;
   gap: 16px;
 }
 
@@ -60,15 +47,14 @@
   height: 118px;
 }
 
-/* Блок заголовка и текста */
 .titleBlock {
-  text-align: center; /* Центрируем текст горизонтально */
-  width: 100%; /* Занимаем всю ширину блока */
-  display: flex; /* Используем flex для вертикального центрирования */
+  text-align: center;
+  width: 100%;
+  display: flex;
   flex-direction: column;
-  align-items: center; /* Центрируем содержимое горизонтально */
-  justify-content: center; /* Центрируем содержимое вертикально */
-  flex: 1; /* Распределяем пространство внутри .contentBlock */
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 }
 
 .title {
@@ -86,19 +72,18 @@
   margin: 12px 0 24px;
   color: var(--grey);
   max-width: 400px;
-  text-align: center; /* Центрируем текст горизонтально */
+  text-align: center;
   line-height: 130%;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Вертикальное центрирование текста */
+  align-items: center;
 }
 
 .text span {
-  display: block; /* Разрываем строку для <span> */
-  margin-top: 8px; /* Добавляем небольшой отступ между строками, если нужно */
+  display: block;
+  margin-top: 8px;
 }
 
-/* Кнопка */
 .button {
   border-radius: 6px;
   padding: 12px 52px;
@@ -110,24 +95,23 @@
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
-  align-items: center; /* Вертикальное центрирование кнопки */
-  justify-content: center; /* Горизонтальное центрирование текста внутри кнопки */
+  align-items: center;
+  justify-content: center;
 }
 
 .button:hover,
 .button:focus {
-  background-color: #7D8F2D; /* Темный зеленый при наведении */
+  background-color: #7D8F2D;
   color: var(--black);
 }
 
-/* Темная тема */
 .night_mode .title {
   color: var(--white);
 }
+.breadcrumbs {
+  display: none;
+}
 
-/* Медиа-запросы */
-
-/* 480px */
 @media screen and (min-width: 480px) {
   .contentBlock {
     width: 480px;
@@ -135,7 +119,7 @@
     gap: 24px;
     padding-left: 20px;
     padding-right: 20px;
-    margin-top: 20px; /* Сохраняем отступ 20px */
+    margin-top: 20px;
   }
   .image {
     width: 109px;
@@ -156,10 +140,9 @@
   }
 }
 
-/* 768px */
 @media screen and (min-width: 768px) {
   .wrapper {
-    margin-top: 60px; /* Восстанавливаем, если это часть дизайна */
+    margin-top: 60px;
   }
   .contentBlock {
     width: 768px;
@@ -167,7 +150,7 @@
     gap: 32px;
     padding-left: 20px;
     padding-right: 20px;
-    margin-top: 20px; /* Сохраняем отступ 20px */
+    margin-top: 20px;
   }
   .image {
     width: 161px;
@@ -193,12 +176,11 @@
   }
 }
 
-/* 1000px */
 @media screen and (min-width: 1000px) {
   .contentBlock {
     width: 760px;
     height: 530px;
-    margin-top: 20px; /* Сохраняем отступ 20px */
+    margin-top: 20px;
   }
   .image {
     width: 180px;
@@ -217,7 +199,6 @@
   }
 }
 
-/* 1440px */
 @media screen and (min-width: 1440px) {
   .wrapper {
     margin-top: 80px;
@@ -225,14 +206,13 @@
   .contentBlock {
     width: 760px;
     height: 530px;
-    margin-top: 20px; /* Сохраняем отступ 20px */
+    margin-top: 20px;
   }
   .text span {
     display: block;
   }
 }
 
-/* 360px (минимальное разрешение) */
 @media screen and (max-width: 360px) {
   .contentBlock {
     width: 360px;
@@ -240,7 +220,7 @@
     gap: 24px;
     padding-left: 20px;
     padding-right: 20px;
-    margin-top: 20px; /* Сохраняем отступ 20px */
+    margin-top: 20px;
   }
   .title {
     font-size: 24px;

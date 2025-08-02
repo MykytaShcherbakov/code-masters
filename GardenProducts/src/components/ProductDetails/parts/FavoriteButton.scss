@@ -1,3 +1,5 @@
+@use '../../../assets/styles/variables' as nav;
+
 .favorite-btn {
   background: none;
   border: none;
@@ -10,33 +12,34 @@
     font-size: 36px;
     color: #242424;
     stroke-width: 5px;
-    fill: #ffffff;
-    stroke: #424436;
+    fill: nav.$font-lightColor;
+    stroke: nav.$font-darkColor;
     transition: fill 0.3s, color 0.3s;
 
     &:hover {
-      fill: #424436;
-      color: #424436;
+      fill: nav.$font-darkColor;
+      color: nav.$font-darkColor;
     }
 
     &.active {
-      fill: #92a134;
-      color: #92a134;
-      stroke: #92a134;
+      fill: nav.$green-color;
+      color: nav.$green-color;
+      stroke: nav.$green-color;
     }
   }
 
   &:hover .heart-icon {
-    fill: #424436;
-    color: #424436;
+    fill: nav.$font-darkColor;
+    color: nav.$font-darkColor;
   }
 
   &:hover .heart-icon.active {
-    fill: #7a8a2b;
+    fill: #7a8a2b; 
     color: #7a8a2b;
     stroke: #7a8a2b;
   }
 }
+
 @media (min-width: 481px) and (max-width: 768px) {
   .favorite-btn .heart-icon {
     font-size: 44px;
