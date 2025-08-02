@@ -1,3 +1,5 @@
+@use '../../assets/styles/variables' as nav;
+
 .breadcrumbs {
   display: flex;
   align-items: center;
@@ -16,14 +18,14 @@
   font-size: 16px;
   text-decoration: none;
   padding: 8px 16px;
-  border: 1px solid rgb(221, 221, 221);
+  border: 1px solid nav.$font-light-grey;
   border-radius: 6px;
-  color: rgb(139, 139, 139);
+  color: nav.$font-greyColor;
 }
 
 .breadcrumb-link.active {
   font-weight: 600;
-  color: rgb(66, 68, 54);
+  color: nav.$font-darkColor;
   text-overflow: ellipsis;
   max-width: 150px;
   overflow: hidden;
@@ -31,7 +33,6 @@
 
 .breadcrumb-item a {
   text-overflow: ellipsis;
-
   align-items: center;
   overflow: hidden;
   white-space: nowrap;
@@ -42,7 +43,7 @@
   display: inline-block;
   width: 16px;
   height: 1px;
-  background-color: rgb(221, 221, 221);
+  background-color: nav.$font-light-grey;
 }
 
 @media (max-width: 1000px) {
@@ -57,4 +58,3 @@
     margin-top: 32px;
   }
 }
-

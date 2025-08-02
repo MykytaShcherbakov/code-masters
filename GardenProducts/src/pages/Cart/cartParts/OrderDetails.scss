@@ -1,5 +1,7 @@
+@use '../../../assets/styles/variables' as nav;
+
 .order-details {
-    background: #f2f6d3;
+    background: nav.$bg-skeleton;
     border-radius: 16px;
     box-shadow: 0 2px 14px 0 rgba(55, 62, 39, 0.04);
     padding: 20px 12px 18px 12px;
@@ -11,62 +13,62 @@
 
     h3 {
       font-size: 28px;
-      color: #424436;
+      color: nav.$font-darkColor;
       font-weight: 700;
       margin-bottom: 4px;
     }
 
     >p {
       font-size: 28px;
-      color: #8b8b8b;
+      color: nav.$font-greyColor;
       margin: 2px 0;
       font-weight: 500;
     }
 
     .price-breakdown {
-    margin: 8px 0;
-    
-    .subtotal-line {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 4px;
-      
-      span {
-        font-size: 20px;
-        color: #8b8b8b;
-        font-weight: 500;
-      }
-    }
-    
-    .discount-line {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      
-      span {
-        font-size: 18px;
-        color: #4CAF50;
-        font-weight: 600;
-      }
-    }
-  }
+      margin: 8px 0;
 
-  .total-sum {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px 0 10px 0;
+      .subtotal-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 4px;
+
+        span {
+          font-size: 20px;
+          color: nav.$font-greyColor;
+          font-weight: 500;
+        }
+      }
+
+      .discount-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        span {
+          font-size: 18px;
+          color: #4CAF50; // нет переменной, оставлено как есть
+          font-weight: 600;
+        }
+      }
+    }
+
+    .total-sum {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0 10px 0;
 
       p {
         font-size: 28px;
-        color: #8b8b8b;
+        color: nav.$font-greyColor;
         font-weight: 500;
         margin: 0;
       }
 
       .sum {
-        color: #424436;
+        color: nav.$font-darkColor;
         font-size: 40px;
         font-weight: 700;
         letter-spacing: 0.5px;
@@ -83,7 +85,7 @@
         padding: 13px 12px;
         border-radius: 6px;
         border: 1px solid #e0e7ca;
-        background: #fff;
+        background: nav.$bg-color-white;
         transition: border 0.2s;
 
         &:focus {
@@ -94,8 +96,8 @@
 
       .order-btn {
         margin-top: 6px;
-        background: #a5ab40;
-        color: #fff;
+        background: #a5ab40; // нет переменной, оставлено как есть
+        color: nav.$font-lightColor;
         font-size: 18px;
         padding: 11px 0;
         border-radius: 7px;
@@ -105,11 +107,12 @@
         transition: background 0.18s;
 
         &:hover {
-          background: #8e952e;
+          background: #8e952e; // нет переменной, оставлено как есть
         }
       }
     }
-  }
+}
+
 @media (min-width: 481px) and (max-width: 768px) {
   .order-details {
       margin: 0 16px;
@@ -151,81 +154,81 @@
 }
 
 @media (min-width: 769px) and (max-width: 1000px) {
-.order-details {
-        width: 46%;
-        margin: 0;
-        padding: 20px 20px 32px 32px;
-        border-radius: 24px;
-        background: #f2f6d3;
+  .order-details {
+    width: 46%;
+    margin: 0;
+    padding: 20px 20px 32px 32px;
+    border-radius: 24px;
+    background: nav.$bg-skeleton;
 
-        h3 {
-          font-size: 26px;
-        }
+    h3 {
+      font-size: 26px;
+    }
 
-        >p {
-          font-size: 26px;
-        }
+    >p {
+      font-size: 26px;
+    }
 
-        .total-sum {
-          p {
-            font-size: 26px;
-          }
+    .total-sum {
+      p {
+        font-size: 26px;
+      }
 
-          .sum {
-            font-size: 44px;
-          }
-        }
-
-        .order-form {
-          input {
-            font-size: 20px;
-            padding: 16px 20px;
-          }
-
-          .order-btn {
-            font-size: 20px;
-            padding: 17px 0;
-          }
-        }
+      .sum {
+        font-size: 44px;
       }
     }
 
-@media (min-width: 1001px) {
-.order-details {
-        width: 40%;
-        margin: 0;
-        padding: 20px 32px 32px 32px;
-        border-radius: 24px;
-        background: #f2f6d3;
-
-        h3 {
-          font-size: 40px;
-        }
-
-        >p {
-          font-size: 4ch;
-        }
-
-        .total-sum {
-          p {
-            font-size: 40px;
-          }
-
-          .sum {
-            font-size: 50px;
-          }
-        }
-
-        .order-form {
-          input {
-            font-size: 20px;
-            padding: 16px 20px;
-          }
-
-          .order-btn {
-            font-size: 20px;
-            padding: 17px 0;
-          }
-        }
+    .order-form {
+      input {
+        font-size: 20px;
+        padding: 16px 20px;
       }
+
+      .order-btn {
+        font-size: 20px;
+        padding: 17px 0;
+      }
+    }
+  }
+}
+
+@media (min-width: 1001px) {
+  .order-details {
+    width: 40%;
+    margin: 0;
+    padding: 20px 32px 32px 32px;
+    border-radius: 24px;
+    background: nav.$bg-skeleton;
+
+    h3 {
+      font-size: 40px;
+    }
+
+    >p {
+      font-size: 4ch;
+    }
+
+    .total-sum {
+      p {
+        font-size: 40px;
+      }
+
+      .sum {
+        font-size: 50px;
+      }
+    }
+
+    .order-form {
+      input {
+        font-size: 20px;
+        padding: 16px 20px;
+      }
+
+      .order-btn {
+        font-size: 20px;
+        padding: 17px 0;
+      }
+    }
+  }
 }

@@ -1,3 +1,5 @@
+@use '../../../assets/styles/variables' as nav;
+
 .btn {
   border: none;
   border-radius: 6px;
@@ -6,36 +8,36 @@
 }
 
 .color-green {
-  background-color: #92A134;
-  color: #FFFFFF;
+  background-color: nav.$sale-color-green;
+  color: nav.$font-lightColor;
 }
 
 .color-white {
-  background-color: #FFFFF1;
-  color: #424436;
+  background-color: nav.$bg-color-lightTheme;
+  color: nav.$font-darkColor;
 
-   &:hover {
-    background-color: #424436;
-    color: #FFFFFF;
+  &:hover {
+    background-color: nav.$font-darkColor;
+    color: nav.$font-lightColor;
   }
 }
 
 .color-submitted {
-  background-color: #F2F6D3;
-  color: #92A134;
+  background-color: nav.$bg-skeleton;
+  color: nav.$sale-color-green;
   pointer-events: none;
 }
 
 .color-neutral {
   background: none;
-  border: 1px solid #dddddd;
-  color: #8b8b8b;
+  border: 1px solid nav.$font-light-grey;
+  color: nav.$font-greyColor;
   max-width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
 
   &:hover {
-    background-color: #F2F6D3;
+    background-color: nav.$bg-skeleton;
   }
 }
 

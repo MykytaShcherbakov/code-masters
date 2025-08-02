@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import './ProductDetails.scss';
 import productImg from '../../media/5422e5af264f78b8a10da5d1979747d487daef24.png';
-import { IoMdHeart } from 'react-icons/io';
 import { backendUrl } from '../../apiConfig';
 import QuantityControls from './parts/QuantityControls';
 import AddToCartBtn from './parts/AddToCartBtn';
@@ -13,6 +12,7 @@ import DescriptionBlock from './parts/DescriptionBlock';
 import FavoriteButton from './parts/FavoriteButton';
 import ProductImage from './parts/ProductImage';
 import ProductModal from './parts/ProductModal';
+import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 
 function ProductDetails() {
   const dispatch = useDispatch();
@@ -25,6 +25,10 @@ function ProductDetails() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { id } = useParams();
   const product = useLoaderData();
+
+  if (!product || Number(product.id) !== Number(id)) {
+    return <NotFoundPage />;
+  }
 
   useEffect(() => {
     try {
@@ -57,8 +61,6 @@ function ProductDetails() {
 
   const handleDecrement = () => setCount(c => (c > 1 ? c - 1 : 1));
   const handleIncrement = () => setCount(c => c + 1);
-
-  if (!product) return <div>Product not found</div>;
 
   const handleAddToCart = () => {
     const cartItem = {
@@ -103,12 +105,12 @@ function ProductDetails() {
   return (
     <>
       {isModalOpen && (
-  <ProductModal
-    imageUrl={imageUrl}
-    title={product.title}
-    onClose={handleModalClose}
-  />
-)}
+        <ProductModal
+          imageUrl={imageUrl}
+          title={product.title}
+          onClose={handleModalClose}
+        />
+      )}
 
       <section className="product-info-section mobile-only">
         <div className="product-info">

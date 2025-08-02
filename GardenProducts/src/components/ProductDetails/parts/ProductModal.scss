@@ -1,3 +1,5 @@
+@use '../../../assets/styles/variables' as nav;
+
 .product-modal-overlay {
   position: fixed;
   z-index: 9999;
@@ -19,7 +21,7 @@
   max-width: 90vw;
   max-height: 80vh;
   border-radius: 12px;
-  background: #fff;
+  background: nav.$bg-color-white;
   box-shadow: 0 2px 32px 0 rgba(0, 0, 0, 0.14);
 }
 
@@ -27,13 +29,13 @@
   position: absolute;
   top: -8px;
   right: -8px;
-  background: #fdacacc2;
+  background: #fdacacc2; // нет переменной, оставлено как есть
   border: none;
   border-radius: 50%;
   width: 18px;
   height: 18px;
   font-size: 1rem;
-  color: #10110b;
+  color: #10110b; // нет переменной, оставлено как есть
   cursor: pointer;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.12);
   display: flex;
@@ -42,6 +44,6 @@
   transition: background 0.15s;
 
   &:hover {
-    background: #f7f7e9;
+    background: nav.$bg-color-lightTheme;
   }
 }

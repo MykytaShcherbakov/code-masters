@@ -1,5 +1,7 @@
+@use '../../assets/styles/variables' as nav;
+
 .body {
-  background-color: #fffff1;
+  background-color: nav.$bg-color-lightTheme;
 }
 
 .container {
@@ -7,18 +9,18 @@
   margin: 0 auto;
   padding: 0 20px;
   box-sizing: border-box;
-  background-color: #fffff1;
+  background-color: nav.$bg-color-lightTheme;
 }
 
 .no-products-on-sale {
-  color: #424436;
+  color: nav.$font-darkColor;
   padding: 0 20px;
 }
 
 .page-title {
   font-size: 64px;
   font-weight: 700;
-  color: rgb(66, 68, 54);
+  color: nav.$font-darkColor;
   padding: 40px 0;
 }
 
@@ -68,7 +70,7 @@
 
   position: relative;
   &:checked {
-    background: #92a134;
+    background: nav.$sale-color-green;
     border-color: #ccc;
 
     &::after {
@@ -138,8 +140,8 @@
   top: 16px;
   left: 16px;
   max-width: calc(100% - 80px);
-  background-color: #f26d22;
-  color: #fff;
+  background-color: nav.$sale-color;
+  color: nav.$font-lightColor;
   font-weight: bold;
   font-size: 14px;
   padding: 4px 8px;
@@ -161,11 +163,11 @@
   .shopping-bag-icon-sales {
     font-size: 48px;
     stroke-width: 20px;
-    fill: #ffffff;
-    stroke: #424436;
+    fill: nav.$font-lightColor;
+    stroke: nav.$font-darkColor;
   }
   &:hover {
-    fill: #424436;
+    fill: nav.$font-darkColor;
   }
 }
 
@@ -190,12 +192,12 @@
 .current-price {
   font-size: 40px;
   font-weight: 600;
-  color: #424436;
+  color: nav.$font-darkColor;
 }
 
 .original-price {
   font-size: 20px;
-  color: #8b8b8b;
+  color: nav.$font-greyColor;
   text-decoration: line-through;
 }
 
@@ -207,8 +209,8 @@
 
 .all-sales-button {
   font-size: 16px;
-  color: #8b8b8b;
-  background-color: #fffff1;
+  color: nav.$font-greyColor;
+  background-color: nav.$bg-color-lightTheme;
   border: 1px solid #ddd;
   padding: 12px 24px;
   border-radius: 8px;
@@ -222,6 +224,8 @@
     background-color: #f4f4f4;
   }
 }
+
+// ...existing media queries...
 
 @media (max-width: 1000px) {
   .product-grid {

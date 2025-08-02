@@ -76,7 +76,7 @@ export const router = createBrowserRouter([
                 errorElement: <ErrorPage />,
                 handle: {
                   breadcrumb: (params, data) =>
-                    data?.title || `Продукт: ${params.id}`,
+                    data?.title || `Product: ${params.id}`,
                 },
               },
             ],

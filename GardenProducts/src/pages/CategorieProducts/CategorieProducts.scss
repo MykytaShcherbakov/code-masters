@@ -1,16 +1,18 @@
+@use '../../assets/styles/variables' as nav;
+
 .container {
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 40px;
   box-sizing: border-box;
-  background-color: #fffff1;
+  background-color: nav.$bg-color-lightTheme;
 }
 
 .breadcrumbs {
   display: flex;
   align-items: center;
   font-size: 16px;
-  color: #666;
+  color: nav.$font-greyColor;
   margin-left: 16px;
 
   .breadcrumb-list {
@@ -25,9 +27,9 @@
 
 .breadcrumb-text {
   padding: 8px 16px;
-  border: 1px solid #ddd;
+  border: 1px solid nav.$font-light-grey;
   border-radius: 6px;
-  color: #8b8b8b;
+  color: nav.$font-greyColor;
 
   &:hover {
     color: #656262;
@@ -36,22 +38,22 @@
 
 .breadcrumb-text-2 {
   padding: 8px 16px;
-  border: 1px solid #ddd;
+  border: 1px solid nav.$font-light-grey;
   border-radius: 6px;
-  color: #424436;
+  color: nav.$font-darkColor;
 }
 
 .breadcrumb-line {
   display: block;
   height: 1px;
   width: 16px;
-  background-color: #ddd;
+  background-color: nav.$font-light-grey;
 }
 
 .page-title {
   font-size: 64px;
   font-weight: 700;
-  color: #424436;
+  color: nav.$font-darkColor;
 }
 
 .filters-panel {
@@ -131,7 +133,7 @@
 }
 
 .no-products-on-sale {
-  color: #424436;
+  color: nav.$font-darkColor;
   padding: 0 20px;
 }
 

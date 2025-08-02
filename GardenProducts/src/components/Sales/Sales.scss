@@ -1,3 +1,5 @@
+@use '../../assets/styles/variables' as nav;
+
 .sales-section {
   padding: 40px 0;
   margin: 0 20px;
@@ -21,13 +23,13 @@
     margin-right: 20px;
     flex-shrink: 0;
     white-space: nowrap;
-    color: #424436;
+    color: nav.$font-darkColor;
   }
 
   .header-line-between {
     flex-grow: 1;
     height: 1px;
-    background-color: #e0e0e0;
+    background-color: nav.$border-color-grey;
     margin: 0 20px;
     min-width: 50px;
     margin-right: 0;
@@ -36,8 +38,8 @@
 
   .header-all-sales-button {
     font-size: 16px;
-    color: #8b8b8b;
-    background-color: #fffff1;
+    color: nav.$font-greyColor;
+    background-color: nav.$bg-color-lightTheme;
     border: 1px solid #ddd;
     padding: 8px 16px;
     border-radius: 8px;
@@ -53,7 +55,6 @@
 
 .product-grid-sales {
   display: grid;
-
   grid-template-columns: repeat(4, minmax(130px, 1fr));
   gap: 32px;
   margin-bottom: 24px;
@@ -66,8 +67,8 @@
 
   .all-sales-button {
     font-size: 16px;
-    color: #8b8b8b;
-    background-color: #fffff1;
+    color: nav.$font-greyColor;
+    background-color: nav.$bg-color-lightTheme;
     border: 1px solid #ddd;
     padding: 12px 24px;
     border-radius: 8px;

@@ -1,4 +1,4 @@
-import bannerImage from '../../media/banner.jpg';import './Banner.css';
+import bannerImage from '../../media/banner.jpg';import './Banner.scss';
 import { Link } from "react-router-dom";
 
 const Banner = () => {

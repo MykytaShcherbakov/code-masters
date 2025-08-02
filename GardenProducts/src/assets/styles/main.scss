@@ -34,7 +34,6 @@ body {
     background: nav.$bg-color-darkTheme;
     color: nav.$font-lightColor;
 
-
     p,
     h1,
     h2,
@@ -92,7 +91,7 @@ body {
             }
 
             .cart-item__old-price {
-              color: #8b8b8b;
+              color: nav.$font-greyColor;
               border: none;
             }
 
@@ -102,17 +101,16 @@ body {
 
             }
 
-
             button {
               background-color: nav.$bg-color-dark;
               color: nav.$font-lightColor;
-              border: 1px solid #8b8b8b;
+              border: 1px solid nav.$font-greyColor;
             }
 
             span {
               background-color: nav.$bg-color-dark;
               color: nav.$font-lightColor;
-              border: 1px solid #8b8b8b;
+              border: 1px solid nav.$font-greyColor;
             }
           }
         }
@@ -149,14 +147,16 @@ body {
 
     div .product-grid .product-card {
       background-color: nav.$bg-color-darkTheme;
-      border: #8b8b8b solid 1px;
+      border: nav.$font-greyColor solid 1px;
 
       p,
       div.prices span.current-price {
         color: nav.$font-lightColor;
       }
     }
-
+    .not-found-page {
+     background: nav.$bg-color-darkTheme;
+    }
     footer {
       background-color: nav.$bg-color-darkTheme;
       color: nav.$font-lightColor;
@@ -195,7 +195,7 @@ body {
         }
 
         button {
-          color: #fff;
+          color: nav.$font-lightColor;
         }
 
         svg {
@@ -208,9 +208,11 @@ body {
       background: nav.$bg-color-darkTheme;
       color: nav.$font-lightColor;
     }
+
     .product-info-section {
       background-color: nav.$bg-color-darkTheme;
       color: nav.$font-lightColor;
+
       h1,
       h2,
       h3,
@@ -238,32 +240,37 @@ body {
       .product-old-price,
       .old-price,
       .old-price-discount-wrap .product-old-price {
-        color: #8b8b8b;
+        color: nav.$font-greyColor;
       }
+
       .product-discount,
       .product-discount-inprice,
       .old-price-discount-wrap .product-discount-inprice {
-        background-color: #f7941d;
-        color: white;
+        background-color: nav.$sale-color;
+        color: nav.$font-lightColor;
       }
-      .quantity-controls{
+
+      .quantity-controls {
         background-color: nav.$bg-color-darkTheme;
         color: nav.$font-lightColor;
-        border: 1px solid #8b8b8b;
+        border: 1px solid nav.$font-greyColor;
       }
+
       .quantity-btn {
         background-color: nav.$bg-color-darkTheme;
         color: nav.$font-lightColor;
-        border: 1px solid #8b8b8b;
+        border: 1px solid nav.$font-greyColor;
 
         &:hover {
           background-color: #4a4a4a;
         }
       }
-      .quantity-value { 
+
+      .quantity-value {
         background-color: nav.$bg-color-darkTheme;
         color: nav.$font-lightColor;
       }
+
       .read-more-btn,
       button.read-more-btn,
       .product-description .read-more-btn,
@@ -295,7 +302,7 @@ body {
           }
         }
       }
-      
+
       .product-title,
       .product-header .product-title,
       .before768 .product-title {
@@ -323,16 +330,17 @@ body {
       }
     }
 
-.product-card-details{
-  background-color: #424436;
-  border: #8b8b8b solid 1px;
-  p{
-    color: #fff;
-  }
-  .original-price{
-    color: #8b8b8b;
-  }
-}
+    .product-card-details {
+      background-color: nav.$bg-color-darkTheme;
+      border: nav.$font-greyColor solid 1px;
 
+      p {
+        color: nav.$font-lightColor;
+      }
+
+      .original-price {
+        color: nav.$font-greyColor;
+      }
+    }
   }
 }
