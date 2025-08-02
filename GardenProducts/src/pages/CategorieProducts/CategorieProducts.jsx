@@ -1,65 +1,58 @@
-import { useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   useLoaderData,
   useParams,
   Outlet,
   useLocation,
 } from 'react-router-dom';
-import ProductSkeleton from "../../components/ProductSkeleton/ProductSkeleton";
-import useSkeletonLoader from "../../components/ProductSkeleton/useSkeletonLoader";
+import { useSelector, useDispatch } from 'react-redux';
+import ProductSkeleton from '../../components/ProductSkeleton/ProductSkeleton';
+import useSkeletonLoader from '../../components/ProductSkeleton/useSkeletonLoader';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import './CategorieProducts.scss';
 
+import {
+  setProducts,
+  setMinPrice,
+  setMaxPrice,
+  setSortOrder,
+  setShowDiscountedOnly,
+  selectSortedProducts,
+  selectCategoryProducts,
+} from '../../store/productsSlice';
+
 export default function CategorieProducts() {
   const { categoryId } = useParams();
-  const { products, category } = useLoaderData();
+  const { products: loadedProducts, category } = useLoaderData();
   const location = useLocation();
   const localLoading = useSkeletonLoader(100);
 
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
-  const [sortOrder, setSortOrder] = useState("default");
-  const [showDiscountedOnly, setShowDiscountedOnly] = useState(false);
-  
-
-  // Проверяем, находимся ли мы на странице товара
-  const isProductPage = location.pathname.includes('/product/');
-
-  // Если мы на странице товара, показываем только Outlet
-  if (isProductPage) {
-    return <Outlet />;
-  }
-
-  const min = parseFloat(minPrice) || 0;
-  const max = parseFloat(maxPrice) || Infinity;
-
-  const categoryFilteredProducts = products.filter(
-    (product) => product.categoryId === +categoryId
+  const dispatch = useDispatch();
+  const minPrice = useSelector((state) => state.products.minPrice);
+  const maxPrice = useSelector((state) => state.products.maxPrice);
+  const sortOrder = useSelector((state) => state.products.sortOrder);
+  const showDiscountedOnly = useSelector(
+    (state) => state.products.showDiscountedOnly
   );
 
-  const priceFilteredProducts = categoryFilteredProducts.filter((product) => {
-    const realPrice = product.discont_price ?? product.price;
-    return realPrice >= min && realPrice <= max;
-  });
+  const sortedAndFilteredCategoryProducts = useSelector((state) =>
+    selectSortedProducts(
+      state,
+      (innerState) => selectCategoryProducts(innerState, categoryId),
+      showDiscountedOnly
+    )
+  );
 
-  const discountedFilteredProducts = showDiscountedOnly
-    ? priceFilteredProducts.filter((product) => product.discont_price !== null)
-    : priceFilteredProducts;
+  useEffect(() => {
+    if (Array.isArray(loadedProducts) && loadedProducts.length > 0) {
+      dispatch(setProducts(loadedProducts));
+    }
+  }, [dispatch, loadedProducts]);
 
-  let sortedProducts = [...discountedFilteredProducts];
+  const isProductPage = location.pathname.includes('/product/');
 
-  if (sortOrder === 'price-asc') {
-    sortedProducts.sort((a, b) => {
-      const priceA = a.discont_price ?? a.price;
-      const priceB = b.discont_price ?? b.price;
-      return priceA - priceB;
-    });
-  } else if (sortOrder === 'price-desc') {
-    sortedProducts.sort((a, b) => {
-      const priceA = a.discont_price ?? a.price;
-      const priceB = b.discont_price ?? b.price;
-      return priceB - priceA;
-    });
+  if (isProductPage) {
+    return <Outlet />;
   }
 
   return (
@@ -78,7 +71,7 @@ export default function CategorieProducts() {
             placeholder="from"
             className="filter-input"
             value={minPrice}
-            onChange={(e) => setMinPrice(e.target.value)}
+            onChange={(e) => dispatch(setMinPrice(e.target.value))}
           />
           <input
             type="number"
@@ -86,7 +79,7 @@ export default function CategorieProducts() {
             placeholder="to"
             className="filter-input"
             value={maxPrice}
-            onChange={(e) => setMaxPrice(e.target.value)}
+            onChange={(e) => dispatch(setMaxPrice(e.target.value))}
           />
         </div>
 
@@ -99,7 +92,7 @@ export default function CategorieProducts() {
             type="checkbox"
             id="discounted-items"
             checked={showDiscountedOnly}
-            onChange={(e) => setShowDiscountedOnly(e.target.checked)}
+            onChange={(e) => dispatch(setShowDiscountedOnly(e.target.checked))}
           />
         </div>
 
@@ -111,7 +104,7 @@ export default function CategorieProducts() {
             id="sort-by"
             className="filter-select"
             value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
+            onChange={(e) => dispatch(setSortOrder(e.target.value))}
           >
             <option value="default">by default</option>
             <option value="price-asc">Price: Low to High</option>
@@ -123,8 +116,8 @@ export default function CategorieProducts() {
       <div className="product-grid">
         {localLoading ? (
           <ProductSkeleton />
-        ) : sortedProducts.length > 0 ? (
-          sortedProducts.map((product) => (
+        ) : sortedAndFilteredCategoryProducts.length > 0 ? (
+          sortedAndFilteredCategoryProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))
         ) : (
