@@ -38,7 +38,7 @@ export default function DiscountedItems() {
       <div className="container">
         </div>
 
-        <h1 className="page-title">Discounted items</h1>
+        <h1 className="page-title discount">Discounted items</h1>
 
         <div className="filters-panel">
           <div className="filter-group">
