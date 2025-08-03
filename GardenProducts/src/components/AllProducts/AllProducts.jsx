@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProductCard from '../ProductCard/ProductCard';
+import useSkeletonLoader from '../ProductSkeleton/useSkeletonLoader';
+import ProductSkeleton from '../ProductSkeleton/ProductSkeleton';
 import {
   setProducts,
   setMinPrice,
@@ -9,19 +11,13 @@ import {
   setSortOrder,
   setShowDiscountedOnly,
   selectSortedProducts,
-  selectProducts, 
 } from '../../store/productsSlice';
 import './AllProducts.scss';
 
 export default function AllProducts() {
+  const products = useLoaderData() || [];
+  const localLoading = useSkeletonLoader(100);
   const dispatch = useDispatch();
-  const loadedProducts = useLoaderData() || [];
-
-  useEffect(() => {
-    if (Array.isArray(loadedProducts) && loadedProducts.length > 0) {
-      dispatch(setProducts(loadedProducts));
-    }
-  }, [dispatch, loadedProducts]);
 
   const minPrice = useSelector((state) => state.products.minPrice);
   const maxPrice = useSelector((state) => state.products.maxPrice);
@@ -30,18 +26,24 @@ export default function AllProducts() {
     (state) => state.products.showDiscountedOnly
   );
 
-  const sortedAndFilteredProducts = useSelector((state) =>
-    selectSortedProducts(state, (innerState) => {
-      const allProds = selectProducts(innerState);
-      return showDiscountedOnly
-        ? allProds.filter((product) => product.discont_price !== null)
-        : allProds;
-    })
+  const sortedFilteredProducts = useSelector((state) =>
+    selectSortedProducts(
+      state,
+      (innerState) => innerState.products.products,
+      showDiscountedOnly
+    )
   );
+
+  useEffect(() => {
+    if (Array.isArray(products) && products.length > 0) {
+      dispatch(setProducts(products));
+    }
+  }, [dispatch, products]);
 
   return (
     <div className="container">
       <h1 className="page-title">All Products</h1>
+
       <div className="filters-panel">
         <div className="filter-group">
           <label htmlFor="price-from" className="filter-label">
@@ -64,6 +66,7 @@ export default function AllProducts() {
             onChange={(e) => dispatch(setMaxPrice(e.target.value))}
           />
         </div>
+
         <div className="checkbox-container">
           <label className="checkbox-label" htmlFor="discounted-items">
             Discounted items
@@ -76,6 +79,7 @@ export default function AllProducts() {
             onChange={(e) => dispatch(setShowDiscountedOnly(e.target.checked))}
           />
         </div>
+
         <div className="filter-group-sorted">
           <label htmlFor="sort-by" className="filter-label">
             Sorted
@@ -92,13 +96,16 @@ export default function AllProducts() {
           </select>
         </div>
       </div>
+
       <div className="product-grid">
-        {sortedAndFilteredProducts.length > 0 ? (
-          sortedAndFilteredProducts.map((product) => (
+        {localLoading ? (
+          <ProductSkeleton />
+        ) : sortedFilteredProducts.length > 0 ? (
+          sortedFilteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))
         ) : (
-          <p className="no-products-on-sale">No products on sale</p>
+          <p className="no-products-on-sale">No products found</p>
         )}
       </div>
     </div>
