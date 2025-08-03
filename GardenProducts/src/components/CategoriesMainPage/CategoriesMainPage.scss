@@ -20,14 +20,15 @@
 @media (max-width: 1000px) {
   .categories__main-page__list{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    grid-template-columns: repeat(4, minmax(150px, 1fr));
+    gap: 24px;
   }
 }
 
 @media (max-width: 768px) {
   .categories__main-page__list{
     display: grid;
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
   }
 }
 
@@ -35,7 +36,21 @@
   .categories__main-page__list{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+     gap: 16px;
   }
+}
+
+@media (min-width: 431px) and (max-width: 479px) {
+  .adaptive__link{
+    padding-left: 120px;
+    padding-top: 20px;
+  }
+}
+
+@media (max-width: 431px) {
+   .adaptive__link{
+    text-align: center;
+   }
 }
 
 @media (min-width: 480px) {
