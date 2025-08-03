@@ -44,6 +44,9 @@ const selectMaxPrice = (state) => state.products.maxPrice;
 const selectSortOrder = (state) => state.products.sortOrder;
 const selectShowDiscountedOnly = (state) => state.products.showDiscountedOnly;
 
+
+
+
 export const selectDiscountedItems = createSelector(
   [selectProducts],
   (products) => products.filter((product) => product.discont_price !== null)
@@ -63,16 +66,13 @@ export const selectLikedProducts = createSelector(
     }
   }
 );
-
-// --- НОВЫЙ СЕЛЕКТОР для получения товаров по категории ---
-// Он принимает categoryId как аргумент, чтобы фильтровать продукты.
 export const selectCategoryProducts = createSelector(
-  [selectProducts, (state, categoryId) => categoryId], // categoryId как второй входной параметр
+  [selectProducts, (state, categoryId) => categoryId], 
   (products, categoryId) => {
-    // Убедимся, что categoryId является числом для сравнения
+  
     const numericCategoryId = parseInt(categoryId);
     if (isNaN(numericCategoryId)) {
-      return []; // Возвращаем пустой массив, если categoryId некорректен
+      return []; 
     }
     return products.filter(
       (product) => product.categoryId === numericCategoryId
@@ -80,8 +80,6 @@ export const selectCategoryProducts = createSelector(
   }
 );
 
-// --- ОБНОВЛЕННЫЙ СЕЛЕКТОР selectFilteredProducts ---
-// Теперь он принимает useDiscountOnlyFilter как входной параметр.
 export const selectFilteredProducts = createSelector(
   [
     (state, productsSourceSelector, useDiscountOnlyFilter = false) =>
@@ -95,12 +93,12 @@ export const selectFilteredProducts = createSelector(
     const min = parseFloat(minPrice) || 0;
     const max = parseFloat(maxPrice) || Infinity;
 
-    // Сначала применяем фильтрацию по скидке, если флаг установлен
+  
     const initialFiltered = useDiscountOnlyFilter
       ? products.filter((product) => product.discont_price !== null)
       : products;
 
-    // Фильтрация по диапазону цен
+ 
     const priceFiltered = initialFiltered.filter((product) => {
       const realPrice = product.discont_price ?? product.price;
       return realPrice >= min && realPrice <= max;
