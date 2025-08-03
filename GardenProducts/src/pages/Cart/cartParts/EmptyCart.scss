@@ -3,24 +3,27 @@
 .empty-cart {
   max-width: 1440px;
   background: nav.$bg-color-lightTheme;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0 40px;
+  padding: 40px 20px;
 
   &__header {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 32px;
 
     h2 {
       font-family: "Montserrat";
       font-weight: 700;
-      font-style: Bold;
       font-size: 56px;
       line-height: 110%;
-      letter-spacing: 0%;
-      padding-right: 16px;
       color: nav.$font-darkColor;
+      margin: 0;
+      padding-right: 16px;
+      white-space: nowrap;
     }
 
     .header-divider {
@@ -28,211 +31,206 @@
       height: 2px;
       background: nav.$font-light-grey;
       border-radius: 2px;
+      min-width: 24px;
+      display: block;
     }
 
     .breadcrumb-btn {
       border: 1px solid nav.$font-light-grey;
       height: 36px;
-      gap: 10px;
-      opacity: 0.8;
       padding: 8px 16px;
       border-radius: 8px;
-      border-width: 1px;
       background-color: nav.$bg-color-lightTheme;
       color: nav.$font-greyColor;
       cursor: pointer;
+      font-size: 16px;
+      opacity: 0.8;
+      white-space: nowrap;
+      text-align: center;
+      align-self: center;
+      margin: 0;
     }
   }
 
-  p {
-    font-family: "Montserrat";
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 130%;
-    letter-spacing: 0%;
+  &-content {
+    margin-top: 32px;
+
+    p {
+      font-family: "Montserrat";
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 130%;
+      margin-bottom: 24px;
+      color: nav.$font-darkColor;
+    }
+
+    .continue-btn {
+      width: 313px;
+      height: 58px;
+      padding: 16px 56px;
+      background-color: nav.$sale-color-green;
+      color: nav.$font-lightColor;
+      font-size: 20px;
+      font-family: "Montserrat";
+      font-weight: 600;
+      line-height: 130%;
+      text-align: center;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 0;
+      letter-spacing: 0%;
+    }
   }
 
-  button.continue-btn {
-    width: 313px;
-    height: 58px;
-    gap: 10px;
-    opacity: 1;
-    padding: 16px 56px;
-    background-color: nav.$sale-color-green;
-    color: nav.$font-lightColor;
-    font-size: 20px;
-    font-family: "Montserrat";
-    font-weight: 600;
-    line-height: 130%;
-    letter-spacing: 0%;
-    text-align: center;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-  }
-
-  button.breadcrumb-btn-bottom {
+  .breadcrumb-btn-bottom {
     display: none;
     border: 1px solid nav.$font-light-grey;
     height: 36px;
-    gap: 10px;
-    opacity: 0.8;
     padding: 8px 16px;
     border-radius: 8px;
-    border-width: 1px;
     background-color: nav.$bg-color-lightTheme;
     color: nav.$font-greyColor;
+    font-size: 16px;
+    opacity: 0.8;
+    margin-top: 12px;
+    width: 100%;
+    max-width: 320px;
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 768px) and (min-width: 481px) {
   .empty-cart {
-    max-width: 960px;
-    padding: 0 20px;
-
-    &__header {
-      h2 {
-        padding-right: 12px;
-      }
-
-      .breadcrumb-btn {
-        font-size: 14px;
-        height: 32px;
-        padding: 6px 14px;
-        border-radius: 6px;
-      }
-    }
-
-    button.continue-btn {
-      width: 220px;
-      height: 46px;
-      padding: 12px 24px;
-      font-size: 16px;
-      border-radius: 6px;
-    }
-  }
-}
-
-@media(max-width: 768px) {
-  .empty-cart {
-    max-width: 728px;
-    padding: 0 20px;
+    width: 100%;
+    max-width: none;
+    padding: 32px 20px;
 
     &__header {
       h2 {
         font-size: 36px;
         padding-right: 8px;
       }
-
       .header-divider {
-        display: block;
+        margin-left: 8px;
       }
-
       .breadcrumb-btn {
         font-size: 14px;
         height: 32px;
         padding: 6px 12px;
-        border-radius: 4px;
-        white-space: nowrap;
+        border-radius: 6px;
       }
     }
 
-    button.continue-btn {
-      width: 100%;
-      max-width: 320px;
-      padding: 16px 0;
-      letter-spacing: 0%;
+    &-content {
+      p {
+        font-size: 16px;
+      }
+      .continue-btn {
+        width: 100%;
+        max-width: 320px;
+        height: 47px;
+        padding: 12px 0;
+        font-size: 16px;
+        border-radius: 6px;
+        margin-top: 12px;
+      }
     }
   }
 }
-
-@media (max-width: 480px) {
+@media (max-width: 480px) and (min-width: 361px) {
   .empty-cart {
-    max-width: 440px;
-    padding: 0 20px;
+    width: 100%;
+    max-width: none;
+    padding: 32px 20px;
+   
 
     &__header {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      justify-content: space-between;
-
       h2 {
-        font-size: 32px;
+        font-size: 24px;
         padding-right: 4px;
+        white-space: normal; // разрешаем перенос строк
+        word-break: break-word;
       }
-
       .header-divider {
-        display: block;
+        margin-left: 4px;
       }
-
       .breadcrumb-btn {
-        font-size: 16px;
-        height: 32px;
-        padding: 8px 16px;
-        border-radius: 4px;
-        white-space: nowrap;
-        text-align: center;
-        align-self: flex-start;
-        margin-top: 28px;
+        font-size: 13px;
+        height: 28px;
+        padding: 4px 8px;
+        border-radius: 5px;
       }
     }
 
-    p {
-      font-size: 18px;
-    }
-
-    button.continue-btn {
-      width: 100%;
-      max-width: 285px;
-      height: 47px;
-      padding: 12px 52px;
-      font-size: 18px;
-      border-radius: 5px;
-      margin-top: 12px;
-      white-space: nowrap;
+    &-content {
+      p {
+        font-size: 14px;
+      }
+      .continue-btn {
+        width: 100%;
+        max-width: 100%;
+        height: 40px;
+        padding: 10px 0;
+        font-size: 14px;
+        border-radius: 5px;
+        margin-top: 12px;
+      }
     }
   }
 }
-
 @media (max-width: 360px) {
   .empty-cart {
-    padding: 0 20px;
-    max-width: 320px;
-
-    .empty-cart__header {
+    width: 100%;
+    max-width: none;
+    padding: 32px 20px;
+    &__header {
       flex-direction: column;
       align-items: flex-start;
 
       h2 {
-        font-size: 22px;
-        margin-bottom: 8px;
-        padding-right: 0;
+        font-size: 35px;
+        padding: 0;
+        white-space: normal;
+        word-break: break-word;
       }
 
+      .header-divider,
       .breadcrumb-btn {
         display: none;
       }
     }
 
-    button.continue-btn {
-      max-width: 100%;
-      height: 40px;
-      font-size: 14px;
-      padding: 10px 0;
-      border-radius: 5px;
-      margin-top: 12px;
+    &-content {
+      p {
+        font-size: 18px;
+      }
+      .continue-btn {
+        width: 100%;
+        max-width: 100%;
+        height: 36px;
+        padding: 8px 0;
+        font-size: 13px;
+        border-radius: 5px;
+        margin-top: 12px;
+      }
     }
 
-    button.breadcrumb-btn-bottom {
+    .breadcrumb-btn-bottom {
       display: block;
-      width: 100%;
-      max-width: 320px;
-      height: 40px;
-      font-size: 14px;
-      padding: 10px 0;
-      border-radius: 5px;
+      border: 1px solid nav.$font-light-grey;
+      height: 36px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background-color: nav.$bg-color-lightTheme;
+      color: nav.$font-greyColor;
+      font-size: 13px;
+      opacity: 0.8;
       margin-top: 12px;
+      width: 100%;
+      max-width: 100%;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
     }
   }
 }
