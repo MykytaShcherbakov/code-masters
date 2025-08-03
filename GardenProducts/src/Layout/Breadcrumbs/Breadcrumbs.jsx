@@ -5,20 +5,30 @@ const Breadcrumbs = () => {
   const matches = useMatches();
   const location = useLocation();
 
-  const productsMatch = matches.find(
-    (m) => Array.isArray(m.data?.products) 
+  const categoryProductsMatch = matches.find((m) =>
+    Array.isArray(m.data?.category?.products)
   );
-  const products = productsMatch?.data?.products || [];
+  const directProductsMatch = matches.find((m) =>
+    Array.isArray(m.data?.products)
+  );
+
+  let products = [];
+  if (categoryProductsMatch) {
+    products = categoryProductsMatch.data.category.products;
+  } else if (directProductsMatch) {
+    products = directProductsMatch.data.products;
+  }
 
   const match = location.pathname.match(/^\/categories\/\d+\/product\/(\d+)$/);
   if (match) {
     const productId = Number(match[1]);
-    if (productId > products.length) {
+    const productExists = products.some((p) => p.id === productId);
+
+    if (!productExists) {
       return null;
     }
   }
 
-  // Прячем крошки на главной и в корзине
   if (
     location.pathname === '/' ||
     location.pathname === '/cart' ||

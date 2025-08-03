@@ -10,11 +10,12 @@ export default function CartItem({ item, product, increment, decrement, removeFr
 
   return (
     <div className="cart-item" key={item.id}>
-      <img src={imageUrl} alt={product.title} className="cart-item__img" />
-
-      {item.isDiscountItem && (
-        <div className="discount-badge">Daily Deal -50%</div>
-      )}
+      <div className="cart-item__img">
+        <img src={imageUrl} alt={product.title} />
+        {item.isDiscountItem && (
+          <span className="cart-item__badge">Daily Deal -50%</span>
+        )}
+      </div>
 
       <div className="cart-item__info">
         <Link
