@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
 import styles from "./ModalNavMenu.module.css";
 
-const ModalNavMenu = ({ navMenuActive, setNavMenuActive }) => {
-  const closeMenu = () => {
-    setNavMenuActive(false);
+const ModalNavMenu = ({ navMenuActive, setNavMenuActive, onDiscountClick }) => {
+  const closeMenu = () => setNavMenuActive(false);
+
+  const handleClick = () => {
+    closeMenu();
+    if (onDiscountClick) onDiscountClick();
   };
 
   if (!navMenuActive) return null;
@@ -35,13 +38,13 @@ const ModalNavMenu = ({ navMenuActive, setNavMenuActive }) => {
                 </Link>
               </li>
               <li className={styles.navItem}>
-                <Link to="/sales" className={styles.navLink} onClick={closeMenu}>
+                <Link to="/discounted-items" className={styles.navLink} onClick={closeMenu}>
                   All sales
                 </Link>
               </li>
             </ul>
           </nav>
-          <button className={styles.discountButton} onClick={closeMenu}>
+          <button className={styles.discountButton} onClick={handleClick}>
             1 day discount!
           </button>
         </div>

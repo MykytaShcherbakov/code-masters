@@ -7,10 +7,13 @@
   .container-sales {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 40px;
   }
 }
-
+  .sales-section-sales .container-sales,
+  .container-sales {
+    padding: 0 40px;
+  }
 .header-sales {
   display: flex;
   justify-content: space-between;
@@ -99,6 +102,10 @@
     margin-bottom: 4px;
   }
 }
+  .sales-section-sales .container-sales,
+  .container-sales {
+    padding: 0 20px;
+  }
 
 @media (max-width: 768px) {
   .product-grid-sales-sales {
@@ -181,7 +188,7 @@
   }
   .sales-section-sales .container-sales,
   .container-sales {
-    padding: 0;
+    padding: 0 20px;
   }
 
   .header-sales {

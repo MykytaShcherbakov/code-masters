@@ -13,18 +13,19 @@
   padding: 0 20px;
 }
 
-.page-title {
+.page-title-discount {
   font-size: 64px;
   font-weight: 700;
   color: nav.$font-darkColor;
+  padding: 32px 20px 32px;
 }
 
 .filters-panel {
   display: flex;
   align-items: center;
   gap: 20px;
-  gap: 40px;
   margin-bottom: 40px;
+  padding: 0 20px;
 }
 
 .filter-input,
@@ -64,6 +65,7 @@
   grid-template-columns: repeat(4, minmax(130px, 1fr));
   gap: 32px;
   margin-bottom: 24px;
+  padding: 0 20px;
 }
 
 .product-grid .product-card {
@@ -145,6 +147,7 @@
   .product-grid {
     grid-template-columns: repeat(4, minmax(130px, 1fr));
     gap: 20px;
+    padding: 0 20px;
   }
   .container {
     padding: 0 20px;
@@ -153,7 +156,7 @@
     margin-bottom: 32px;
   }
   .page-title {
-    padding: 40px 0 32px 0;
+    padding: 40px 20px 32px;
   }
 }
 
@@ -182,7 +185,7 @@
   }
   .page-title {
     font-size: 62px;
-    padding: 32px 0 32px 0;
+    padding: 32px 20px 32px;
   }
 }
 

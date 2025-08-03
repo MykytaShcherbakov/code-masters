@@ -1,39 +1,43 @@
 import React, { useEffect } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProductCard from '../ProductCard/ProductCard';
+import useSkeletonLoader from '../ProductSkeleton/useSkeletonLoader';
+import ProductSkeleton from '../ProductSkeleton/ProductSkeleton';
 import {
   setProducts,
   setMinPrice,
   setMaxPrice,
   setSortOrder,
   selectSortedProducts,
-  selectDiscountedItems,
 } from '../../store/productsSlice';
 import './DiscountedItems.scss';
 
 export default function DiscountedItems() {
+  const products = useLoaderData();
+  const localLoading = useSkeletonLoader(100);
   const dispatch = useDispatch();
-  const loadedProducts = useLoaderData() || [];
-
-  useEffect(() => {
-    if (Array.isArray(loadedProducts) && loadedProducts.length > 0) {
-      dispatch(setProducts(loadedProducts));
-    }
-  }, [dispatch, loadedProducts]);
 
   const minPrice = useSelector((state) => state.products.minPrice);
   const maxPrice = useSelector((state) => state.products.maxPrice);
   const sortOrder = useSelector((state) => state.products.sortOrder);
 
-  const sortedAndFilteredDiscountedProducts = useSelector((state) =>
-    selectSortedProducts(state, selectDiscountedItems)
+  const sortedFilteredProducts = useSelector((state) =>
+    selectSortedProducts(
+      state,
+      (innerState) => innerState.products.products,
+      true
+    )
   );
 
+  useEffect(() => {
+    dispatch(setProducts(products));
+  }, [dispatch, products]);
+
   return (
-    <div>
-      <div className="container"></div>
-      <h1 className="page-title">Discounted items</h1>
+    <div className="container">
+      <h1 className="page-title discount">Discounted items</h1>
+
       <div className="filters-panel">
         <div className="filter-group">
           <label htmlFor="price-from" className="filter-label">
@@ -73,13 +77,16 @@ export default function DiscountedItems() {
           </select>
         </div>
       </div>
+
       <div className="product-grid">
-        {sortedAndFilteredDiscountedProducts.length > 0 ? (
-          sortedAndFilteredDiscountedProducts.map((product) => (
-            <ProductCard product={product} key={product.id} />
+        {localLoading ? (
+          <ProductSkeleton />
+        ) : sortedFilteredProducts.length > 0 ? (
+          sortedFilteredProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
           ))
         ) : (
-          <p className="no-products-on-sale">No discounted products found</p>
+          <p className="no-products-on-sale">No products found</p>
         )}
       </div>
     </div>

@@ -52,6 +52,9 @@ body {
     .breadcrumb-link.active {
       color: nav.$font-lightColor;
     }
+    .header-sales .sale-sales {
+      color: nav.$font-lightColor;
+    }
 
     .empty-cart {
       background-color: nav.$bg-color-darkTheme;
@@ -98,7 +101,6 @@ body {
             .cart-item__remove {
               color: nav.$font-lightColor;
               border: none;
-
             }
 
             button {
@@ -127,7 +129,6 @@ body {
           }
 
           .total-sum {
-
             p,
             span {
               color: nav.$font-lightColor;
@@ -155,7 +156,7 @@ body {
       }
     }
     .not-found-page {
-     background: nav.$bg-color-darkTheme;
+      background: nav.$bg-color-darkTheme;
     }
     footer {
       background-color: nav.$bg-color-darkTheme;
@@ -229,10 +230,13 @@ body {
       .product-price,
       .current-price,
       .price,
-      span[class*="price"],
+      span[class*='price'],
       .product-prices .product-price,
       .old-price-discount-wrap .product-price,
-      .product-main-block .product-purchase-block .product-prices .product-price,
+      .product-main-block
+        .product-purchase-block
+        .product-prices
+        .product-price,
       .product-purchase-block .product-prices .product-price {
         color: nav.$font-lightColor;
       }

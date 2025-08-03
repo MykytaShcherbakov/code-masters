@@ -45,3 +45,9 @@
   top: 0;
   right: 0;
 }
+
+@media (max-width: 480px) {
+  .info-modal__window {
+    max-width: 300px;
+  }
+}

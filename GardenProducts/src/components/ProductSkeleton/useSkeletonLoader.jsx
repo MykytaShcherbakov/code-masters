@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useSkeletonLoader(delay = 500) {
+export default function useSkeletonLoader(delay) {
   const [localLoading, setLocalLoading] = useState(true);
 
   useEffect(() => {
