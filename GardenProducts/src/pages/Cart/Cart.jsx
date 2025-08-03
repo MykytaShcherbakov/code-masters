@@ -83,13 +83,15 @@ function Cart() {
   return (
     <div className="cart">
       <div className="cart__header">
-        <h2>Shopping cart</h2>
-        <span className="header-divider"></span>
-        <Link to={'/'}>
-          <button className="breadcrumb-btn">
-            Back to the store
-          </button>
-        </Link>
+        <div className="cart__header-row">
+          <h2>Shopping cart</h2>
+          <div className="header-divider-flex"></div>
+          <Link to={'/'}>
+            <button className="breadcrumb-btn">
+              Back to the store
+            </button>
+          </Link>
+        </div>
       </div>
 
       <div className="cart-container">
@@ -123,6 +125,13 @@ function Cart() {
           handleSubmit={handleSubmit}
         />
       </div>
+
+      {/* Кнопка внизу для мобильных */}
+      <Link to={'/'}>
+        <button className="breadcrumb-btn-bottom">
+          Back to the store
+        </button>
+      </Link>
 
       {isModalOpen && <CartModal closeModal={closeModal} />}
     </div>
