@@ -38,7 +38,7 @@ const ModalNavMenu = ({ navMenuActive, setNavMenuActive, onDiscountClick }) => {
                 </Link>
               </li>
               <li className={styles.navItem}>
-                <Link to="/sales" className={styles.navLink} onClick={closeMenu}>
+                <Link to="/discounted-items" className={styles.navLink} onClick={closeMenu}>
                   All sales
                 </Link>
               </li>

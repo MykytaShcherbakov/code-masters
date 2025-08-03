@@ -14,14 +14,14 @@ import {
 } from '../../store/productsSlice';
 import './LikedProducts.scss';
 
+
 export default function LikedProducts() {
   const products = useLoaderData() || [];
   const localLoading = useSkeletonLoader(100);
   const dispatch = useDispatch();
 
-  const minPrice = useSelector((state) => state.products.minPrice);
-  const maxPrice = useSelector((state) => state.products.maxPrice);
-  const sortOrder = useSelector((state) => state.products.sortOrder);
+  const min = parseFloat(minPrice) || 0;
+  const max = parseFloat(maxPrice) || Infinity;
 
   const sortedFilteredLiked = useSelector((state) =>
     selectSortedProducts(state, selectLikedProducts, false)

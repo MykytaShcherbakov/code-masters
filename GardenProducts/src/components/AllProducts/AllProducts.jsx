@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductCard from '../ProductCard/ProductCard';
@@ -19,12 +19,8 @@ export default function AllProducts() {
   const localLoading = useSkeletonLoader(100);
   const dispatch = useDispatch();
 
-  const minPrice = useSelector((state) => state.products.minPrice);
-  const maxPrice = useSelector((state) => state.products.maxPrice);
-  const sortOrder = useSelector((state) => state.products.sortOrder);
-  const showDiscountedOnly = useSelector(
-    (state) => state.products.showDiscountedOnly
-  );
+  const min = parseFloat(minPrice) || 0;
+  const max = parseFloat(maxPrice) || Infinity;
 
   const sortedFilteredProducts = useSelector((state) =>
     selectSortedProducts(
@@ -42,6 +38,8 @@ export default function AllProducts() {
 
   return (
     <div className="container">
+     
+
       <h1 className="page-title">All Products</h1>
 
       <div className="filters-panel">
@@ -55,7 +53,7 @@ export default function AllProducts() {
             placeholder="from"
             className="filter-input"
             value={minPrice}
-            onChange={(e) => dispatch(setMinPrice(e.target.value))}
+            onChange={(e) => setMinPrice(e.target.value)}
           />
           <input
             type="number"
@@ -63,7 +61,7 @@ export default function AllProducts() {
             placeholder="to"
             className="filter-input"
             value={maxPrice}
-            onChange={(e) => dispatch(setMaxPrice(e.target.value))}
+            onChange={(e) => setMaxPrice(e.target.value)}
           />
         </div>
 
@@ -76,7 +74,7 @@ export default function AllProducts() {
             type="checkbox"
             id="discounted-items"
             checked={showDiscountedOnly}
-            onChange={(e) => dispatch(setShowDiscountedOnly(e.target.checked))}
+            onChange={(e) => setShowDiscountedOnly(e.target.checked)}
           />
         </div>
 
@@ -88,7 +86,7 @@ export default function AllProducts() {
             id="sort-by"
             className="filter-select"
             value={sortOrder}
-            onChange={(e) => dispatch(setSortOrder(e.target.value))}
+            onChange={(e) => setSortOrder(e.target.value)}
           >
             <option value="default">by default</option>
             <option value="price-asc">Price: Low to High</option>

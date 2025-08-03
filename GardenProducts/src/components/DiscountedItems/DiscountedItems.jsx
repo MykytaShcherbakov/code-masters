@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductCard from '../ProductCard/ProductCard';
@@ -61,20 +61,46 @@ export default function DiscountedItems() {
           />
         </div>
 
-        <div className="filter-group-sorted">
-          <label htmlFor="sort-by" className="filter-label">
-            Sorted
-          </label>
-          <select
-            id="sort-by"
-            className="filter-select"
-            value={sortOrder}
-            onChange={(e) => dispatch(setSortOrder(e.target.value))}
-          >
-            <option value="default">by default</option>
-            <option value="price-asc">Price: Low to High</option>
-            <option value="price-desc">Price: High to Low</option>
-          </select>
+        <h1 className="page-title">Discounted items</h1>
+
+        <div className="filters-panel">
+          <div className="filter-group">
+            <label htmlFor="price-from" className="filter-label">
+              Price
+            </label>
+            <input
+              type="number"
+              id="price-from"
+              placeholder="from"
+              className="filter-input"
+              value={minPrice}
+              onChange={(e) => setMinPrice(e.target.value)}
+            />
+            <input
+              type="number"
+              id="price-to"
+              placeholder="to"
+              className="filter-input"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(e.target.value)}
+            />
+          </div>
+
+          <div className="filter-group-sorted">
+            <label htmlFor="sort-by" className="filter-label">
+              Sorted
+            </label>
+            <select
+              id="sort-by"
+              className="filter-select"
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+            >
+              <option value="default">by default</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -88,7 +114,7 @@ export default function DiscountedItems() {
         ) : (
           <p className="no-products-on-sale">No products found</p>
         )}
+        </div>
       </div>
-    </div>
   );
 }
