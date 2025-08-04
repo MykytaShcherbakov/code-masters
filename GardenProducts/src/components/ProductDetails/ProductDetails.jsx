@@ -74,6 +74,7 @@ function ProductDetails() {
 
     dispatch(addToCart(cartItem));
     setCartState('added');
+    setTimeout(() => setCartState('default'), 1000);
   };
 
   const hasDiscount = product.discont_price && product.discont_price < product.price;

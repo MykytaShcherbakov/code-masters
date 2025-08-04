@@ -75,6 +75,7 @@ body {
           .cart-item {
             background-color: nav.$bg-color-dark;
             border-radius: 10px;
+            border: 1px solid #8b8b8b;
 
             .cart-item__info {
               color: nav.$font-lightColor;

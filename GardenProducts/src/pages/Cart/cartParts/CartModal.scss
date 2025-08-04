@@ -17,7 +17,7 @@
     border-radius: 12px;
     padding: 20px 24px;
     width: 75vw;
-    max-width: 320px;
+    max-width: 340px;
     position: relative;
     text-align: left;
     color: nav.$font-lightColor;
@@ -39,8 +39,8 @@
 
     .cart-modal-close {
       position: absolute;
-      top: 16px;
-      right: 20px;
+      top: 0px;
+      right: 10px;
       background: none;
       border: none;
       font-size: 40px;
