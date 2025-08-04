@@ -14,14 +14,14 @@
   margin-top: 2px;
 
   &:hover:not(:disabled) {
-    background: #7a8a2b; // нет переменной, оставлено как есть
+    background: #7a8a2b; 
   }
 
   &:disabled,
   &.added {
-    background: #d8e3ab; // нет переменной, оставлено как есть
-    color: #8ca05a;      // нет переменной, оставлено как есть
-    cursor: not-allowed;
+    background: #d8e3ab; 
+    color: #8ca05a;      
+    // cursor: not-allowed;
   }
 }
 

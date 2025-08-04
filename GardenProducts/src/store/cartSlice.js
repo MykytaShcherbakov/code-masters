@@ -5,7 +5,7 @@ const loadCartFromStorage = () => {
     const cartItems = localStorage.getItem('cartItems');
     return cartItems ? JSON.parse(cartItems) : [];
   } catch (error) {
-    console.error('Ошибка при загрузке корзины из localStorage:', error);
+    console.error('Error loading cart from localStorage:', error);
     return [];
   }
 };
@@ -14,7 +14,7 @@ const saveCartToStorage = (items) => {
   try {
     localStorage.setItem('cartItems', JSON.stringify(items));
   } catch (error) {
-    console.error('Ошибка при сохранении корзины в localStorage:', error);
+    console.error('Error saving cart to localStorage:', error);
   }
 };
 

@@ -135,7 +135,7 @@
   .cart {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 0 12px;
+    padding: 20px;
 
     &__header {
       margin: 32px 0 32px 0;
@@ -165,8 +165,7 @@
 @media (min-width: 1001px) {
   .cart {
     max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 20px;
 
     &__header {
       margin: 32px 0 32px 0;

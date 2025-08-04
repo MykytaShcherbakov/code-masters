@@ -79,7 +79,9 @@ const Sales = () => {
         </div>
 
         <div className="all-sales-button-container-sales">
-          <button className="all-sales-button-sales">All sales</button>
+          <Link to={'/discounted-items'}>
+            <button className="all-sales-button-sales">All sales</button>
+          </Link>
         </div>
       </div>
     </section>

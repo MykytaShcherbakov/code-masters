@@ -24,7 +24,6 @@
       color: nav.$font-light-grey;
       text-decoration: line-through;
       margin-left: 6px;
-      vertical-align: middle;
     }
 
     .product-discount-inprice {
@@ -38,12 +37,6 @@
       position: absolute;
       top: 0;
     }
-  }
-}
-
-@media (max-width: 360px) {
-  .product-prices {
-    justify-content: center;
   }
 }
 
